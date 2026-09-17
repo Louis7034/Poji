@@ -1,0 +1,23 @@
+# Backend
+back/node_modules/
+back/.env
+back/.env.*
+!back/.env.example
+
+# Frontend
+front/node_modules/
+front/.angular/
+front/dist/
+
+# PostgreSQL
+postgres-data/
+
+# Logs
+*.log
+
+# JetBrains
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

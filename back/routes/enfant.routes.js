@@ -3,14 +3,14 @@ import EnfantController from "../controllers/enfant.controller.js";
 
 const router = express.Router();
 
-router.get("/", EnfantController.getAll);
+router.get("/enfant", EnfantController.getAll);
 
-router.get("/:id", EnfantController.getById);
+router.get("/enfant/:id", EnfantController.getById);
 
-router.post("/", EnfantController.create);
+router.post("/enfant", EnfantController.create);
 
-router.put("/:id", EnfantController.update);
+router.put("/enfant/:id", EnfantController.update);
 
-router.delete("/:id", EnfantController.delete);
+router.delete("/enfant/:id", EnfantController.delete);
 
 export default router;

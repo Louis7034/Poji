@@ -17,8 +17,8 @@ const EnfantService = {
         return enfant;
     },
 
-    async create(req) {
-        return await db.orm.public.Enfant.create(req.body);
+    async create(data) {
+        return await db.orm.public.Enfant.create(data);
     },
 
     async update(id, data) {

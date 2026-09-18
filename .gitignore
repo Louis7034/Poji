@@ -8,6 +8,7 @@ back/.env.*
 front/node_modules/
 front/.angular/
 front/dist/
+front/src/app/environment/environment.ts
 
 # PostgreSQL
 postgres-data/
@@ -21,3 +22,4 @@ postgres-data/
 # OS
 .DS_Store
 Thumbs.db
+

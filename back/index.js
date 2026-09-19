@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import enfantRoutes from "./routes/enfant.routes.js";
 import dejectionRoutes from "./routes/dejection.routes.js";
 import histoireEnfantRoutes from "./routes/histoire_enfant.routes.js";
@@ -13,6 +14,9 @@ import transmissionSoirRoutes from "./routes/transmission_soir.routes.js";
 
 const app = express();
 
+app.use(cors({
+    origin: "http://localhost:4200",
+}));
 app.use(express.json());
 
 app.use("/api", enfantRoutes);

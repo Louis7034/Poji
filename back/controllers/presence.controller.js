@@ -19,6 +19,15 @@ const PresenceController = {
         }
     },
 
+    async getCountPresentToday(req, res) {
+        try {
+            res.status(200).json(await PresenceService.getCountPresentToday());
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors du calcul du nombre d'enfants présents aujourd'hui", error: error.message });
+        }
+    },
+
     async create(req, res) {
         try {
             res.status(201).json(await PresenceService.create(req.body));

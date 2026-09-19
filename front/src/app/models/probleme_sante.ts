@@ -8,7 +8,6 @@ export interface ProblemeSante {
   symptome: string | null;
   traitement: string | null;
   observation: string | null;
-  date_probleme: Date |null
   temperatures: Temperature[];
   transmissionMatin: TransmissionMatin | null;
   transmissionSoir: TransmissionSoir | null;

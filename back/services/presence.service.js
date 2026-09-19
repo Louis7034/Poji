@@ -1,4 +1,5 @@
 import { db } from "../prisma/db.ts";
+import PresenceRepository from "../repositories/presence.repository.js";
 
 const PresenceService = {
     async getAll() {
@@ -9,6 +10,10 @@ const PresenceService = {
         const presence = await db.orm.public.Presence.where({ id }).first();
         if (!presence) throw new Error("Présence introuvable");
         return presence;
+    },
+
+    async getCountPresentToday() {
+        return await PresenceRepository.countPresentToday();
     },
 
     async create(data) {

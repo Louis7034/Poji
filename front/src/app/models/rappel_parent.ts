@@ -1,11 +1,10 @@
 import { Personnel } from "./personnel";
 import { TransmissionSoir } from "./transmission_soir";
 
-export interface Dejection {
+export interface RappelParent {
   id: string;
-  type: string | null;
-  date: Date | null;
-  commentaire: string | null;
+  message: string | null;
+  dateCreation: Date;
+  journee: TransmissionSoir | null;
   auteur: Personnel | null;
-  transmissionSoir: TransmissionSoir;
 }

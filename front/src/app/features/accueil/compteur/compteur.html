@@ -1,0 +1,47 @@
+<section class="flex flex-col gap-3 p-8" aria-labelledby="compteur-title">
+  <div class="grid grid-cols-4 justify-start gap-16">
+    <article class="flex aspect-square w-full max-w-44 flex-col justify-center rounded-2xl bg-[#eef3ff] p-5 shadow-sm">
+      <div class="flex items-center gap-4">
+        <svg class="h-10 w-10 shrink-0 text-[#526fca]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5"></circle>
+          <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+        </svg>
+        <p class="text-4xl font-bold text-[#243b70]">{{ enfantData().length }}</p>
+      </div>
+      <p class="mt-4 text-left text-sm font-semibold text-[#526fca]">Enfants inscrits</p>
+    </article>
+
+    <article class="flex aspect-square w-full max-w-44 flex-col justify-center rounded-2xl bg-emerald-50 p-5 shadow-sm">
+      <div class="flex items-center gap-4">
+        <svg class="h-10 w-10 shrink-0 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5"></circle>
+          <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+        </svg>
+        <p class="text-4xl font-bold text-emerald-800">{{ presenceData()?.nombreEnfantsPresents ?? 0 }}</p>
+      </div>
+      <p class="mt-4 text-left text-sm font-semibold text-emerald-700">Enfants présents</p>
+    </article>
+
+    <article class="flex aspect-square w-full max-w-44 flex-col justify-center rounded-2xl bg-amber-50 p-5 shadow-sm">
+      <div class="flex items-center gap-4">
+        <svg class="h-10 w-10 shrink-0 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5"></circle>
+          <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+        </svg>
+        <p class="text-4xl font-bold text-amber-800">{{ presenceData()?.nombreEnfantsAbsents ?? 0 }}</p>
+      </div>
+      <p class="mt-4 text-left text-sm font-semibold text-amber-700">Enfants absents</p>
+    </article>
+
+    <article class="flex aspect-square w-full max-w-44 flex-col justify-center rounded-2xl bg-rose-50 p-5 shadow-sm">
+      <div class="flex items-center gap-4">
+        <svg class="h-10 w-10 shrink-0 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5"></circle>
+          <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+        </svg>
+        <p class="text-4xl font-bold text-rose-800">{{ presenceData()?.nombreEnfantsMalades ?? 0 }}</p>
+      </div>
+      <p class="mt-4 text-left text-sm font-semibold text-rose-700">Enfants malades</p>
+    </article>
+  </div>
+</section>

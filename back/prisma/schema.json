@@ -434,6 +434,13 @@
                   "kind": "scalar"
                 }
               },
+              "heureArrivee": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-string@1",
+                  "kind": "scalar"
+                }
+              },
               "id": {
                 "nullable": false,
                 "type": {
@@ -459,6 +466,9 @@
                 },
                 "etatPresence": {
                   "column": "etat_presence"
+                },
+                "heureArrivee": {
+                  "column": "heure_arrivee"
                 },
                 "id": {
                   "column": "id"
@@ -1177,6 +1187,11 @@
                   "nativeType": "text",
                   "nullable": true
                 },
+                "heure_arrivee": {
+                  "codecId": "pg/time-string@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
                 "id": {
                   "codecId": "sql/char@1",
                   "nativeType": "character",
@@ -1482,7 +1497,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "3bd46ba02bf8ac053cd828fcaf599042d368974a74034a1cd62d609a2970f4a5"
+    "storageHash": "fc0b0f1853a7246003079ebba194195c6faf9b32856acea494b1f79daeec382f"
   },
   "execution": {
     "executionHash": "bd5220a3ef0a68da045ec490ab727d1d03b5c51a64b07b77bc5859e6627ceef7",

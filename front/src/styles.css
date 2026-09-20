@@ -7,7 +7,6 @@ body {
   min-height: 100%;
   margin: 0;
   background:
-    radial-gradient(circle at 92% 88%, rgba(190, 245, 231, 0.7) 0 10%, transparent 24%),
-    radial-gradient(circle at 100% 80%, rgba(224, 235, 255, 0.85) 0 24%, transparent 40%),
-    #f7f9ff;
+    radial-gradient(circle at 100% 0%, rgba(232, 239, 255, 0.7), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f8faff 52%, #f4f8ff 100%);
 }

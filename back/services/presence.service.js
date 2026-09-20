@@ -16,6 +16,10 @@ const PresenceService = {
         return await PresenceRepository.countPresentToday();
     },
 
+    async getEnfantPresentToday() {
+        return await PresenceRepository.getEnfantPresentToday();
+    },
+
     async create(data) {
         return await db.orm.public.Presence.create(data);
     },

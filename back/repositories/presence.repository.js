@@ -37,6 +37,24 @@ const PresenceRepository = {
             nombreEnfantsMalades: Number(sickResult.rows[0]?.nombre_enfants_malades ?? 0),
         };
     },
+
+    async getEnfantPresentToday() {
+        const result = await pool.query(`
+            SELECT DISTINCT
+                presence.enfant_id,
+                enfant.prenom,
+                presence.etat_presence,
+                presence.heure_arrivee
+            FROM presence
+            INNER JOIN enfant
+                ON enfant.id = presence.enfant_id
+            WHERE presence.date_presence = CURRENT_DATE
+              AND presence.etat_presence IN ('PRESENT', 'PAS_ENCORE_ARRIVE')
+            ORDER BY enfant.prenom
+        `);
+
+        return result.rows;
+    }
 };
 
 export default PresenceRepository;

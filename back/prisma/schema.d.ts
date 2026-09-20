@@ -3,8 +3,21 @@
 // To regenerate, run: prisma contract emit
 import type { QueryOperationTypes as PgAdapterQueryOps } from '@prisma/orm-postgres/adapter/operation-types';
 import type {
+  Bit,
   Char,
   CodecTypes as PgTypes,
+  Interval,
+  JsonValue,
+  Numeric,
+  Time,
+  TimeString,
+  Timestamp,
+  TimestampString,
+  Timestamptz,
+  TimestamptzString,
+  Timetz,
+  VarBit,
+  Varchar,
 } from '@prisma/orm-postgres/target/codec-types';
 
 import type {
@@ -21,13 +34,14 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'3bd46ba02bf8ac053cd828fcaf599042d368974a74034a1cd62d609a2970f4a5'>;
+  StorageHashBase<'fc0b0f1853a7246003079ebba194195c6faf9b32856acea494b1f79daeec382f'>;
 export type ExecutionHash =
   ExecutionHashBase<'bd5220a3ef0a68da045ec490ab727d1d03b5c51a64b07b77bc5859e6627ceef7'>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
 export type CodecTypes = PgTypes;
+export type LaneCodecTypes = CodecTypes;
 export type QueryOperationTypes = PgAdapterQueryOps<CodecTypes>;
 export type AggregateTypes = {
   readonly avg: {
@@ -268,6 +282,7 @@ export type FieldOutputTypes = {
       readonly id: Char<36>;
       readonly etatPresence: CodecTypes['pg/text@1']['output'] | null;
       readonly datePresence: CodecTypes['pg/date-string@1']['output'];
+      readonly heureArrivee: CodecTypes['pg/time-string@1']['output'] | null;
       readonly auteurId: Char<36> | null;
       readonly enfantId: Char<36>;
     };
@@ -359,6 +374,7 @@ export type FieldInputTypes = {
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly etatPresence: CodecTypes['pg/text@1']['input'] | null;
       readonly datePresence: CodecTypes['pg/date-string@1']['input'];
+      readonly heureArrivee: CodecTypes['pg/time-string@1']['input'] | null;
       readonly auteurId: CodecTypes['sql/char@1']['input'] | null;
       readonly enfantId: CodecTypes['sql/char@1']['input'];
     };
@@ -451,6 +467,7 @@ export type StorageColumnTypes = {
       readonly date_presence: CodecTypes['pg/date-string@1']['output'];
       readonly enfant_id: Char<36>;
       readonly etat_presence: CodecTypes['pg/text@1']['output'] | null;
+      readonly heure_arrivee: CodecTypes['pg/time-string@1']['output'] | null;
       readonly id: Char<36>;
     };
     readonly probleme_sante: {
@@ -542,6 +559,7 @@ export type StorageColumnInputTypes = {
       readonly date_presence: CodecTypes['pg/date-string@1']['input'];
       readonly enfant_id: CodecTypes['sql/char@1']['input'];
       readonly etat_presence: CodecTypes['pg/text@1']['input'] | null;
+      readonly heure_arrivee: CodecTypes['pg/time-string@1']['input'] | null;
       readonly id: CodecTypes['sql/char@1']['input'];
     };
     readonly probleme_sante: {
@@ -621,6 +639,7 @@ export namespace Models {
     id: Char<36>;
     etatPresence: CodecTypes['pg/text@1']['output'] | null;
     datePresence: CodecTypes['pg/date-string@1']['output'];
+    heureArrivee: CodecTypes['pg/time-string@1']['output'] | null;
     auteurId: Char<36> | null;
     enfantId: Char<36>;
     readonly [RelationKeys]?: never;
@@ -923,6 +942,11 @@ type ContractBase = Omit<
                   readonly nativeType: 'date';
                   readonly codecId: 'pg/date-string@1';
                   readonly nullable: false;
+                };
+                readonly heure_arrivee: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
                 };
                 readonly auteur_id: {
                   readonly nativeType: 'character';
@@ -1472,6 +1496,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
               };
+              readonly heureArrivee: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
               readonly auteurId: {
                 readonly nullable: true;
                 readonly type: {
@@ -1497,6 +1525,7 @@ type ContractBase = Omit<
                 readonly id: { readonly column: 'id' };
                 readonly etatPresence: { readonly column: 'etat_presence' };
                 readonly datePresence: { readonly column: 'date_presence' };
+                readonly heureArrivee: { readonly column: 'heure_arrivee' };
                 readonly auteurId: { readonly column: 'auteur_id' };
                 readonly enfantId: { readonly column: 'enfant_id' };
               };

@@ -3,7 +3,7 @@ import {EnfantsService} from '../../../services/enfants/enfants.service';
 import {Enfant} from '../../../models/enfant';
 import {PersonnelService} from '../../../services/personnel/personnel.service';
 import {Personnel} from '../../../models/personnel';
-import { EnfantPresent } from '../../../models/enfantPresent';
+import { Enfant_present_count } from '../../../models/enfant_present_count';
 import { PresenceService } from '../../../services/presence/presence.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class Compteur implements OnInit {
 
   readonly enfantData = signal<Enfant[]>([]);
   readonly personnelData = signal<Personnel | null>(null);
-  readonly presenceData = signal<EnfantPresent | null>(null);
+  readonly presenceData = signal<Enfant_present_count | null>(null);
 
   ngOnInit() {
     this.enfantsService.getEnfants().subscribe((enfants: Enfant[]) => {
@@ -29,8 +29,8 @@ export class Compteur implements OnInit {
     this.personnelService.getPersonnelById('10000000-0000-0000-0000-000000000001').subscribe((Personnel: Personnel) => {
       this.personnelData.set(Personnel);
     });
-    this.presenceService.getEnfantPresents().subscribe((present: EnfantPresent) => {
-        this.presenceData.set(present);
+    this.presenceService.getEnfantCountPresents().subscribe((present: Enfant_present_count) => {
+      this.presenceData.set(present);
     });
   }
 }

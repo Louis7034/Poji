@@ -441,6 +441,13 @@
                   "kind": "scalar"
                 }
               },
+              "heureDepart": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-string@1",
+                  "kind": "scalar"
+                }
+              },
               "id": {
                 "nullable": false,
                 "type": {
@@ -469,6 +476,9 @@
                 },
                 "heureArrivee": {
                   "column": "heure_arrivee"
+                },
+                "heureDepart": {
+                  "column": "heure_depart"
                 },
                 "id": {
                   "column": "id"
@@ -1192,6 +1202,11 @@
                   "nativeType": "time",
                   "nullable": true
                 },
+                "heure_depart": {
+                  "codecId": "pg/time-string@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
                 "id": {
                   "codecId": "sql/char@1",
                   "nativeType": "character",
@@ -1497,7 +1512,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "fc0b0f1853a7246003079ebba194195c6faf9b32856acea494b1f79daeec382f"
+    "storageHash": "f262a6ef1ceaabaecce7cc7ab3314807be4de552597a263cedfeac095ef2683a"
   },
   "execution": {
     "executionHash": "bd5220a3ef0a68da045ec490ab727d1d03b5c51a64b07b77bc5859e6627ceef7",

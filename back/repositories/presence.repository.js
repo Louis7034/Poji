@@ -41,19 +41,59 @@ const PresenceRepository = {
     async getEnfantPresentToday() {
         const result = await pool.query(`
             SELECT DISTINCT
+                presence.id AS presence_id,
                 presence.enfant_id,
                 enfant.prenom,
                 presence.etat_presence,
-                presence.heure_arrivee
+                presence.heure_arrivee,
+                presence.heure_depart
             FROM presence
             INNER JOIN enfant
                 ON enfant.id = presence.enfant_id
             WHERE presence.date_presence = CURRENT_DATE
-              AND presence.etat_presence IN ('PRESENT', 'PAS_ENCORE_ARRIVE')
             ORDER BY enfant.prenom
         `);
 
         return result.rows;
+    },
+
+    async update(id, data) {
+        const fields = [];
+        const values = [];
+
+        if (data.etatPresence !== undefined) {
+            values.push(String(data.etatPresence).toUpperCase());
+            fields.push(`etat_presence = $${values.length}`);
+        }
+
+        if (data.heureArrivee !== undefined) {
+            values.push(data.heureArrivee);
+            fields.push(`heure_arrivee = $${values.length}`);
+        }
+
+        if (data.heureDepart !== undefined) {
+            values.push(data.heureDepart);
+            fields.push(`heure_depart = $${values.length}`);
+        }
+
+        if (fields.length === 0) {
+            throw new Error("Aucune donnée de présence à mettre à jour");
+        }
+
+        values.push(id);
+        const result = await pool.query(
+            `UPDATE presence
+             SET ${fields.join(", ")}
+             WHERE id = $${values.length}
+             RETURNING id, etat_presence, heure_arrivee, heure_depart`,
+            values,
+        );
+
+        if (result.rows.length === 0) {
+            throw new Error("Présence introuvable");
+        }
+
+        return result.rows[0];
     }
 };
 

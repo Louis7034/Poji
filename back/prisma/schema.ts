@@ -117,6 +117,14 @@ export const contract = defineContract({}, ({ field, model }) => {
                 .optional()
                 .column("heure_arrivee"),
 
+            heureDepart: field
+                .column({
+                    codecId: "pg/time-string@1",
+                    nativeType: "time",
+                } as const)
+                .optional()
+                .column("heure_depart"),
+
             auteurId: field
                 .uuidString()
                 .optional()

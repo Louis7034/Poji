@@ -16,7 +16,7 @@ export class EnfantsService {
   }
 
   getEnfant(id: string) {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.get<Enfant>(`${this.baseUrl}/${id}`);
   }
 
   createEnfant(enfant: Partial<Enfant>) {

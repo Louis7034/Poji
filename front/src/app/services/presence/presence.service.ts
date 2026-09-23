@@ -19,4 +19,31 @@ export class PresenceService {
   getEnfantPresentToday() {
     return this.http.get<EnfantPresent[]>(`${this.baseUrl}/enfants-present`);
   }
+
+  updatePresence(
+    id: string,
+    etat: string,
+    heureArrivee?: string | null,
+    heureDepart?: string | null,
+  ) {
+    const data: {
+      etatPresence: string;
+      heureArrivee?: string | null;
+      heureDepart?: string | null;
+    } = {
+      etatPresence: etat.toUpperCase(),
+    };
+
+    if (heureArrivee !== undefined) {
+      data.heureArrivee = heureArrivee;
+    }
+
+    if (heureDepart !== undefined) {
+      data.heureDepart = heureDepart;
+    }
+
+    return this.http.put(`${this.baseUrl}/${id}`, {
+      ...data,
+    });
+  }
 }

@@ -1,8 +1,9 @@
 import { db } from "../prisma/db.ts";
+import EnfantRepository from "../repositories/enfant.repository.js";
 
 const EnfantService = {
     async getAll() {
-        return await db.orm.public.Enfant.all();
+        return await EnfantRepository.getAllEnfantsWithStory();
     },
 
     async getById(id) {

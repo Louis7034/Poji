@@ -1,9 +1,9 @@
 <section class="mx-8 w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-sm" aria-labelledby="present-title">
   <h2 id="present-title" class="px-8 py-6 text-2xl font-bold text-[#243b70]">
-    Présences aujourd'hui
+    Enfant présent aujourd'hui
   </h2>
 
-  <div class="divide-y divide-slate-100">
+  <div class="max-h-96 divide-y divide-slate-100 overflow-y-auto">
     @for (enfant of enfantPresentTodaySignal(); track enfant.enfant_id) {
       <div class="flex items-center gap-5 px-8 py-4">
         <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-[#526fca]" aria-hidden="true">
@@ -17,8 +17,8 @@
           {{ enfant.prenom }}
         </p>
 
-        <span class="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
-          {{ enfant.etat_presence }}
+        <span [class]="getEtatClass(enfant.etat_presence)">
+          {{ getEtatLabel(enfant.etat_presence) }}
         </span>
 
         <span class="w-14 text-right text-lg font-semibold text-slate-400">
@@ -26,7 +26,7 @@
         </span>
       </div>
     } @empty {
-      <p class="px-8 py-6 text-slate-500">Aucune présence enregistrée aujourd'hui.</p>
+      <p class="px-8 py-6 text-slate-500">Aucune enfant n'est enregistrée aujourd'hui.</p>
     }
   </div>
 </section>

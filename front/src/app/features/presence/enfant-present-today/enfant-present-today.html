@@ -1,0 +1,52 @@
+  <h2 id="present-title" class="px-8 py-6 text-2xl font-bold text-[#243b70]">
+    Enfant présent aujourd'hui
+  </h2>
+
+    @for (enfant of enfantPresentTodaySignal(); track enfant.enfant_id) {
+      <div
+        [class]="getEtatBackgroundClass(enfant.etat_presence) + ' mx-4 my-2 flex items-center gap-5 rounded-xl px-8 py-4'"
+      >
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-[#526fca]" aria-hidden="true">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+          </svg>
+        </span>
+
+        <p class="min-w-0 max-w-48 truncate text-lg font-semibold text-[#243b70]">
+          {{ enfant.prenom }}
+        </p>
+        <div class="pl-10">
+        <app-bouton-arrive
+          [arrive]="!!enfant.heure_arrivee"
+          (arriveChange)="marquerCommeArrive(enfant)"/>
+        </div>
+        <div class="pl-10">
+          <app-bouton-quitte
+            [quitte]="!!enfant.heure_depart"
+            (quitteChange)="marquerCommeQuitte(enfant)"
+          />
+        </div>
+          <div class="pl-10">
+            <app-select-etat-presence
+              [etat]="getEtatPresence(enfant.etat_presence)"
+              [selectId]="'etat-presence-' + enfant.enfant_id"
+              (etatChange)="modifierEtat(enfant, $event)"
+            />
+          </div>
+          <div class="flex items-center gap-2 pl-10">
+            <span class="text-sm font-medium text-slate-500">Heure d'arrivée : </span>
+            <span class="text-lg font-semibold text-slate-400">
+              {{ enfant.heure_arrivee?.substring(0, 5) ?? '--' }}
+            </span>
+          </div>
+          <div class="flex items-center gap-2 pl-10">
+            <span class="text-sm font-medium text-slate-500">Heure de départ : </span>
+            <span class="text-lg font-semibold text-slate-400">
+              {{ enfant.heure_depart?.substring(0, 5) ?? '--' }}
+            </span>
+          </div>
+        </div>
+    } @empty {
+      <p class="px-8 py-6 text-slate-500">Aucune enfant n'est enregistrée aujourd'hui.</p>
+    }

@@ -25,7 +25,7 @@ const PresenceService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Presence.update(id, data);
+        return await PresenceRepository.update(id, data);
     },
 
     async delete(id) {

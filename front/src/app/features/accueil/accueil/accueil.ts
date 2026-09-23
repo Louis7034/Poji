@@ -1,15 +1,16 @@
 import { Component, OnInit, signal } from '@angular/core';
-import {Navbar} from '../../navbar/navbar';
 import {Compteur} from '../compteur/compteur';
 import { PersonnelService } from '../../../services/personnel/personnel.service';
 import { Personnel } from '../../../models/personnel';
 import { PresentAujourdhui } from '../present-aujourdhui/present-aujourdhui';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  imports: [Navbar, Compteur, PresentAujourdhui],
+  imports: [Compteur, PresentAujourdhui, RouterLink, RouterLinkActive],
   selector: 'app-accueil',
   styleUrl: './accueil.css',
   templateUrl: './accueil.html',
+  standalone: true,
 })
 export class Accueil implements OnInit {
   constructor(private readonly personnelService: PersonnelService) {}

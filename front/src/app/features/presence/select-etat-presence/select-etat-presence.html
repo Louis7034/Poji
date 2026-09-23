@@ -1,0 +1,15 @@
+<label class="sr-only" [for]="selectId">État de présence</label>
+<select
+  [id]="selectId"
+  class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-[#243b70] outline-none focus:border-[#526fca] focus:ring-2 focus:ring-[#526fca]/20"
+  (change)="onChange($any($event.target).value)"
+>
+  @for (option of options; track option.value) {
+    <option
+      [value]="option.value"
+      [selected]="option.value === (etat ?? options[0].value)"
+    >
+      {{ option.label }}
+    </option>
+  }
+</select>

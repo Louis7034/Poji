@@ -11,11 +11,14 @@ import { PresenceService } from '../../../services/presence/presence.service';
   imports: [],
   templateUrl: './compteur.html',
   styleUrl: './compteur.css',
+  standalone: true,
 })
 export class Compteur implements OnInit {
-  constructor(private readonly enfantsService: EnfantsService,
-              private readonly presenceService: PresenceService,
-              private readonly personnelService: PersonnelService) {}
+  constructor(
+    private readonly enfantsService: EnfantsService,
+    private readonly presenceService: PresenceService,
+    private readonly personnelService: PersonnelService,
+  ) {}
 
   readonly enfantData = signal<Enfant[]>([]);
   readonly personnelData = signal<Personnel | null>(null);
@@ -26,9 +29,11 @@ export class Compteur implements OnInit {
       this.enfantData.set(enfants);
     });
 
-    this.personnelService.getPersonnelById('10000000-0000-0000-0000-000000000001').subscribe((Personnel: Personnel) => {
-      this.personnelData.set(Personnel);
-    });
+    this.personnelService
+      .getPersonnelById('10000000-0000-0000-0000-000000000001')
+      .subscribe((Personnel: Personnel) => {
+        this.personnelData.set(Personnel);
+      });
     this.presenceService.getEnfantCountPresents().subscribe((present: Enfant_present_count) => {
       this.presenceData.set(present);
     });

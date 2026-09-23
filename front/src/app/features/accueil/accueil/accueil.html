@@ -1,13 +1,14 @@
 <div class="flex min-h-screen">
-  <app-navbar></app-navbar>
-  <div class="flex flex-col  pt-10 pb-15">
+  <div class="flex flex-col  pt-10 pb-15 gap-15">
   <div class="flex-col p-8">
       <h1 id="compteur-title" class="text-3xl font-bold text-[#243b70]">
         Bonjour {{ personnelData()?.prenom }}
       </h1>
       <p class="text-xl text-slate-600">Voici un aperçu de la journée d'aujourd'hui</p>
     </div>
-      <app-compteur></app-compteur>
+    <app-compteur></app-compteur>
+    <a routerLink="/enfants-present" routerLinkActive="active">
+      <app-present-aujourdhui></app-present-aujourdhui>
+    </a>
   </div>
-  <app-present-aujourdhui></app-present-aujourdhui>
 </div>

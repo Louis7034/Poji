@@ -4,6 +4,8 @@ import { EnfantPresentToday } from './features/presence/enfant-present-today/enf
 import { EnfantsTotal } from './features/enfants/enfants-total/enfants-total';
 import { Calendrier } from './features/calendrier/calendrier/calendrier';
 import { RappelCreation } from './features/rappel_parent/rappel-creation/rappel-creation';
+import { TransmissionsPanel } from './features/presence/transmissions/transmissions-panel/transmissions-panel';
+import { JournalPanel } from './features/enfants/journal/journal-panel/journal-panel';
 
 export const routes: Routes = [
   {
@@ -20,8 +22,16 @@ export const routes: Routes = [
     component: EnfantPresentToday,
   },
   {
+    path: 'enfants-present/transmission/:enfantId',
+    component: TransmissionsPanel,
+  },
+  {
     path: 'enfants',
     component: EnfantsTotal,
+  },
+  {
+    path: 'journal/:enfantId',
+    component: JournalPanel,
   },
   {
     path: 'calendrier',

@@ -4,7 +4,8 @@
 
   <div class="max-h-[calc(100vh-12rem)] divide-y divide-slate-100 overflow-y-auto">
     @for (enfant of enfantsSignal(); track enfant.id) {
-      <div class="mx-4 my-2 flex items-center gap-5 rounded-xl bg-[#eef3ff] px-6 py-4">
+      <div class="mx-4 my-2 flex cursor-pointer items-center gap-5 rounded-xl bg-[#eef3ff] px-6 py-4"
+        (click)="ouvrirJournal(enfant)" (keydown.enter)="ouvrirJournal(enfant)" tabindex="0" role="link">
         <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#526fca]" aria-hidden="true">
           <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <circle cx="12" cy="8" r="3.5"></circle>
@@ -21,7 +22,7 @@
             </p>
           </div>
           <span>Accéder à mon journal</span>
-          <a routerLink="/journal" routerLinkActive="active">
+          <a [routerLink]="['/journal', enfant.id]" routerLinkActive="active" (click)="$event.stopPropagation()">
             <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir le calendrier de {{ enfant.prenom }}">
               <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M6 3.5h9.5L19 7v13.5H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Z"></path>

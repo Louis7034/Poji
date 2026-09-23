@@ -19,6 +19,15 @@ const JournalController = {
         }
     },
 
+    async getByEnfant(req, res) {
+        try {
+            res.status(200).json(await JournalService.getByEnfant(req.params.enfantId));
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors de la récupération du journal de l'enfant", error: error.message });
+        }
+    },
+
     async create(req, res) {
         try {
             res.status(201).json(await JournalService.create(req.body));

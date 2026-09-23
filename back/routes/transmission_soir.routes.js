@@ -4,6 +4,7 @@ import TransmissionSoirController from "../controllers/transmission_soir.control
 const router = express.Router();
 
 router.get("/transmission-soir", TransmissionSoirController.getAll);
+router.get("/transmission-soir/enfant/:enfantId", TransmissionSoirController.getByEnfant);
 router.get("/transmission-soir/:id", TransmissionSoirController.getById);
 router.post("/transmission-soir", TransmissionSoirController.create);
 router.put("/transmission-soir/:id", TransmissionSoirController.update);

@@ -10,6 +10,15 @@ const TransmissionMatinController = {
         }
     },
 
+    async getByEnfant(req, res) {
+        try {
+            res.status(200).json(await TransmissionMatinService.getByEnfant(req.params.enfantId));
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors de la récupération des transmissions du matin", error: error.message });
+        }
+    },
+
     async getById(req, res) {
         try {
             res.status(200).json(await TransmissionMatinService.getById(req.params.id));

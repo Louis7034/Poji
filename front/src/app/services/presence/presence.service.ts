@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import { Enfant_present_count } from '../../models/enfant_present_count';
 import { EnfantPresent } from '../../models/enfant_present';
 import { PresenceCalendrier } from '../../models/presence-calendrier';
+import { TransmissionMatin } from '../../models/transmission_matin';
+import { TransmissionSoir } from '../../models/transmission_soir';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +25,38 @@ export class PresenceService {
 
   getAll() {
     return this.http.get<PresenceCalendrier[]>(this.baseUrl);
+  }
+
+  getTransmissionsMatin(enfantId: string) {
+    return this.http.get<TransmissionMatin[]>(
+      `${environment.API_URL}/api/transmission-matin/enfant/${enfantId}`,
+    );
+  }
+
+  getTransmissionsSoir(enfantId: string) {
+    return this.http.get<TransmissionSoir[]>(
+      `${environment.API_URL}/api/transmission-soir/enfant/${enfantId}`,
+    );
+  }
+
+  updateTransmissionMatin(
+    id: string,
+    data: Partial<Pick<TransmissionMatin, 'heureCouche' | 'heureReveille' | 'observation' | 'repas' | 'comportement'>>,
+  ) {
+    return this.http.put<TransmissionMatin>(
+      `${environment.API_URL}/api/transmission-matin/${id}`,
+      data,
+    );
+  }
+
+  updateTransmissionSoir(
+    id: string,
+    data: Partial<Pick<TransmissionSoir, 'depart' | 'arrivee' | 'observation' | 'evenement' | 'besoin'>>,
+  ) {
+    return this.http.put<TransmissionSoir>(
+      `${environment.API_URL}/api/transmission-soir/${id}`,
+      data,
+    );
   }
 
   createPresence(enfantId: string, datePresence: string) {

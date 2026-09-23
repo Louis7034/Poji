@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { PresenceService } from '../../../services/presence/presence.service';
 import {
   getPresenceEtatBackgroundClass,
@@ -18,7 +19,10 @@ import { BoutonQuitte } from '../bouton-quitte/bouton-quitte';
   standalone: true,
 })
 export class EnfantPresentToday {
-  constructor(private readonly presenceService: PresenceService) {}
+  constructor(
+    private readonly presenceService: PresenceService,
+    private readonly router: Router,
+  ) {}
 
   readonly enfantPresentTodaySignal = signal<EnfantPresent[]>([]);
 
@@ -157,6 +161,10 @@ export class EnfantPresentToday {
         console.error("Erreur lors de l'enregistrement de l'arrivée", error);
       },
       });
+  }
+
+  ouvrirTransmissions(enfant: EnfantPresent): void {
+    this.router.navigate(['/enfants-present/transmission', enfant.enfant_id]);
   }
 
   ngOnInit() {

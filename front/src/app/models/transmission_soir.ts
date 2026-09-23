@@ -12,6 +12,8 @@ export interface TransmissionSoir {
   observation: string | null;
   evenement: string | null;
   besoin: string | null;
+  journalId?: string | null;
+  auteurId?: string | null;
 
   journal: Journal;
   auteur: Personnel | null;

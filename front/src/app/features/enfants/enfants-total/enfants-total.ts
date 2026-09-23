@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Enfant } from '../../../models/enfant';
 import { EnfantsService } from '../../../services/enfants/enfants.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histoire';
 
 @Component({
@@ -11,7 +11,10 @@ import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histo
   styleUrl: './enfants-total.css',
 })
 export class EnfantsTotal implements OnInit {
-  constructor(private readonly enfantsService: EnfantsService) {}
+  constructor(
+    private readonly enfantsService: EnfantsService,
+    private readonly router: Router,
+  ) {}
 
   readonly enfantsSignal = signal<Enfant[]>([]);
   readonly enfantHistoireSelectionne = signal<Enfant | null>(null);
@@ -31,4 +34,7 @@ export class EnfantsTotal implements OnInit {
     this.enfantHistoireSelectionne.set(null);
   }
 
+  ouvrirJournal(enfant: Enfant): void {
+    this.router.navigate(['/journal', enfant.id]);
+  }
 }

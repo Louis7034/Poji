@@ -1,1 +1,30 @@
-<p>transmissions-panel works!</p>
+<section class="mx-4 my-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+  <header class="border-b border-slate-200 px-6 pt-6">
+    <p class="text-sm font-semibold text-slate-500">Transmissions de l'enfant</p>
+    <h2 class="mt-1 text-2xl font-bold text-slate-800">Journal de transmission</h2>
+    <nav class="mt-6 flex gap-6" aria-label="Type de transmission">
+      <button type="button" (click)="onglet.set('matin')"
+        [class]="onglet() === 'matin'
+          ? 'border-b-2 border-orange-500 px-1 pb-3 font-semibold text-orange-600'
+          : 'border-b-2 border-transparent px-1 pb-3 text-slate-500'"
+        [attr.aria-selected]="onglet() === 'matin'">
+        Transmission matin
+      </button>
+      <button type="button" (click)="onglet.set('soir')"
+        [class]="onglet() === 'soir'
+          ? 'border-b-2 border-orange-500 px-1 pb-3 font-semibold text-orange-600'
+          : 'border-b-2 border-transparent px-1 pb-3 text-slate-500'"
+        [attr.aria-selected]="onglet() === 'soir'">
+        Transmission soir
+      </button>
+    </nav>
+  </header>
+
+  <div class="p-6">
+    @if (onglet() === 'matin') {
+      <app-transmissions-matin [enfantId]="enfantId()" />
+    } @else {
+      <app-transmissions-soir [enfantId]="enfantId()" />
+    }
+  </div>
+</section>

@@ -5,6 +5,11 @@
     @for (enfant of enfantPresentTodaySignal(); track enfant.enfant_id) {
       <div
         [class]="getEtatBackgroundClass(enfant.etat_presence) + ' mx-4 my-2 flex items-center gap-5 rounded-xl px-8 py-4'"
+        role="button"
+        tabindex="0"
+        (click)="ouvrirTransmissions(enfant)"
+        (keydown.enter)="ouvrirTransmissions(enfant)"
+        (keydown.space)="ouvrirTransmissions(enfant); $event.preventDefault()"
       >
         <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-[#526fca]" aria-hidden="true">
           <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">

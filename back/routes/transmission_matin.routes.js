@@ -4,6 +4,7 @@ import TransmissionMatinController from "../controllers/transmission_matin.contr
 const router = express.Router();
 
 router.get("/transmission-matin", TransmissionMatinController.getAll);
+router.get("/transmission-matin/enfant/:enfantId", TransmissionMatinController.getByEnfant);
 router.get("/transmission-matin/:id", TransmissionMatinController.getById);
 router.post("/transmission-matin", TransmissionMatinController.create);
 router.put("/transmission-matin/:id", TransmissionMatinController.update);

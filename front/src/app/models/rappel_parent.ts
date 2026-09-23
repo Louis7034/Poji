@@ -4,7 +4,8 @@ import { TransmissionSoir } from "./transmission_soir";
 export interface RappelParent {
   id: string;
   message: string | null;
-  dateCreation: Date;
+  dateCreation: string | Date;
+  prenomEnfant?: string | null;
   journee: TransmissionSoir | null;
   auteur: Personnel | null;
 }

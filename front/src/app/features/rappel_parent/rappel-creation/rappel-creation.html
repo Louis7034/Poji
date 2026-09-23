@@ -1,0 +1,40 @@
+<div class="space-y-6 p-6 lg:p-8">
+  <app-rappel-parent [refresh]="refresh()" />
+
+    <div class="mb-6 mt-6">
+      <p class="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-orange-500">Nouveau message</p>
+      <h1 class="text-2xl font-bold text-slate-800">Créer un rappel parent</h1>
+    </div>
+
+    <form (ngSubmit)="creerRappel()">
+      <article class="rounded-2xl border border-orange-100 bg-amber-50 p-5">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-500">
+          <div class="flex min-w-0 flex-1 items-center gap-2">
+            <label for="enfant" class="sr-only">Prénom de l’enfant</label>
+            <select id="enfant" name="enfant" [(ngModel)]="enfantId" required
+              class="min-w-0 rounded-xl border border-orange-200 bg-white px-3 py-2 font-semibold text-slate-700 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20">
+              <option value="" disabled>Choisir un enfant</option>
+              @for (enfant of enfants(); track enfant.id) {
+                <option [value]="enfant.id">{{ enfant.prenom }}</option>
+              }
+            </select>
+          </div>
+          <span>Rappel à compléter</span>
+        </div>
+
+        <label for="message" class="sr-only">Message à transmettre</label>
+        <textarea id="message" name="message" [(ngModel)]="message" required rows="3"
+          placeholder="Écrire le rappel à transmettre aux parents..."
+          class="w-full resize-y rounded-xl border border-orange-200 bg-white px-3 py-3 text-base leading-7 text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"></textarea>
+      </article>
+
+      @if (erreur) {
+        <p class="mt-3 text-sm text-red-600" role="alert">{{ erreur }}</p>
+      }
+
+      <button type="submit" [disabled]="envoiEnCours"
+        class="mt-4 rounded-xl bg-orange-500 px-6 py-3 font-bold text-white disabled:cursor-not-allowed disabled:opacity-60">
+        {{ envoiEnCours ? 'Création en cours...' : 'Ajouter le rappel' }}
+      </button>
+    </form>
+</div>

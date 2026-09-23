@@ -94,7 +94,20 @@ const PresenceRepository = {
         }
 
         return result.rows[0];
-    }
+    },
+
+    async delete(id) {
+        const result = await pool.query(
+            `DELETE FROM presence
+             WHERE id = $1
+             RETURNING id`,
+            [id],
+        );
+
+        if (result.rows.length === 0) {
+            throw new Error("Présence introuvable");
+        }
+    },
 };
 
 export default PresenceRepository;

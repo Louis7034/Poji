@@ -29,7 +29,7 @@ const PresenceService = {
     },
 
     async delete(id) {
-        return await db.orm.public.Presence.delete(id);
+        return await PresenceRepository.delete(id);
     },
 };
 

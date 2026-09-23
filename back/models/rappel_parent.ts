@@ -1,5 +1,6 @@
 import { Personnel } from "./personnel";
 import { TransmissionSoir } from "./transmission-soir";
+import {Enfant} from "./enfant";
 
 export interface RappelParent {
   id: string;
@@ -7,4 +8,5 @@ export interface RappelParent {
   dateCreation: Date;
   journee: TransmissionSoir | null;
   auteur: Personnel | null;
+  enfantId: Enfant | null;
 }

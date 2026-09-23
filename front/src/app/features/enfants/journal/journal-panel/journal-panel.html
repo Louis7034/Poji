@@ -1,0 +1,76 @@
+<div class="p-6 lg:p-8">
+  <h1 class="mb-6 text-2xl font-bold text-slate-800">Journal des transmissions</h1>
+  <div class="grid gap-6 lg:grid-cols-[minmax(360px,0.9fr)_minmax(420px,1.1fr)]">
+    <section class="rounded-2xl bg-white p-5 ring-1 ring-slate-100">
+      <div class="mb-5 flex items-center justify-between">
+        <button type="button" class="p-2 text-xl text-slate-500" (click)="previousMonth()">‹</button>
+        <h2 class="font-semibold capitalize text-slate-800">{{ monthLabel() }}</h2>
+        <button type="button" class="p-2 text-xl text-slate-500" (click)="nextMonth()">›</button>
+      </div>
+      <div class="mb-2 grid grid-cols-7 text-center text-xs font-semibold uppercase text-slate-400">
+        @for (name of ['lun','mar','mer','jeu','ven','sam','dim']; track name) { <span>{{ name }}</span> }
+      </div>
+      <div class="grid grid-cols-7 gap-2">
+        @for (day of days(); track $index) {
+          <button type="button" [disabled]="!day.currentMonth" (click)="selectDate(day.isoDate)"
+            class="min-h-20 rounded-xl border p-2 text-left text-sm"
+            [class.border-orange-400]="selectedDate() === day.isoDate"
+            [class.bg-orange-50]="selectedDate() === day.isoDate"
+            [class.border-slate-200]="day.currentMonth && selectedDate() !== day.isoDate"
+            [class.bg-slate-50]="!day.currentMonth">
+            <span class="font-semibold text-slate-700">{{ day.date || '' }}</span>
+            @if (day.currentMonth && journalFor(day.isoDate)) {
+              <span class="mt-2 block rounded-md bg-orange-100 px-1 py-1 text-[10px] font-semibold text-orange-700">Transmission</span>
+            }
+          </button>
+        }
+      </div>
+    </section>
+    <section class="rounded-2xl bg-white p-6 ring-1 ring-slate-100">
+      @if (selectedJournal(); as journal) {
+        <h2 class="mb-1 text-xl font-bold text-slate-800">{{ journal.nom }}</h2>
+        <p class="mb-5 text-sm text-slate-500">{{ journal.createdAt | date: 'EEEE d MMMM yyyy' }}</p>
+        <div class="space-y-4">
+          <article class="rounded-xl border border-slate-200 p-4">
+            <h3 class="mb-3 font-semibold text-slate-800">Transmission matin</h3>
+            @for (transmission of journal.transmissionsMatin; track transmission.id) {
+              <dl class="grid gap-3 text-sm sm:grid-cols-2">
+                <div><dt class="text-slate-500">Heure du coucher</dt><dd class="font-medium text-slate-700">{{ transmission.heureCouche || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Heure du réveil</dt><dd class="font-medium text-slate-700">{{ transmission.heureReveille || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Repas</dt><dd class="font-medium text-slate-700">{{ transmission.repas || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Comportement</dt><dd class="font-medium text-slate-700">{{ transmission.comportement || '--' }}</dd></div>
+                <div class="sm:col-span-2">
+                  <dt class="text-slate-500">Observations</dt>
+                  <dd class="mt-1 whitespace-pre-line rounded-lg bg-amber-50/60 px-3 py-2 font-mono text-slate-700">{{ transmission.observation || 'Aucune observation' }}</dd>
+                </div>
+                <div><dt class="text-slate-500">Identifiant</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.id }}</dd></div>
+                <div><dt class="text-slate-500">Identifiant du journal</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.journalId || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Identifiant de l’auteur</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.auteurId || '--' }}</dd></div>
+              </dl>
+            } @empty { <p class="text-sm text-slate-400">Aucune transmission du matin.</p> }
+          </article>
+          <article class="rounded-xl border border-slate-200 p-4">
+            <h3 class="mb-3 font-semibold text-slate-800">Transmission soir</h3>
+            @for (transmission of journal.transmissionsSoir; track transmission.id) {
+              <dl class="grid gap-3 text-sm sm:grid-cols-2">
+                <div><dt class="text-slate-500">Heure d’arrivée</dt><dd class="font-medium text-slate-700">{{ transmission.arrivee || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Heure de départ</dt><dd class="font-medium text-slate-700">{{ transmission.depart || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Événement</dt><dd class="font-medium text-slate-700">{{ transmission.evenement || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Besoin</dt><dd class="font-medium text-slate-700">{{ transmission.besoin || '--' }}</dd></div>
+                <div class="sm:col-span-2">
+                  <dt class="text-slate-500">Observations</dt>
+                  <dd class="mt-1 whitespace-pre-line rounded-lg bg-amber-50/60 px-3 py-2 font-mono text-slate-700">{{ transmission.observation || 'Aucune observation' }}</dd>
+                </div>
+                <div><dt class="text-slate-500">Identifiant</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.id }}</dd></div>
+                <div><dt class="text-slate-500">Identifiant du journal</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.journalId || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Identifiant de l’auteur</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.auteurId || '--' }}</dd></div>
+              </dl>
+            } @empty { <p class="text-sm text-slate-400">Aucune transmission du soir.</p> }
+          </article>
+        </div>
+      } @else {
+        <p class="py-16 text-center text-slate-500">Sélectionnez un jour pour afficher ses transmissions.</p>
+      }
+    </section>
+  </div>
+</div>

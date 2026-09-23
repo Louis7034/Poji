@@ -1,5 +1,24 @@
-Liste de tous les enfants
+<section class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100" aria-labelledby="presence-calendar-title">
+  <div class="mb-4">
+    <h2 id="presence-calendar-title" class="text-lg font-semibold text-[#243b70]">Présences</h2>
+    <p class="mt-1 text-sm text-slate-500">
+      {{ formatSelectedDate(selectedDate()) }}
+    </p>
+  </div>
 
-Je peux les cocher
-
-Et sur un calendrier de style apple je peux choisir des jours de preence pour chaque enfant.
+  <div class="space-y-2">
+    @for (enfant of enfants(); track enfant.id) {
+      <label class="flex cursor-pointer items-center gap-3 rounded-xl bg-[#eef3ff] px-4 py-3 text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        <input
+          type="checkbox"
+          class="h-5 w-5 accent-[#526fca]"
+          [checked]="isChecked(enfant.id)"
+          (change)="togglePresence(enfant.id, $event)"
+        />
+        <span class="font-medium">{{ enfant.prenom }}</span>
+      </label>
+    } @empty {
+      <p class="py-3 text-sm text-slate-500">Aucun enfant n'est enregistré.</p>
+    }
+  </div>
+</section>

@@ -3,6 +3,7 @@ import {environment} from '../../environment/environment';
 import {HttpClient} from '@angular/common/http';
 import { Enfant_present_count } from '../../models/enfant_present_count';
 import { EnfantPresent } from '../../models/enfant_present';
+import { PresenceCalendrier } from '../../models/presence-calendrier';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,22 @@ export class PresenceService {
 
   getEnfantPresentToday() {
     return this.http.get<EnfantPresent[]>(`${this.baseUrl}/enfants-present`);
+  }
+
+  getAll() {
+    return this.http.get<PresenceCalendrier[]>(this.baseUrl);
+  }
+
+  createPresence(enfantId: string, datePresence: string) {
+    return this.http.post<PresenceCalendrier>(this.baseUrl, {
+      enfantId,
+      datePresence,
+      etatPresence: 'PRESENT',
+    });
+  }
+
+  deletePresence(id: string) {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
   updatePresence(

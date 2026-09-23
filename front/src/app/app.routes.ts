@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import { Accueil } from './features/accueil/accueil/accueil';
 import { EnfantPresentToday } from './features/presence/enfant-present-today/enfant-present-today';
 import { EnfantsTotal } from './features/enfants/enfants-total/enfants-total';
-import { CalendrierPresence } from './features/calendrier/calendrier-presence/calendrier-presence';
+import { Calendrier } from './features/calendrier/calendrier/calendrier';
+import { RappelCreation } from './features/rappel_parent/rappel-creation/rappel-creation';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'calendrier',
-    component: CalendrierPresence,
+    component: Calendrier,
   },
   {
     path: 'presences',
@@ -36,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'rappel-parent',
-    component: EnfantPresentToday,
+    component: RappelCreation,
   },
   {
     path: 'personnel',

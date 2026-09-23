@@ -12,7 +12,24 @@
           </svg>
         </span>
 
-        <div class="flex shrink-0 items-center gap-2">
+
+
+        <div class="flex shrink-0 items-center gap-8">
+          <div class="min-w-0 flex-1">
+            <p class="truncate text-lg font-semibold text-[#243b70]">
+              {{ enfant.prenom }}
+            </p>
+          </div>
+          <span>Accéder à mon journal</span>
+          <a routerLink="/journal" routerLinkActive="active">
+            <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir le calendrier de {{ enfant.prenom }}">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 3.5h9.5L19 7v13.5H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Z"></path>
+                <path d="M15 3.5V7h4M8 10h8M8 13h8M8 16h5"></path>
+              </svg>
+            </button>
+          </a>
+          <span>Ajouter des dates de présences</span>
           <a routerLink="/calendrier" routerLinkActive="active">
             <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir le calendrier de {{ enfant.prenom }}">
               <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -21,17 +38,13 @@
               </svg>
             </button>
           </a>
+          <span>Ma petite histoire</span>
           <button type="button" (click)="afficherHistoire(enfant)" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir la petite histoire de {{ enfant.prenom }}">
             <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"></path>
               <path d="M4 5.5V21M8 7h8M8 11h8"></path>
             </svg>
           </button>
-        </div>
-        <div class="min-w-0 flex-1">
-          <p class="truncate text-lg font-semibold text-[#243b70]">
-            {{ enfant.prenom }}
-          </p>
         </div>
       </div>
     } @empty {

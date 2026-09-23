@@ -1,0 +1,65 @@
+<section class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100" aria-labelledby="calendar-title">
+  <div class="mb-5 flex items-center justify-between gap-3">
+    <button
+      type="button"
+      class="rounded-lg p-2 text-xl text-[#526fca] transition-colors hover:bg-[#eef3ff]"
+      aria-label="Mois précédent"
+      (click)="previousMonth()"
+    >‹</button>
+    <h2 id="calendar-title" class="text-lg font-semibold capitalize text-[#243b70]">
+      {{ monthLabel() }}
+    </h2>
+    <button
+      type="button"
+      class="rounded-lg p-2 text-xl text-[#526fca] transition-colors hover:bg-[#eef3ff]"
+      aria-label="Mois suivant"
+      (click)="nextMonth()"
+    >›</button>
+  </div>
+
+  <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold uppercase text-slate-400">
+    @for (dayName of ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim']; track dayName) {
+      <span class="py-2">{{ dayName }}</span>
+    }
+  </div>
+
+  <div class="grid grid-cols-7 gap-2">
+    @for (day of days(); track $index) {
+      <button
+        type="button"
+        class="calendar-day min-h-24 rounded-xl border border-slate-200 bg-white p-2 text-left text-sm shadow-sm transition-all duration-200"
+        [class.text-slate-300]="!day.isCurrentMonth"
+        [class.text-[#243b70]]="day.isCurrentMonth"
+        [class.border-[#526fca]]="isSelected(day)"
+        [class.bg-[#eef3ff]]="isSelected(day)"
+        [class.shadow-[0_0_0_3px_rgba(82,111,202,0.15)]]="isSelected(day)"
+        [class.border-dashed]="!day.isCurrentMonth"
+        [class.bg-slate-50]="!day.isCurrentMonth"
+        [class.opacity-60]="!day.isCurrentMonth"
+        [disabled]="!day.isCurrentMonth"
+        [attr.aria-label]="day.isCurrentMonth ? 'Choisir le ' + day.date : 'Jour hors du mois'"
+        (click)="selectDay(day)"
+      >
+        <span class="mb-2 flex items-center justify-between">
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-full font-semibold"
+            [class.bg-[#526fca]]="day.isToday"
+            [class.text-white]="day.isToday"
+          >{{ day.date || '' }}</span>
+          @if (getPresenceNames(day).length > 0) {
+            <span class="rounded-full bg-[#dbe5ff] px-1.5 py-0.5 text-[10px] font-semibold text-[#526fca]">
+              {{ getPresenceNames(day).length }}
+            </span>
+          }
+        </span>
+        <span class="space-y-1">
+          @for (prenom of getPresenceNames(day); track prenom) {
+            <span class="block truncate rounded-md bg-[#f0f4ff] px-1.5 py-0.5 text-[11px] font-medium text-[#526fca]">
+              {{ prenom }}
+            </span>
+          }
+        </span>
+      </button>
+    }
+  </div>
+</section>

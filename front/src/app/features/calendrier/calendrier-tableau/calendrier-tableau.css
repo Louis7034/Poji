@@ -1,0 +1,9 @@
+.calendar-day:not(:disabled):hover {
+  border-color: #9aaee8;
+  background-color: #f7f9ff;
+  transform: translateY(-1px);
+}
+
+.calendar-day:not(:disabled):active {
+  transform: scale(0.97);
+}

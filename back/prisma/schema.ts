@@ -165,42 +165,23 @@ export const contract = defineContract({}, ({ field, model }) => {
         fields: {
             id: field.id.uuidv4String(),
 
-            heureCouche: field
+            contenu: field.text().optional(),
+
+            createdAt: field
                 .column({
-                    codecId: "pg/time-string@1",
-                    nativeType: "time",
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
                 } as const)
-                .optional()
-                .column("heure_couche"),
-
-            heureReveille: field
-                .column({
-                    codecId: "pg/time-string@1",
-                    nativeType: "time",
-                } as const)
-                .optional()
-                .column("heure_reveille"),
-
-            observation: field
-                .text()
-                .optional(),
-
-            repas: field
-                .text()
-                .optional(),
-
-            comportement: field
-                .text()
-                .optional(),
-
-            journalId: field
-                .uuidString()
-                .column("journal_id"),
+                .column("created_at"),
 
             auteurId: field
                 .uuidString()
                 .optional()
                 .column("auteur_id"),
+
+            enfantId: field
+                .uuidString()
+                .column("enfant_id"),
         },
     }).sql({
         table: "transmission_matin",
@@ -211,40 +192,23 @@ export const contract = defineContract({}, ({ field, model }) => {
         fields: {
             id: field.id.uuidv4String(),
 
-            depart: field
+            contenu: field.text().optional(),
+
+            createdAt: field
                 .column({
-                    codecId: "pg/time-string@1",
-                    nativeType: "time",
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
                 } as const)
-                .optional(),
-
-            arrivee: field
-                .column({
-                    codecId: "pg/time-string@1",
-                    nativeType: "time",
-                } as const)
-                .optional(),
-
-            observation: field
-                .text()
-                .optional(),
-
-            evenement: field
-                .text()
-                .optional(),
-
-            besoin: field
-                .text()
-                .optional(),
-
-            journalId: field
-                .uuidString()
-                .column("journal_id"),
+                .column("created_at"),
 
             auteurId: field
                 .uuidString()
                 .optional()
                 .column("auteur_id"),
+
+            enfantId: field
+                .uuidString()
+                .column("enfant_id"),
         },
     }).sql({
         table: "transmission_soir",

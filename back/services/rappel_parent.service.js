@@ -1,24 +1,22 @@
 import { db } from "../prisma/db.ts";
 import pool from "../db/database.js";
+import { randomUUID } from "node:crypto";
 
 const RappelParentService = {
     async getAll() {
         const result = await pool.query(`
             SELECT
                 rappel_parent.id,
-                rappel_parent.message,
-                rappel_parent.date_creation AS "dateCreation",
+                rappel_parent.sujet,
+                rappel_parent.contenu AS message,
+                rappel_parent.created_at AS "dateCreation",
+                rappel_parent.auteur_id AS "auteurId",
+                rappel_parent.enfant_id AS "enfantId",
                 enfant.prenom AS "prenomEnfant"
             FROM rappel_parent
-            LEFT JOIN transmission_soir
-                ON transmission_soir.id = rappel_parent.journee_id
-            LEFT JOIN journal
-                ON journal.id = transmission_soir.journal_id
-            LEFT JOIN enfant
-                ON enfant.id = journal.enfant_id
-            ORDER BY rappel_parent.date_creation DESC
+            LEFT JOIN enfant ON enfant.id = rappel_parent.enfant_id
+            ORDER BY rappel_parent.created_at DESC
         `);
-
         return result.rows;
     },
 
@@ -30,38 +28,12 @@ const RappelParentService = {
 
     async create(data) {
         const result = await pool.query(`
-            INSERT INTO rappel_parent (message, journee_id)
-            SELECT $1, transmission_soir.id
-            FROM transmission_soir
-            INNER JOIN journal
-                ON journal.id = transmission_soir.journal_id
-            WHERE journal.enfant_id = $2
-            ORDER BY journal.created_at DESC
-            LIMIT 1
-            RETURNING id
-        `, [data.message, data.enfantId]);
-
-        if (result.rowCount === 0) {
-            throw new Error("Aucune transmission du soir n'est disponible pour cet enfant");
-        }
-
-        const rappel = await pool.query(`
-            SELECT
-                rappel_parent.id,
-                rappel_parent.message,
-                rappel_parent.date_creation AS "dateCreation",
-                enfant.prenom AS "prenomEnfant"
-            FROM rappel_parent
-            INNER JOIN transmission_soir
-                ON transmission_soir.id = rappel_parent.journee_id
-            INNER JOIN journal
-                ON journal.id = transmission_soir.journal_id
-            INNER JOIN enfant
-                ON enfant.id = journal.enfant_id
-            WHERE rappel_parent.id = $1
-        `, [result.rows[0].id]);
-
-        return rappel.rows[0];
+            INSERT INTO rappel_parent (id, sujet, contenu, auteur_id, enfant_id)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id, sujet, contenu AS message, created_at AS "dateCreation",
+                      auteur_id AS "auteurId", enfant_id AS "enfantId"
+        `, [randomUUID(), data.sujet ?? null, data.contenu ?? data.message ?? null, data.auteurId ?? null, data.enfantId]);
+        return result.rows[0];
     },
 
     async update(id, data) {

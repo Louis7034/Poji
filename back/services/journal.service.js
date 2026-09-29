@@ -2,43 +2,63 @@ import { db } from "../prisma/db.ts";
 import pool from "../db/database.js";
 import { randomUUID } from "node:crypto";
 
+function parseTransmission(transmission) {
+    let contenu = {};
+    if (transmission.contenu) {
+        try {
+            const parsed = JSON.parse(transmission.contenu);
+            if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+                contenu = parsed;
+            }
+        } catch {
+            contenu = { observation: transmission.contenu };
+        }
+    }
+    return { ...transmission, ...contenu };
+}
+
 const JournalService = {
     async ensureDailyTransmission(enfantId, type) {
+        const table = type === "matin" ? "transmission_matin" : "transmission_soir";
         const client = await pool.connect();
 
         try {
             await client.query("BEGIN");
-            await client.query("SELECT pg_advisory_xact_lock(hashtext($1))", [enfantId]);
 
             const journalResult = await client.query(`
                 SELECT id
                 FROM journal
                 WHERE enfant_id = $1
-                  AND created_at >= CURRENT_DATE
-                  AND created_at < CURRENT_DATE + INTERVAL '1 day'
+                  AND created_at >= (CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Paris')::date
+                  AND created_at < (CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Paris')::date + INTERVAL '1 day'
                 ORDER BY created_at DESC
                 LIMIT 1
             `, [enfantId]);
 
-            let journalId = journalResult.rows[0]?.id;
-            if (!journalId) {
-                journalId = randomUUID();
+            if (journalResult.rowCount === 0) {
                 await client.query(`
-                    INSERT INTO journal (id, nom, created_at, enfant_id)
-                    VALUES ($1, $2, CURRENT_TIMESTAMP, $3)
-                `, [journalId, `Transmission du ${new Date().toLocaleDateString("fr-FR")}`, enfantId]);
+                    INSERT INTO journal (id, nom, enfant_id)
+                    VALUES ($1, $2, $3)
+                `, [
+                    randomUUID(),
+                    `Transmission du ${new Date().toLocaleDateString("fr-FR")}`,
+                    enfantId,
+                ]);
             }
 
-            const table = type === "matin" ? "transmission_matin" : "transmission_soir";
-            const existingResult = await client.query(
-                `SELECT id FROM ${table} WHERE journal_id = $1 LIMIT 1`,
-                [journalId],
-            );
+            const existingResult = await client.query(`
+                SELECT id
+                FROM ${table}
+                WHERE enfant_id = $1
+                  AND created_at >= (CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Paris')::date
+                  AND created_at < (CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Paris')::date + INTERVAL '1 day'
+                LIMIT 1
+            `, [enfantId]);
 
-            if (existingResult.rows.length === 0) {
+            if (existingResult.rowCount === 0) {
                 await client.query(
-                    `INSERT INTO ${table} (id, journal_id) VALUES ($1, $2)`,
-                    [randomUUID(), journalId],
+                    `INSERT INTO ${table} (id, enfant_id) VALUES ($1, $2)`,
+                    [randomUUID(), enfantId],
                 );
             }
 
@@ -57,32 +77,71 @@ const JournalService = {
 
     async getByEnfant(enfantId) {
         const result = await pool.query(`
-            SELECT journal.id, journal.nom, journal.created_at AS "createdAt",
-                COALESCE(json_agg(DISTINCT jsonb_build_object(
-                    'id', tm.id, 'heureCouche', tm.heure_couche, 'heureReveille', tm.heure_reveille,
-                    'observation', tm.observation, 'repas', tm.repas, 'comportement', tm.comportement,
-                    'journalId', tm.journal_id, 'auteurId', tm.auteur_id
-                )) FILTER (WHERE tm.id IS NOT NULL), '[]') AS "transmissionsMatin",
-                COALESCE(json_agg(DISTINCT jsonb_build_object(
-                    'id', ts.id, 'depart', ts.depart, 'arrivee', ts.arrivee,
-                    'observation', ts.observation, 'evenement', ts.evenement, 'besoin', ts.besoin,
-                    'journalId', ts.journal_id, 'auteurId', ts.auteur_id
-                )) FILTER (WHERE ts.id IS NOT NULL), '[]') AS "transmissionsSoir",
-                COALESCE(json_agg(DISTINCT jsonb_build_object(
-                    'id', ps.id, 'symptome', ps.symptome, 'traitement', ps.traitement,
-                    'observation', ps.observation, 'transmissionMatinId', ps.transmission_matin_id,
-                    'transmissionSoirId', ps.transmission_soir_id
-                )) FILTER (WHERE ps.id IS NOT NULL), '[]') AS "problemesSante"
+            SELECT
+                journal.id,
+                journal.nom,
+                journal.created_at AS "createdAt",
+                COALESCE(matin.transmissions, '[]'::json) AS "transmissionsMatin",
+                COALESCE(soir.transmissions, '[]'::json) AS "transmissionsSoir",
+                COALESCE(sante.problemes, '[]'::json) AS "problemesSante"
             FROM journal
-            LEFT JOIN transmission_matin tm ON tm.journal_id = journal.id
-            LEFT JOIN transmission_soir ts ON ts.journal_id = journal.id
-            LEFT JOIN probleme_sante ps
-                ON ps.transmission_matin_id = tm.id OR ps.transmission_soir_id = ts.id
+            LEFT JOIN LATERAL (
+                SELECT json_agg(json_build_object(
+                    'id', transmission_matin.id,
+                    'contenu', transmission_matin.contenu,
+                    'createdAt', transmission_matin.created_at,
+                    'auteurId', transmission_matin.auteur_id,
+                    'enfantId', transmission_matin.enfant_id
+                ) ORDER BY transmission_matin.created_at DESC) AS transmissions
+                FROM transmission_matin
+                WHERE transmission_matin.enfant_id = journal.enfant_id
+                  AND transmission_matin.created_at >= journal.created_at::date
+                  AND transmission_matin.created_at < journal.created_at::date + INTERVAL '1 day'
+            ) matin ON true
+            LEFT JOIN LATERAL (
+                SELECT json_agg(json_build_object(
+                    'id', transmission_soir.id,
+                    'contenu', transmission_soir.contenu,
+                    'createdAt', transmission_soir.created_at,
+                    'auteurId', transmission_soir.auteur_id,
+                    'enfantId', transmission_soir.enfant_id
+                ) ORDER BY transmission_soir.created_at DESC) AS transmissions
+                FROM transmission_soir
+                WHERE transmission_soir.enfant_id = journal.enfant_id
+                  AND transmission_soir.created_at >= journal.created_at::date
+                  AND transmission_soir.created_at < journal.created_at::date + INTERVAL '1 day'
+            ) soir ON true
+            LEFT JOIN LATERAL (
+                SELECT json_agg(json_build_object(
+                    'id', probleme_sante.id,
+                    'description', probleme_sante.description,
+                    'dateDebut', probleme_sante.date_debut,
+                    'dateFin', probleme_sante.date_fin,
+                    'auteurId', probleme_sante.auteur_id,
+                    'enfantId', probleme_sante.enfant_id
+                ) ORDER BY probleme_sante.created_at DESC) AS problemes
+                FROM probleme_sante
+                WHERE probleme_sante.enfant_id = journal.enfant_id
+                  AND probleme_sante.date_debut <= journal.created_at::date
+                  AND (
+                      probleme_sante.date_fin IS NULL
+                      OR probleme_sante.date_fin >= journal.created_at::date
+                  )
+            ) sante ON true
             WHERE journal.enfant_id = $1
-            GROUP BY journal.id
             ORDER BY journal.created_at DESC
         `, [enfantId]);
-        return result.rows;
+        return result.rows.map((journal) => ({
+            ...journal,
+            transmissionsMatin: journal.transmissionsMatin.map(parseTransmission),
+            transmissionsSoir: journal.transmissionsSoir.map(parseTransmission),
+            problemesSante: journal.problemesSante.map((probleme) => ({
+                ...probleme,
+                symptome: probleme.description,
+                traitement: null,
+                observation: null,
+            })),
+        }));
     },
 
     async getById(id) {

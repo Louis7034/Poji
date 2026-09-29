@@ -11,6 +11,7 @@ import rappelParentRoutes from "./routes/rappel_parent.routes.js";
 import temperatureRoutes from "./routes/temperature.routes.js";
 import transmissionMatinRoutes from "./routes/transmission_matin.routes.js";
 import transmissionSoirRoutes from "./routes/transmission_soir.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api", rappelParentRoutes);
 app.use("/api", temperatureRoutes);
 app.use("/api", transmissionMatinRoutes);
 app.use("/api", transmissionSoirRoutes);
+app.use("/api", authRoutes);
 
 const PORT = 3000;
 

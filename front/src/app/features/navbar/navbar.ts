@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   imports: [
@@ -11,4 +12,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbar.html',
   standalone: true,
 })
-export class Navbar {}
+export class Navbar {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
+
+  logout(): void {
+    this.authService.logout();
+    void this.router.navigate(['/login']);
+  }
+}

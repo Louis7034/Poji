@@ -5,6 +5,8 @@ import { Personnel } from '../../../models/personnel';
 import { PresentAujourdhui } from '../present-aujourdhui/present-aujourdhui';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { RappelParentRecap } from '../rappel-parent-recap/rappel-parent-recap';
+import { AuthService } from '../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [Compteur, PresentAujourdhui, RappelParentRecap, RouterLink, RouterLinkActive],
@@ -14,13 +16,24 @@ import { RappelParentRecap } from '../rappel-parent-recap/rappel-parent-recap';
   standalone: true,
 })
 export class Accueil implements OnInit {
-  constructor(private readonly personnelService: PersonnelService) {}
+  constructor(
+    private readonly personnelService: PersonnelService,
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   readonly personnelData = signal<Personnel | null>(null);
 
   ngOnInit() {
+    const userId = this.authService.getCurrentUserId();
+
+    if (!userId) {
+      void this.router.navigate(['/login']);
+      return;
+    }
+
     this.personnelService
-      .getPersonnelById('10000000-0000-0000-0000-000000000001')
+      .getPersonnelById(userId)
       .subscribe((Personnel: Personnel) => {
         this.personnelData.set(Personnel);
       });

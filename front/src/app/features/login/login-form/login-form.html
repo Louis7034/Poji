@@ -37,12 +37,26 @@
         />
       </div>
 
+      <label class="flex items-center gap-3 text-sm text-slate-600">
+        <input
+          type="checkbox"
+          name="rememberSession"
+          [(ngModel)]="rememberSession"
+          class="h-4 w-4 rounded border-slate-300 text-[#243b70] focus:ring-[#526fca]"
+        />
+        <span>Mémoriser mes identifiants</span>
+      </label>
+
+      @if (errorMessage()) {
+        <p role="alert" class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ errorMessage() }}</p>
+      }
+
       <button
         type="submit"
-        [disabled]="loginForm.invalid"
+        [disabled]="loginForm.invalid || isSubmitting()"
         class="w-full rounded-xl bg-[#243b70] px-4 py-3 font-semibold text-white transition hover:bg-[#31578e] disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Se connecter
+        {{ isSubmitting() ? 'Connexion...' : 'Se connecter' }}
       </button>
     </form>
   </section>

@@ -48,14 +48,14 @@
 
   </nav>
 
-  <a routerLink="/login" class="mt-6 flex h-16 items-center gap-5 rounded-2xl bg-[#8f304d]/80 px-5 text-[1.5rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
+  <button type="button" (click)="logout()" class="mt-6 flex h-16 w-full items-center gap-5 rounded-2xl bg-[#8f304d]/80 px-5 text-left text-[1.5rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
     <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
       <path d="M10 17l5-5-5-5"/>
       <path d="M15 12H3"/>
       <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
     </svg>
     <span>Déconnexion</span>
-  </a>
+  </button>
 </aside>
 
 </div>

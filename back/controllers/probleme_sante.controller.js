@@ -19,6 +19,24 @@ const ProblemeSanteController = {
         }
     },
 
+    async getByEnfantToday(req, res) {
+        try {
+            res.status(200).json(await ProblemeSanteService.getByEnfantToday(req.params.enfantId));
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors de la récupération des données de santé", error: error.message });
+        }
+    },
+
+    async updateDaily(req, res) {
+        try {
+            res.status(200).json(await ProblemeSanteService.updateDaily(req.params.id, req.body));
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erreur lors de la mise à jour des données de santé", error: error.message });
+        }
+    },
+
     async create(req, res) {
         try {
             res.status(201).json(await ProblemeSanteService.create(req.body));

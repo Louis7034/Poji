@@ -6,6 +6,8 @@ import { EnfantPresent } from '../../models/enfant_present';
 import { PresenceCalendrier } from '../../models/presence-calendrier';
 import { TransmissionMatin } from '../../models/transmission_matin';
 import { TransmissionSoir } from '../../models/transmission_soir';
+import { PresenceEtat } from '../../enum/presence_etat';
+import { ProblemeSante } from '../../models/probleme_sante';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,19 @@ export class PresenceService {
     );
   }
 
+  getSanteAujourdHui(enfantId: string) {
+    return this.http.get<ProblemeSante>(
+      `${environment.API_URL}/api/probleme-sante/enfant/${enfantId}/aujourd-hui`,
+    );
+  }
+
+  updateSante(id: string, data: Pick<ProblemeSante, 'symptome' | 'traitement' | 'observation'>) {
+    return this.http.put<ProblemeSante>(
+      `${environment.API_URL}/api/probleme-sante/${id}`,
+      data,
+    );
+  }
+
   updateTransmissionMatin(
     id: string,
     data: Partial<Pick<TransmissionMatin, 'heureCouche' | 'heureReveille' | 'observation' | 'repas' | 'comportement'>>,
@@ -63,7 +78,7 @@ export class PresenceService {
     return this.http.post<PresenceCalendrier>(this.baseUrl, {
       enfantId,
       datePresence,
-      etatPresence: 'PRESENT',
+      etatPresence: PresenceEtat.PAS_ENCORE_ARRIVE.toUpperCase(),
     });
   }
 

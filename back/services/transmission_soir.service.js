@@ -1,5 +1,6 @@
 import { db } from "../prisma/db.ts";
 import pool from "../db/database.js";
+import JournalService from "./journal.service.js";
 
 const TransmissionSoirService = {
     async getAll() {
@@ -7,6 +8,7 @@ const TransmissionSoirService = {
     },
 
     async getByEnfant(enfantId) {
+        await JournalService.ensureDailyTransmission(enfantId, "soir");
         const result = await pool.query(`
             SELECT
                 transmission_soir.id,
@@ -21,6 +23,8 @@ const TransmissionSoirService = {
             INNER JOIN journal
                 ON journal.id = transmission_soir.journal_id
             WHERE journal.enfant_id = $1
+              AND journal.created_at >= CURRENT_DATE
+              AND journal.created_at < CURRENT_DATE + INTERVAL '1 day'
             ORDER BY journal.created_at DESC
         `, [enfantId]);
 

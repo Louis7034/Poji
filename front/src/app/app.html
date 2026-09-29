@@ -1,5 +1,7 @@
 <div class="flex min-h-screen">
-  <app-navbar></app-navbar>
+  @if (showNavbar) {
+    <app-navbar></app-navbar>
+  }
 
   <main class="min-w-0 flex-1">
     <router-outlet />

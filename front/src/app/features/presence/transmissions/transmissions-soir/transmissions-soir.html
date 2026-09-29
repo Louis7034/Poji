@@ -21,9 +21,6 @@
             class="mt-1 w-full resize-y rounded-lg border border-slate-200 bg-amber-50/40 px-4 py-3 font-mono text-sm leading-6 text-slate-700 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"></textarea>
         </label>
         <dl class="mt-4 grid gap-2 border-t border-slate-100 pt-4 text-xs text-slate-400 sm:grid-cols-2">
-          <div><dt class="inline font-semibold">Identifiant : </dt><dd class="inline">{{ transmission.id }}</dd></div>
-          <div><dt class="inline font-semibold">Journal : </dt><dd class="inline">{{ transmission.journalId || '--' }}</dd></div>
-          <div><dt class="inline font-semibold">Auteur : </dt><dd class="inline">{{ transmission.auteurId || '--' }}</dd></div>
         </dl>
         @if (sauvegarde(); as etat) {
           @if (etat.id === transmission.id) {

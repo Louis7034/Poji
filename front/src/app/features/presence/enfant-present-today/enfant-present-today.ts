@@ -163,7 +163,15 @@ export class EnfantPresentToday {
       });
   }
 
-  ouvrirTransmissions(enfant: EnfantPresent): void {
+  ouvrirTransmissions(enfant: EnfantPresent, event: Event): void {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    if (event.type === 'keydown') {
+      event.preventDefault();
+    }
+
     this.router.navigate(['/enfants-present/transmission', enfant.enfant_id]);
   }
 

@@ -4,9 +4,10 @@ import { PersonnelService } from '../../../services/personnel/personnel.service'
 import { Personnel } from '../../../models/personnel';
 import { PresentAujourdhui } from '../present-aujourdhui/present-aujourdhui';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RappelParentRecap } from '../rappel-parent-recap/rappel-parent-recap';
 
 @Component({
-  imports: [Compteur, PresentAujourdhui, RouterLink, RouterLinkActive],
+  imports: [Compteur, PresentAujourdhui, RappelParentRecap, RouterLink, RouterLinkActive],
   selector: 'app-accueil',
   styleUrl: './accueil.css',
   templateUrl: './accueil.html',

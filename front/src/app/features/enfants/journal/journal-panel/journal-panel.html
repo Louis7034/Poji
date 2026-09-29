@@ -43,9 +43,6 @@
                   <dt class="text-slate-500">Observations</dt>
                   <dd class="mt-1 whitespace-pre-line rounded-lg bg-amber-50/60 px-3 py-2 font-mono text-slate-700">{{ transmission.observation || 'Aucune observation' }}</dd>
                 </div>
-                <div><dt class="text-slate-500">Identifiant</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.id }}</dd></div>
-                <div><dt class="text-slate-500">Identifiant du journal</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.journalId || '--' }}</dd></div>
-                <div><dt class="text-slate-500">Identifiant de l’auteur</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.auteurId || '--' }}</dd></div>
               </dl>
             } @empty { <p class="text-sm text-slate-400">Aucune transmission du matin.</p> }
           </article>
@@ -61,11 +58,21 @@
                   <dt class="text-slate-500">Observations</dt>
                   <dd class="mt-1 whitespace-pre-line rounded-lg bg-amber-50/60 px-3 py-2 font-mono text-slate-700">{{ transmission.observation || 'Aucune observation' }}</dd>
                 </div>
-                <div><dt class="text-slate-500">Identifiant</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.id }}</dd></div>
-                <div><dt class="text-slate-500">Identifiant du journal</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.journalId || '--' }}</dd></div>
-                <div><dt class="text-slate-500">Identifiant de l’auteur</dt><dd class="break-all font-mono text-xs text-slate-600">{{ transmission.auteurId || '--' }}</dd></div>
               </dl>
             } @empty { <p class="text-sm text-slate-400">Aucune transmission du soir.</p> }
+          </article>
+          <article class="rounded-xl border border-slate-200 p-4">
+            <h3 class="mb-3 font-semibold text-slate-800">Santé</h3>
+            @for (sante of journal.problemesSante; track sante.id) {
+              <dl class="grid gap-3 text-sm">
+                <div><dt class="text-slate-500">Symptômes</dt><dd class="whitespace-pre-line font-medium text-slate-700">{{ sante.symptome || '--' }}</dd></div>
+                <div><dt class="text-slate-500">Traitement</dt><dd class="whitespace-pre-line font-medium text-slate-700">{{ sante.traitement || '--' }}</dd></div>
+                <div>
+                  <dt class="text-slate-500">Observations</dt>
+                  <dd class="mt-1 whitespace-pre-line rounded-lg bg-amber-50/60 px-3 py-2 font-mono text-slate-700">{{ sante.observation || 'Aucune observation' }}</dd>
+                </div>
+              </dl>
+            } @empty { <p class="text-sm text-slate-400">Aucune donnée de santé.</p> }
           </article>
         </div>
       } @else {

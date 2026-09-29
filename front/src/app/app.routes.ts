@@ -6,12 +6,18 @@ import { Calendrier } from './features/calendrier/calendrier/calendrier';
 import { RappelCreation } from './features/rappel_parent/rappel-creation/rappel-creation';
 import { TransmissionsPanel } from './features/presence/transmissions/transmissions-panel/transmissions-panel';
 import { JournalPanel } from './features/enfants/journal/journal-panel/journal-panel';
+import { PersonnelTotal } from './features/personnel/personnel-total/personnel-total';
+import { LoginForm } from './features/login/login-form/login-form';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'accueil',
+    redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginForm,
   },
   {
     path: 'accueil',
@@ -42,16 +48,12 @@ export const routes: Routes = [
     component: EnfantPresentToday,
   },
   {
-    path: 'sante',
-    component: EnfantPresentToday,
-  },
-  {
     path: 'rappel-parent',
     component: RappelCreation,
   },
   {
     path: 'personnel',
-    component: EnfantPresentToday,
+    component: PersonnelTotal,
   },
   {
     path: '**',

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './features/navbar/navbar';
 
 @Component({
@@ -10,4 +10,10 @@ import { Navbar } from './features/navbar/navbar';
 })
 export class App {
   protected readonly title = signal('front');
+
+  constructor(private readonly router: Router) {}
+
+  get showNavbar(): boolean {
+    return this.router.url !== '/login';
+  }
 }

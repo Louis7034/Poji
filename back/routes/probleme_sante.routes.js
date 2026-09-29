@@ -4,6 +4,8 @@ import ProblemeSanteController from "../controllers/probleme_sante.controller.js
 const router = express.Router();
 
 router.get("/probleme-sante", ProblemeSanteController.getAll);
+router.get("/probleme-sante/enfant/:enfantId/aujourd-hui", ProblemeSanteController.getByEnfantToday);
+router.put("/probleme-sante/:id", ProblemeSanteController.updateDaily);
 router.get("/probleme-sante/:id", ProblemeSanteController.getById);
 router.post("/probleme-sante", ProblemeSanteController.create);
 router.put("/probleme-sante/:id", ProblemeSanteController.update);

@@ -1,0 +1,31 @@
+<section class="w-110 h-160 overflow-hidden rounded-2xl bg-white shadow-sm" aria-labelledby="rappels-title">
+  <div class="mb-6 flex items-center justify-between gap-4 px-8 pt-6">
+    <div>
+      <p class="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-orange-500">À transmettre</p>
+      <h2 id="rappels-title" class="text-2xl font-bold text-slate-800">Rappels aux parents</h2>
+    </div>
+    <span class="flex h-10 min-w-10 items-center justify-center rounded-full bg-orange-100 px-3 text-sm font-bold text-orange-700">
+      {{ rappels().length }}
+    </span>
+  </div>
+
+  <div class="max-h-160 space-y-3 overflow-y-auto px-8 pb-6">
+    @for (rappel of rappels(); track rappel.id) {
+      <article class="rounded-2xl border border-orange-100 bg-amber-50 p-5">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm text-slate-500">
+          <span class="font-semibold text-slate-800">
+            {{ rappel.prenomEnfant || 'Enfant non renseigné' }}
+          </span>
+          <time [attr.datetime]="rappel.dateCreation">
+            {{ rappel.dateCreation | date: 'dd/MM/yyyy à HH:mm' }}
+          </time>
+        </div>
+        <p class="text-base leading-7 text-slate-700">{{ rappel.message || 'Aucun message' }}</p>
+      </article>
+    } @empty {
+      <p class="rounded-2xl border border-dashed border-orange-200 bg-orange-50/50 px-4 py-6 text-center text-slate-500">
+        Aucun rappel à faire aux parents.
+      </p>
+    }
+  </div>
+</section>

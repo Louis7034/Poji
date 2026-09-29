@@ -1,0 +1,49 @@
+<main class="flex min-h-screen items-center justify-center bg-[#f4f7fc] px-6 py-10">
+  <section class="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl">
+    <div class="mb-8 text-center">
+      <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#243b70] text-4xl text-[#fff5f0]">
+        <span aria-hidden="true">◡</span>
+      </div>
+      <h1 class="text-3xl font-bold text-[#243b70]">Bienvenue sur Poji</h1>
+      <p class="mt-2 text-slate-500">Connectez-vous à votre espace</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="space-y-5">
+      <div>
+        <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">Adresse e-mail</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          required
+          autocomplete="email"
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-[#526fca] focus:ring-2 focus:ring-[#526fca]/20"
+          placeholder="vous@exemple.fr"
+        />
+      </div>
+
+      <div>
+        <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">Mot de passe</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          required
+          autocomplete="current-password"
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-[#526fca] focus:ring-2 focus:ring-[#526fca]/20"
+          placeholder="Votre mot de passe"
+        />
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="w-full rounded-xl bg-[#243b70] px-4 py-3 font-semibold text-white transition hover:bg-[#31578e] disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Se connecter
+      </button>
+    </form>
+  </section>
+</main>

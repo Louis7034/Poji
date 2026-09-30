@@ -8,5 +8,6 @@ export interface AchievementObservation {
     AchievementId: Achievement;
     observateurId: AchievementObservateur;
     reponse: number;
+    professionnelResponse: number;
     dateObservation: Date;
 }

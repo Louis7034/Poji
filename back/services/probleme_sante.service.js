@@ -52,11 +52,13 @@ const ProblemeSanteService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.ProblemeSante.update(id, data);
+        return await db.orm.public.ProblemeSante
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.ProblemeSante.delete(id);
+        return await db.orm.public.ProblemeSante.where({ id }).delete();
     },
 };
 

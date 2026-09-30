@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'da11ce04512b956b2609518c070605b585acb548cebd445121d287f34bf46f58'>;
+  StorageHashBase<'54151b3d895b9f56ec080b08802194007d339bd04c97733dac7fa2c4c38e9083'>;
 export type ExecutionHash =
   ExecutionHashBase<'e6eda1daa4258bb4c01085a04c153ea5481b7af0e957c20779c90ec6745a8391'>;
 export type ProfileHash =
@@ -252,14 +252,14 @@ export type FieldOutputTypes = {
       readonly id: Char<36>;
       readonly type: CodecTypes['pg/text@1']['output'];
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['output'];
-      readonly achievementId: Char<36>;
     };
     readonly AchievementObservation: {
       readonly id: Char<36>;
       readonly enfantId: Char<36>;
       readonly achievementId: Char<36>;
       readonly observateurId: Char<36>;
-      readonly reponse: CodecTypes['pg/text@1']['output'];
+      readonly reponse: CodecTypes['pg/int4@1']['output'];
+      readonly professionnelResponse: CodecTypes['pg/int4@1']['output'];
       readonly dateObservation: CodecTypes['pg/timestamp-string@1']['output'];
     };
     readonly AchievementObservationQuestion: {
@@ -365,14 +365,14 @@ export type FieldInputTypes = {
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly type: CodecTypes['pg/text@1']['input'];
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['input'];
-      readonly achievementId: CodecTypes['sql/char@1']['input'];
     };
     readonly AchievementObservation: {
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly enfantId: CodecTypes['sql/char@1']['input'];
       readonly achievementId: CodecTypes['sql/char@1']['input'];
       readonly observateurId: CodecTypes['sql/char@1']['input'];
-      readonly reponse: CodecTypes['pg/text@1']['input'];
+      readonly reponse: CodecTypes['pg/int4@1']['input'];
+      readonly professionnelResponse: CodecTypes['pg/int4@1']['input'];
       readonly dateObservation: CodecTypes['pg/timestamp-string@1']['input'];
     };
     readonly AchievementObservationQuestion: {
@@ -477,7 +477,6 @@ export type StorageColumnTypes = {
     readonly achievement_observateur: {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['output'];
       readonly id: Char<36>;
-      readonly id_achievement: Char<36>;
       readonly type: CodecTypes['pg/text@1']['output'];
     };
     readonly achievement_observation: {
@@ -486,7 +485,8 @@ export type StorageColumnTypes = {
       readonly enfant_id: Char<36>;
       readonly id: Char<36>;
       readonly observateur_id: Char<36>;
-      readonly reponse: CodecTypes['pg/text@1']['output'];
+      readonly professionnel_response: CodecTypes['pg/int4@1']['output'];
+      readonly reponse: CodecTypes['pg/int4@1']['output'];
     };
     readonly achievement_observation_question: {
       readonly categorie: CodecTypes['pg/text@1']['output'];
@@ -590,7 +590,6 @@ export type StorageColumnInputTypes = {
     readonly achievement_observateur: {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['input'];
       readonly id: CodecTypes['sql/char@1']['input'];
-      readonly id_achievement: CodecTypes['sql/char@1']['input'];
       readonly type: CodecTypes['pg/text@1']['input'];
     };
     readonly achievement_observation: {
@@ -599,7 +598,8 @@ export type StorageColumnInputTypes = {
       readonly enfant_id: CodecTypes['sql/char@1']['input'];
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly observateur_id: CodecTypes['sql/char@1']['input'];
-      readonly reponse: CodecTypes['pg/text@1']['input'];
+      readonly professionnel_response: CodecTypes['pg/int4@1']['input'];
+      readonly reponse: CodecTypes['pg/int4@1']['input'];
     };
     readonly achievement_observation_question: {
       readonly categorie: CodecTypes['pg/text@1']['input'];
@@ -799,7 +799,6 @@ export namespace Models {
     id: Char<36>;
     type: CodecTypes['pg/text@1']['output'];
     createdAt: CodecTypes['pg/timestamp-string@1']['output'];
-    achievementId: Char<36>;
     readonly [RelationKeys]?: never;
   };
   export type public_AchievementObservation = {
@@ -807,7 +806,8 @@ export namespace Models {
     enfantId: Char<36>;
     achievementId: Char<36>;
     observateurId: Char<36>;
-    reponse: CodecTypes['pg/text@1']['output'];
+    reponse: CodecTypes['pg/int4@1']['output'];
+    professionnelResponse: CodecTypes['pg/int4@1']['output'];
     dateObservation: CodecTypes['pg/timestamp-string@1']['output'];
     readonly [RelationKeys]?: never;
   };
@@ -905,12 +905,6 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/timestamp-string@1';
                   readonly nullable: false;
                 };
-                readonly id_achievement: {
-                  readonly nativeType: 'character';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                };
               };
               primaryKey: { readonly columns: readonly ['id'] };
               uniques: readonly [];
@@ -944,8 +938,13 @@ type ContractBase = Omit<
                   readonly typeParams: { readonly length: 36 };
                 };
                 readonly reponse: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                };
+                readonly professionnel_response: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
                   readonly nullable: false;
                 };
                 readonly date_observation: {
@@ -1531,14 +1530,6 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/timestamp-string@1';
                 };
               };
-              readonly achievementId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
             };
             readonly relations: Record<string, never>;
             readonly storage: {
@@ -1548,7 +1539,6 @@ type ContractBase = Omit<
                 readonly id: { readonly column: 'id' };
                 readonly type: { readonly column: 'type' };
                 readonly createdAt: { readonly column: 'created_at' };
-                readonly achievementId: { readonly column: 'id_achievement' };
               };
             };
           };
@@ -1588,7 +1578,11 @@ type ContractBase = Omit<
               };
               readonly reponse: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly professionnelResponse: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
               readonly dateObservation: {
                 readonly nullable: false;
@@ -1608,6 +1602,7 @@ type ContractBase = Omit<
                 readonly achievementId: { readonly column: 'achievement_id' };
                 readonly observateurId: { readonly column: 'observateur_id' };
                 readonly reponse: { readonly column: 'reponse' };
+                readonly professionnelResponse: { readonly column: 'professionnel_response' };
                 readonly dateObservation: { readonly column: 'date_observation' };
               };
             };

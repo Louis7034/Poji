@@ -16,11 +16,13 @@ const AchievementService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Achievement.update(id, data);
+        return await db.orm.public.Achievement
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.Achievement.delete(id);
+        return await db.orm.public.Achievement.where({ id }).delete();
     },
 };
 

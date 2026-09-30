@@ -125,16 +125,6 @@
           },
           "AchievementObservateur": {
             "fields": {
-              "achievementId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
               "createdAt": {
                 "nullable": false,
                 "type": {
@@ -163,9 +153,6 @@
             "relations": {},
             "storage": {
               "fields": {
-                "achievementId": {
-                  "column": "id_achievement"
-                },
                 "createdAt": {
                   "column": "created_at"
                 },
@@ -229,10 +216,17 @@
                   }
                 }
               },
+              "professionnelResponse": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
               "reponse": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/text@1",
+                  "codecId": "pg/int4@1",
                   "kind": "scalar"
                 }
               }
@@ -254,6 +248,9 @@
                 },
                 "observateurId": {
                   "column": "observateur_id"
+                },
+                "professionnelResponse": {
+                  "column": "professionnel_response"
                 },
                 "reponse": {
                   "column": "reponse"
@@ -1197,14 +1194,6 @@
                     "length": 36
                   }
                 },
-                "id_achievement": {
-                  "codecId": "sql/char@1",
-                  "nativeType": "character",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
                 "type": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
@@ -1259,9 +1248,14 @@
                     "length": 36
                   }
                 },
+                "professionnel_response": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
                 "reponse": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
                   "nullable": false
                 }
               },
@@ -1848,7 +1842,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "da11ce04512b956b2609518c070605b585acb548cebd445121d287f34bf46f58"
+    "storageHash": "54151b3d895b9f56ec080b08802194007d339bd04c97733dac7fa2c4c38e9083"
   },
   "execution": {
     "executionHash": "e6eda1daa4258bb4c01085a04c153ea5481b7af0e957c20779c90ec6745a8391",

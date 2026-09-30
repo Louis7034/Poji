@@ -16,11 +16,13 @@ const HistoireEnfantService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.HistoireEnfant.update(id, data);
+        return await db.orm.public.HistoireEnfant
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.HistoireEnfant.delete(id);
+        return await db.orm.public.HistoireEnfant.where({ id }).delete();
     },
 };
 

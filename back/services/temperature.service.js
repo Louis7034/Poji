@@ -16,11 +16,13 @@ const TemperatureService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Temperature.update(id, data);
+        return await db.orm.public.Temperature
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.Temperature.delete(id);
+        return await db.orm.public.Temperature.where({ id }).delete();
     },
 };
 

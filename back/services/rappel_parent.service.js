@@ -37,11 +37,13 @@ const RappelParentService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.RappelParent.update(id, data);
+        return await db.orm.public.RappelParent
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.RappelParent.delete(id);
+        return await db.orm.public.RappelParent.where({ id }).delete();
     },
 };
 

@@ -16,11 +16,13 @@ const PersonnelService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Personnel.update(id, data);
+        return await db.orm.public.Personnel
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.Personnel.delete(id);
+        return await db.orm.public.Personnel.where({ id }).delete();
     },
 };
 

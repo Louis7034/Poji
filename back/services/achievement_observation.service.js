@@ -20,11 +20,27 @@ const AchievementObservationService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.AchievementObservation.update(id, data);
+        const updateData = {};
+
+        if (data.reponse !== undefined) {
+            updateData.reponse = data.reponse;
+        }
+
+        if (data.professionnelResponse !== undefined) {
+            updateData.professionnelResponse = data.professionnelResponse;
+        }
+
+        if (data.dateObservation !== undefined) {
+            updateData.dateObservation = data.dateObservation;
+        }
+
+        return await db.orm.public.AchievementObservation
+            .where({ id })
+            .update(updateData);
     },
 
     async delete(id) {
-        return await db.orm.public.AchievementObservation.delete(id);
+        return await db.orm.public.AchievementObservation.where({ id }).delete();
     },
 };
 

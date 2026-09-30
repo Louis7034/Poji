@@ -382,9 +382,6 @@ export const contract = defineContract({}, ({ field, model }) => {
                 } as const)
                 .column("created_at"),
 
-            achievementId: field
-                .uuidString()
-                .column("id_achievement"),
         },
     }).sql({
         table: "achievement_observateur",
@@ -407,7 +404,11 @@ export const contract = defineContract({}, ({ field, model }) => {
                 .uuidString()
                 .column("observateur_id"),
 
-            reponse: field.text(),
+            reponse: field.int(),
+
+            professionnelResponse: field
+                .int()
+                .column("professionnel_response"),
 
             dateObservation: field
                 .column({

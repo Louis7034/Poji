@@ -26,20 +26,20 @@
     </div>
 
     <div class="mt-6 space-y-3">
-      <button type="button" [routerLink]="['/enfant/six-mois']" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
-        Observation à 6 mois
+      <button type="button" [routerLink]="['/enfant/six-mois']" [queryParams]="{ enfantId: enfant.id }" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        Grille d'observation à 6 mois
       </button>
-      <button type="button" [routerLink]="['/enfant/douze-mois']" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
-        Observation à 12 mois
+      <button type="button" [routerLink]="['/enfant/douze-mois']" [queryParams]="{ enfantId: enfant.id }" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        Grille d'observation à 12 mois
       </button>
-      <button type="button" [routerLink]="['/enfant/dix-huit-mois']" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
-        Observation à 18 mois
+      <button type="button" [routerLink]="['/enfant/dix-huit-mois']" [queryParams]="{ enfantId: enfant.id }" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        Grille d'observation à 18 mois
       </button>
-      <button type="button" [routerLink]="['/enfant/vingt-quatre-mois']" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
-        Observation à 24 mois
+      <button type="button" [routerLink]="['/enfant/vingt-quatre-mois']" [queryParams]="{ enfantId: enfant.id }" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        Grille d'observation à 24 mois
       </button>
-      <button type="button" [routerLink]="['/enfant/trente-six-mois']" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
-        Observation à 36 mois
+      <button type="button" [routerLink]="['/enfant/trente-six-mois']" [queryParams]="{ enfantId: enfant.id }" class="w-full rounded-xl bg-[#eef3ff] px-5 py-4 text-left font-semibold text-[#243b70] transition-colors hover:bg-[#dbe5ff]">
+        Grille d'observation à 36 mois
       </button>
     </div>
   </section>

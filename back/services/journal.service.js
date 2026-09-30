@@ -155,11 +155,13 @@ const JournalService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Journal.update(id, data);
+        return await db.orm.public.Journal
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.Journal.delete(id);
+        return await db.orm.public.Journal.where({ id }).delete();
     },
 };
 

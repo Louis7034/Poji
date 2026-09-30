@@ -16,11 +16,13 @@ const AchievementObservationQuestionService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.AchievementObservationQuestion.update(id, data);
+        return await db.orm.public.AchievementObservationQuestion
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.AchievementObservationQuestion.delete(id);
+        return await db.orm.public.AchievementObservationQuestion.where({ id }).delete();
     },
 };
 

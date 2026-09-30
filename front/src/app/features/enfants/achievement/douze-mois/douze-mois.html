@@ -24,7 +24,7 @@
                     <div class="space-y-3">
                       @for (reponse of (reponsesParAchievement[i] || reponsesParAchievement[reponsesParAchievement.length - 1]); track reponse; let j = $index) {
                         <label class="flex cursor-pointer items-start gap-3 text-sm leading-5 text-slate-700">
-                          <input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#526fca] accent-[#526fca] focus:ring-[#526fca]" [name]="'achievement-' + achievement.id + '-' + observateur" [value]="reponse" [attr.id]="'achievement-' + achievement.id + '-' + observateur + '-' + j" />
+                          <input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#526fca] accent-[#526fca] focus:ring-[#526fca]" [name]="'achievement-' + achievement.id + '-' + observateur" [value]="reponse" [attr.id]="'achievement-' + achievement.id + '-' + observateur + '-' + j" [checked]="estSelectionnee(achievement.id, observateur, j)" (change)="selectionner(achievement.id, observateur, j, $event)" />
                           <span>{{ reponse }}</span>
                         </label>
                       }

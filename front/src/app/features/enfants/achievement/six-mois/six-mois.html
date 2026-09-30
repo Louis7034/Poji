@@ -30,6 +30,8 @@
                             [name]="'achievement-' + achievement.id + '-' + observateur"
                             [value]="reponse"
                             [attr.id]="'achievement-' + achievement.id + '-' + observateur + '-' + j"
+                            [checked]="estSelectionnee(achievement.id, observateur, j)"
+                            (change)="selectionner(achievement.id, observateur, j, $event)"
                           />
                           <span>{{ reponse }}</span>
                         </label>

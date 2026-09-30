@@ -82,7 +82,7 @@ const TransmissionMatinService = {
     },
 
     async delete(id) {
-        return await db.orm.public.TransmissionMatin.delete(id);
+        return await db.orm.public.TransmissionMatin.where({ id }).delete();
     },
 };
 

@@ -23,11 +23,13 @@ const EnfantService = {
     },
 
     async update(id, data) {
-        return await db.orm.public.Enfant.update(id, data);
+        return await db.orm.public.Enfant
+            .where({ id })
+            .update(data);
     },
 
     async delete(id) {
-        return await db.orm.public.Enfant.delete(id);
+        return await db.orm.public.Enfant.where({ id }).delete();
     }
 };
 

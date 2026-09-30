@@ -4,7 +4,7 @@
 
     @for (enfant of enfantPresentTodaySignal(); track enfant.enfant_id) {
       <div
-        [class]="getEtatBackgroundClass(enfant.etat_presence) + ' mx-4 my-2 flex items-center gap-5 rounded-xl px-8 py-4'"
+        [class]="getEtatBackgroundClass(enfant.etat_presence) + ' mx-4 my-2 flex cursor-pointer items-center gap-5 rounded-xl px-8 py-4'"
         role="button"
         tabindex="0"
         (click)="ouvrirTransmissions(enfant, $event)"

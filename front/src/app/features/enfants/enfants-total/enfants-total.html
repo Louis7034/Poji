@@ -31,7 +31,7 @@
             </button>
           </a>
           <span>Ajouter des dates de présences</span>
-          <a routerLink="/calendrier" routerLinkActive="active">
+          <a routerLink="/calendrier" routerLinkActive="active" (click)="$event.stopPropagation()">
             <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir le calendrier de {{ enfant.prenom }}">
               <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="16" rx="2"></rect>
@@ -40,7 +40,7 @@
             </button>
           </a>
           <span>Ma petite histoire</span>
-          <button type="button" (click)="afficherHistoire(enfant)" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir la petite histoire de {{ enfant.prenom }}">
+          <button type="button" (click)="$event.stopPropagation(); afficherHistoire(enfant)" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir la petite histoire de {{ enfant.prenom }}">
             <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"></path>
               <path d="M4 5.5V21M8 7h8M8 11h8"></path>

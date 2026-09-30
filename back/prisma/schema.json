@@ -16,6 +16,10 @@
       "model": "AchievementObservation",
       "namespace": "public"
     },
+    "achievement_observation_question": {
+      "model": "AchievementObservationQuestion",
+      "namespace": "public"
+    },
     "dejection": {
       "model": "Dejection",
       "namespace": "public"
@@ -257,6 +261,60 @@
               },
               "namespaceId": "public",
               "table": "achievement_observation"
+            }
+          },
+          "AchievementObservationQuestion": {
+            "fields": {
+              "categorie": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/char@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 36
+                  }
+                }
+              },
+              "observation": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "ordre": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "categorie": {
+                  "column": "categorie"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "observation": {
+                  "column": "observation"
+                },
+                "ordre": {
+                  "column": "ordre"
+                }
+              },
+              "namespaceId": "public",
+              "table": "achievement_observation_question"
             }
           },
           "Dejection": {
@@ -1216,6 +1274,41 @@
               },
               "uniques": []
             },
+            "achievement_observation_question": {
+              "columns": {
+                "categorie": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "sql/char@1",
+                  "nativeType": "character",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 36
+                  }
+                },
+                "observation": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "ordre": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "dejection": {
               "columns": {
                 "auteur_id": {
@@ -1755,10 +1848,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "ad9b442c7e32dfca977016adabbfff9b42e5b68222a7391042985c9c2fa1a9fd"
+    "storageHash": "da11ce04512b956b2609518c070605b585acb548cebd445121d287f34bf46f58"
   },
   "execution": {
-    "executionHash": "f8455cb67b53dc4ba299a5e8f13cd95f2f05d6a58b3bec3616995e96eb3af571",
+    "executionHash": "e6eda1daa4258bb4c01085a04c153ea5481b7af0e957c20779c90ec6745a8391",
     "mutations": {
       "defaults": [
         {
@@ -1792,6 +1885,17 @@
             "column": "id",
             "namespace": "public",
             "table": "achievement_observation"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "id",
+            "namespace": "public",
+            "table": "achievement_observation_question"
           }
         },
         {

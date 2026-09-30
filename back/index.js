@@ -15,6 +15,7 @@ import authRoutes from "./routes/auth.routes.js";
 import achievementRoutes from "./routes/achievement.routes.js";
 import achievementObservateurRoutes from "./routes/achievement_observateur.routes.js";
 import achievementObservationRoutes from "./routes/achievement_observation.routes.js";
+import achievementObservationQuestionRoutes from "./routes/achievement_observation_question.routes.js";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/api", authRoutes);
 app.use("/api", achievementRoutes);
 app.use("/api", achievementObservateurRoutes);
 app.use("/api", achievementObservationRoutes);
+app.use("/api", achievementObservationQuestionRoutes);
 
 const PORT = 3000;
 

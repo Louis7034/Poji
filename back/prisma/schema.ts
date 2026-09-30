@@ -421,6 +421,21 @@ export const contract = defineContract({}, ({ field, model }) => {
     });
 
 
+    const AchievementObservationQuestion = model("AchievementObservationQuestion", {
+        fields: {
+            id: field.id.uuidv4String(),
+
+            categorie: field.text(),
+
+            observation: field.text(),
+
+            ordre: field.int(),
+        },
+    }).sql({
+        table: "achievement_observation_question",
+    });
+
+
     return {
         models: {
             Personnel,
@@ -437,6 +452,7 @@ export const contract = defineContract({}, ({ field, model }) => {
             Achievement,
             AchievementObservateur,
             AchievementObservation,
+            AchievementObservationQuestion,
         },
     };
 });

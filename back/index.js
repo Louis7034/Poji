@@ -12,6 +12,9 @@ import temperatureRoutes from "./routes/temperature.routes.js";
 import transmissionMatinRoutes from "./routes/transmission_matin.routes.js";
 import transmissionSoirRoutes from "./routes/transmission_soir.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import achievementRoutes from "./routes/achievement.routes.js";
+import achievementObservateurRoutes from "./routes/achievement_observateur.routes.js";
+import achievementObservationRoutes from "./routes/achievement_observation.routes.js";
 
 const app = express();
 
@@ -32,6 +35,9 @@ app.use("/api", temperatureRoutes);
 app.use("/api", transmissionMatinRoutes);
 app.use("/api", transmissionSoirRoutes);
 app.use("/api", authRoutes);
+app.use("/api", achievementRoutes);
+app.use("/api", achievementObservateurRoutes);
+app.use("/api", achievementObservationRoutes);
 
 const PORT = 3000;
 

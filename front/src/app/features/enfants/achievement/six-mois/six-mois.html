@@ -1,0 +1,14 @@
+<main class="min-h-screen bg-[#f7f9ff] px-6 py-8 text-[#243b70]">
+  <h1 class="text-3xl font-bold">Observation à 6 mois</h1>
+  @if (erreur()) {
+    <p class="mt-6 rounded-xl bg-red-50 p-4 text-red-700">Impossible de récupérer les achievements.</p>
+  } @else if (achievements().length === 0) {
+    <p class="mt-6 rounded-xl bg-white p-4 text-slate-500">Aucun achievement pour cette catégorie.</p>
+  } @else {
+    <div class="mt-6 space-y-3">
+      @for (achievement of achievements(); track achievement.id) {
+        <p class="rounded-xl bg-white p-4 shadow-sm">{{ achievement.libelle }}</p>
+      }
+    </div>
+  }
+</main>

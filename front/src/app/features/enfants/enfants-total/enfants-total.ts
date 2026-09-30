@@ -3,10 +3,11 @@ import { Enfant } from '../../../models/enfant';
 import { EnfantsService } from '../../../services/enfants/enfants.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histoire';
+import { AchievementList } from '../achievement/achievement-list/achievement-list';
 
 @Component({
   selector: 'app-enfants-total',
-  imports: [RouterLink, RouterLinkActive, ModalPetiteHistoire],
+  imports: [RouterLink, RouterLinkActive, ModalPetiteHistoire, AchievementList],
   templateUrl: './enfants-total.html',
   styleUrl: './enfants-total.css',
 })
@@ -18,6 +19,7 @@ export class EnfantsTotal implements OnInit {
 
   readonly enfantsSignal = signal<Enfant[]>([]);
   readonly enfantHistoireSelectionne = signal<Enfant | null>(null);
+  readonly enfantAchievementSelectionne = signal<Enfant | null>(null);
 
   ngOnInit(): void {
     this.enfantsService.getEnfants().subscribe({
@@ -32,6 +34,14 @@ export class EnfantsTotal implements OnInit {
 
   fermerHistoire(): void {
     this.enfantHistoireSelectionne.set(null);
+  }
+
+  afficherAchievements(enfant: Enfant): void {
+    this.enfantAchievementSelectionne.set(enfant);
+  }
+
+  fermerAchievements(): void {
+    this.enfantAchievementSelectionne.set(null);
   }
 
   ouvrirJournal(enfant: Enfant): void {

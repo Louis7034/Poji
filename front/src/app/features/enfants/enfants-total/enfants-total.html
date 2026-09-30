@@ -46,6 +46,13 @@
               <path d="M4 5.5V21M8 7h8M8 11h8"></path>
             </svg>
           </button>
+          <span>Achievements</span>
+          <button type="button" (click)="$event.stopPropagation(); afficherAchievements(enfant)" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#526fca] transition-colors hover:bg-[#dbe5ff]" aria-label="Voir les achievements de {{ enfant.prenom }}">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"></path>
+              <path d="M8 6H5a3 3 0 0 0 3 3M16 6h3a3 3 0 0 1-3 3M12 12v4M8 20h8M9 16h6"></path>
+            </svg>
+          </button>
         </div>
       </div>
     } @empty {
@@ -55,4 +62,8 @@
 
   @if (enfantHistoireSelectionne(); as enfant) {
     <app-modal-petite-histoire [enfant]="enfant" (fermer)="fermerHistoire()" />
+  }
+
+  @if (enfantAchievementSelectionne(); as enfant) {
+    <app-achievement-list [enfant]="enfant" (fermer)="fermerAchievements()" />
   }

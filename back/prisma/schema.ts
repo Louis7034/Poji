@@ -349,6 +349,78 @@ export const contract = defineContract({}, ({ field, model }) => {
     });
 
 
+    const Achievement = model("Achievement", {
+        fields: {
+            id: field.id.uuidv4String(),
+
+            libelle: field.text(),
+
+            createdAt: field
+                .column({
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
+                } as const)
+                .column("created_at"),
+
+            categorie: field.text(),
+        },
+    }).sql({
+        table: "achievement",
+    });
+
+
+    const AchievementObservateur = model("AchievementObservateur", {
+        fields: {
+            id: field.id.uuidv4String(),
+
+            type: field.text(),
+
+            createdAt: field
+                .column({
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
+                } as const)
+                .column("created_at"),
+
+            achievementId: field
+                .uuidString()
+                .column("id_achievement"),
+        },
+    }).sql({
+        table: "achievement_observateur",
+    });
+
+
+    const AchievementObservation = model("AchievementObservation", {
+        fields: {
+            id: field.id.uuidv4String(),
+
+            enfantId: field
+                .uuidString()
+                .column("enfant_id"),
+
+            achievementId: field
+                .uuidString()
+                .column("achievement_id"),
+
+            observateurId: field
+                .uuidString()
+                .column("observateur_id"),
+
+            reponse: field.text(),
+
+            dateObservation: field
+                .column({
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
+                } as const)
+                .column("date_observation"),
+        },
+    }).sql({
+        table: "achievement_observation",
+    });
+
+
     return {
         models: {
             Personnel,
@@ -362,6 +434,9 @@ export const contract = defineContract({}, ({ field, model }) => {
             RappelParent,
             ProblemeSante,
             Temperature,
+            Achievement,
+            AchievementObservateur,
+            AchievementObservation,
         },
     };
 });

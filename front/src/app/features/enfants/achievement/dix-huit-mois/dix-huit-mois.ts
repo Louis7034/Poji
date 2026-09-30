@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Achievement } from '../../../../models/achievement';
 import { AchievementService } from '../../../../services/achievement/achievement.service';
+import { REPONSES_PAR_CATEGORIE } from '../../../../models/achievement-observation';
 
 @Component({
   selector: 'app-dix-huit-mois',
@@ -11,6 +12,7 @@ import { AchievementService } from '../../../../services/achievement/achievement
 export class DixHuitMois implements OnInit {
   readonly achievements = signal<Achievement[]>([]);
   readonly erreur = signal(false);
+  readonly reponsesParAchievement = REPONSES_PAR_CATEGORIE['18 mois'];
 
   constructor(private readonly achievementService: AchievementService) {}
 

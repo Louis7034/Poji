@@ -7,6 +7,6 @@ export interface AchievementObservation {
     enfantId: Enfant;
     AchievementId: Achievement;
     observateurId: AchievementObservateur;
-    reponse: string;
+    reponse: number;
     dateObservation: Date;
 }

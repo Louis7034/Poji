@@ -5,10 +5,43 @@
   } @else if (achievements().length === 0) {
     <p class="mt-6 rounded-xl bg-white p-4 text-slate-500">Aucun achievement pour cette catégorie.</p>
   } @else {
-    <div class="mt-6 space-y-3">
-      @for (achievement of achievements(); track achievement.id) {
-        <p class="rounded-xl bg-white p-4 shadow-sm">{{ achievement.libelle }}</p>
-      }
+    <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[900px] border-collapse text-left">
+          <thead class="bg-[#243b70] text-sm text-white">
+            <tr>
+              <th scope="col" class="w-[34%] px-5 py-4 font-semibold">Achievement</th>
+              <th scope="col" class="w-[33%] px-5 py-4 font-semibold">Papa, maman m'ont vu.e le faire</th>
+              <th scope="col" class="w-[33%] px-5 py-4 font-semibold">Les professionnels m'ont vu.e le faire</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            @for (achievement of achievements(); track achievement.id; let i = $index) {
+              <tr class="align-top transition-colors hover:bg-[#f7f9ff]">
+                <th scope="row" class="px-5 py-5 font-semibold text-[#243b70]">{{ achievement.libelle }}</th>
+                @for (observateur of ['parents', 'professionnels']; track observateur) {
+                  <td class="px-5 py-5">
+                    <div class="space-y-3">
+                      @for (reponse of (reponsesParAchievement[i] || reponsesParAchievement[reponsesParAchievement.length - 1]); track reponse; let j = $index) {
+                        <label class="flex cursor-pointer items-start gap-3 text-sm leading-5 text-slate-700">
+                          <input
+                            type="checkbox"
+                            class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#526fca] accent-[#526fca] focus:ring-[#526fca]"
+                            [name]="'achievement-' + achievement.id + '-' + observateur"
+                            [value]="reponse"
+                            [attr.id]="'achievement-' + achievement.id + '-' + observateur + '-' + j"
+                          />
+                          <span>{{ reponse }}</span>
+                        </label>
+                      }
+                    </div>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   }
 </main>

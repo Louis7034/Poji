@@ -6,6 +6,7 @@ import { Achievement } from '../../models/achievement';
 import {
   AchievementObservation,
   AchievementObservateur,
+  AchievementObservationGenerale,
 } from '../../models/achievement-observation';
 
 @Injectable({
@@ -36,6 +37,26 @@ export class AchievementService {
   getObservateurs(): Observable<AchievementObservateur[]> {
     return this.http.get<AchievementObservateur[]>(
       `${environment.API_URL}/api/achievement-observateur`,
+    );
+  }
+
+  getObservationGenerale(
+    enfantId: string,
+    categorie: string,
+  ): Observable<AchievementObservationGenerale | null> {
+    return this.http.get<AchievementObservationGenerale | null>(
+      `${environment.API_URL}/api/achievement-observation-generale/enfant/${enfantId}/categorie/${encodeURIComponent(categorie)}`,
+    );
+  }
+
+  saveObservationGenerale(data: {
+    enfantId: string;
+    categorie: string;
+    observation: string;
+  }): Observable<AchievementObservationGenerale> {
+    return this.http.post<AchievementObservationGenerale>(
+      `${environment.API_URL}/api/achievement-observation-generale`,
+      data,
     );
   }
 

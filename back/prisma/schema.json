@@ -16,6 +16,10 @@
       "model": "AchievementObservation",
       "namespace": "public"
     },
+    "achievement_observation_generale": {
+      "model": "AchievementObservationGenerale",
+      "namespace": "public"
+    },
     "achievement_observation_question": {
       "model": "AchievementObservationQuestion",
       "namespace": "public"
@@ -258,6 +262,73 @@
               },
               "namespaceId": "public",
               "table": "achievement_observation"
+            }
+          },
+          "AchievementObservationGenerale": {
+            "fields": {
+              "categorie": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "dateObservation": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "enfantId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/char@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 36
+                  }
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/char@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 36
+                  }
+                }
+              },
+              "observation": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "categorie": {
+                  "column": "categorie"
+                },
+                "dateObservation": {
+                  "column": "date_observation"
+                },
+                "enfantId": {
+                  "column": "enfant_id"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "observation": {
+                  "column": "observation"
+                }
+              },
+              "namespaceId": "public",
+              "table": "achievement_observation_generale"
             }
           },
           "AchievementObservationQuestion": {
@@ -1268,6 +1339,49 @@
               },
               "uniques": []
             },
+            "achievement_observation_generale": {
+              "columns": {
+                "categorie": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "date_observation": {
+                  "codecId": "pg/timestamp-string@1",
+                  "nativeType": "timestamp",
+                  "nullable": false
+                },
+                "enfant_id": {
+                  "codecId": "sql/char@1",
+                  "nativeType": "character",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 36
+                  }
+                },
+                "id": {
+                  "codecId": "sql/char@1",
+                  "nativeType": "character",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 36
+                  }
+                },
+                "observation": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "achievement_observation_question": {
               "columns": {
                 "categorie": {
@@ -1842,10 +1956,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "54151b3d895b9f56ec080b08802194007d339bd04c97733dac7fa2c4c38e9083"
+    "storageHash": "32afffc79ab1f5a2cbcff49a639339001ac6637e4dce2a0e95c963edfe7cbe8a"
   },
   "execution": {
-    "executionHash": "e6eda1daa4258bb4c01085a04c153ea5481b7af0e957c20779c90ec6745a8391",
+    "executionHash": "8eff32203c89a6f8d54b9154e751f536941106d987dfc9909fa3211c34db596d",
     "mutations": {
       "defaults": [
         {
@@ -1879,6 +1993,17 @@
             "column": "id",
             "namespace": "public",
             "table": "achievement_observation"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "id",
+            "namespace": "public",
+            "table": "achievement_observation_generale"
           }
         },
         {

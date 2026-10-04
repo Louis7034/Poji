@@ -1,3 +1,16 @@
+:host {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex: 0 0 300px;
+  height: 100vh;
+  z-index: 10;
+}
+
+:host > div {
+  height: 100%;
+}
+
 :host aside nav a {
   height: 4rem;
   gap: 1.25rem;

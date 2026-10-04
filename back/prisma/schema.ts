@@ -436,6 +436,23 @@ export const contract = defineContract({}, ({ field, model }) => {
         table: "achievement_observation_question",
     });
 
+    const AchievementObservationGenerale = model("AchievementObservationGenerale", {
+        fields: {
+            id: field.id.uuidv4String(),
+            enfantId: field.uuidString().column("enfant_id"),
+            categorie: field.text(),
+            observation: field.text(),
+            dateObservation: field
+                .column({
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
+                } as const)
+                .column("date_observation"),
+        },
+    }).sql({
+        table: "achievement_observation_generale",
+    });
+
 
     return {
         models: {
@@ -454,6 +471,7 @@ export const contract = defineContract({}, ({ field, model }) => {
             AchievementObservateur,
             AchievementObservation,
             AchievementObservationQuestion,
+            AchievementObservationGenerale,
         },
     };
 });

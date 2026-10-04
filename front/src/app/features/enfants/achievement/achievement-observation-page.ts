@@ -1,10 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
 import { Directive, inject, OnInit, signal } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { Achievement } from '../../../models/achievement';
 import {
   AchievementObservation,
   AchievementObservateur,
+  AchievementObservationGenerale,
   REPONSES_PAR_CATEGORIE,
 } from '../../../models/achievement-observation';
 import { AchievementService } from '../../../services/achievement/achievement.service';
@@ -15,10 +18,30 @@ export abstract class AchievementObservationPage implements OnInit {
   readonly erreur = signal(false);
   readonly observations = signal<AchievementObservation[]>([]);
   readonly observateurs = signal<AchievementObservateur[]>([]);
+  readonly observationGenerale = signal<AchievementObservationGenerale | null>(null);
+  readonly observationGeneraleEnCours = signal('');
   protected readonly route = inject(ActivatedRoute, { optional: true });
   protected readonly achievementService = inject(AchievementService);
   abstract readonly categorie: string;
   private enfantId: string | null = null;
+  private readonly observationGeneraleSaves = new Subject<string>();
+
+  constructor() {
+    this.observationGeneraleSaves
+      .pipe(
+        concatMap((observation) =>
+          this.achievementService.saveObservationGenerale({
+            enfantId: this.enfantId!,
+            categorie: this.categorie,
+            observation,
+          }),
+        ),
+      )
+      .subscribe({
+        next: (observation) => this.observationGenerale.set(observation),
+        error: () => this.erreur.set(true),
+      });
+  }
 
   get reponsesParAchievement(): readonly (readonly string[])[] {
     return REPONSES_PAR_CATEGORIE[this.categorie] ?? [];
@@ -35,14 +58,30 @@ export abstract class AchievementObservationPage implements OnInit {
       achievements: this.achievementService.getByCategorie(this.categorie),
       observations: this.achievementService.getObservationsByEnfant(this.enfantId),
       observateurs: this.achievementService.getObservateurs(),
+      observationGenerale: this.achievementService.getObservationGenerale(
+        this.enfantId,
+        this.categorie,
+      ),
     }).subscribe({
-      next: ({ achievements, observations, observateurs }) => {
+      next: ({ achievements, observations, observateurs, observationGenerale }) => {
         this.achievements.set(achievements);
         this.observations.set(observations);
         this.observateurs.set(observateurs);
+        this.observationGenerale.set(observationGenerale);
+        this.observationGeneraleEnCours.set(observationGenerale?.observation ?? '');
       },
       error: () => this.erreur.set(true),
     });
+  }
+
+  sauvegarderObservationGenerale(observation: string): void {
+    if (!this.enfantId) {
+      this.erreur.set(true);
+      return;
+    }
+
+    this.observationGeneraleEnCours.set(observation);
+    this.observationGeneraleSaves.next(observation);
   }
 
   estSelectionnee(achievementId: string, type: string, index: number): boolean {

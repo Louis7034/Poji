@@ -1,20 +1,20 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Enfant } from '../../../models/enfant';
 import { EnfantsService } from '../../../services/enfants/enfants.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histoire';
 import { AchievementList } from '../achievement/achievement-list/achievement-list';
+import { CreationEnfant } from '../creation-enfant/creation-enfant';
 
 @Component({
   selector: 'app-enfants-total',
-  imports: [RouterLink, RouterLinkActive, ModalPetiteHistoire, AchievementList],
+  imports: [RouterLink, RouterLinkActive, ModalPetiteHistoire, AchievementList, CreationEnfant],
   templateUrl: './enfants-total.html',
   styleUrl: './enfants-total.css',
 })
 export class EnfantsTotal implements OnInit {
   constructor(
     private readonly enfantsService: EnfantsService,
-    private readonly router: Router,
   ) {}
 
   readonly enfantsSignal = signal<Enfant[]>([]);
@@ -44,7 +44,11 @@ export class EnfantsTotal implements OnInit {
     this.enfantAchievementSelectionne.set(null);
   }
 
-  ouvrirJournal(enfant: Enfant): void {
-    this.router.navigate(['/journal', enfant.id]);
+  ajouterEnfant(enfant: Enfant): void {
+    this.enfantsSignal.update((enfants) =>
+      [...enfants, { ...enfant, histoire_enfant: enfant.histoire_enfant ?? [] }].sort((a, b) =>
+        a.prenom.localeCompare(b.prenom),
+      ),
+    );
   }
 }

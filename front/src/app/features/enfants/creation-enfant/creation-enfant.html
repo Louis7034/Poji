@@ -1,0 +1,45 @@
+<section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100" aria-labelledby="creation-enfant-title">
+  <div class="mb-5">
+    <p class="text-sm font-semibold uppercase tracking-wide text-[#526fca]">Nouvelle arrivée</p>
+    <h2 id="creation-enfant-title" class="mt-1 text-2xl font-bold text-[#243b70]">Ajouter un enfant à votre établissement</h2>
+  </div>
+
+  <form [formGroup]="formulaire" (ngSubmit)="creerEnfant()" class="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
+    <div>
+      <label for="prenom-enfant" class="mb-1.5 block text-sm font-semibold text-slate-700">Prénom <span aria-hidden="true">*</span></label>
+      <input
+        id="prenom-enfant"
+        type="text"
+        formControlName="prenom"
+        autocomplete="given-name"
+        placeholder="Prénom de l'enfant"
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-800 outline-none transition focus:border-[#526fca] focus:ring-2 focus:ring-[#dbe5ff]"
+      />
+      @if (formulaire.controls.prenom.invalid && formulaire.controls.prenom.touched) {
+        <p class="mt-1 text-sm text-red-600">Le prénom est obligatoire.</p>
+      }
+    </div>
+
+    <div>
+      <label for="date-arrive-enfant" class="mb-1.5 block text-sm font-semibold text-slate-700">Date d'arrivée</label>
+      <input
+        id="date-arrive-enfant"
+        type="date"
+        formControlName="dateArrive"
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-800 outline-none transition focus:border-[#526fca] focus:ring-2 focus:ring-[#dbe5ff]"
+      />
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="envoiEnCours()"
+      class="rounded-xl bg-[#526fca] px-5 py-3 font-semibold text-white transition hover:bg-[#405daa] disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {{ envoiEnCours() ? 'Création...' : 'Ajouter l’enfant' }}
+    </button>
+  </form>
+
+  @if (erreur(); as message) {
+    <p class="mt-4 text-sm text-red-600" role="alert">{{ message }}</p>
+  }
+</section>

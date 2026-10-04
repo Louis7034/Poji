@@ -32,6 +32,8 @@ export const contract = defineContract({}, ({ field, model }) => {
         fields: {
             id: field.id.uuidv4String(),
 
+            prenom: field.text(),
+
             dateArrive: field
                 .column({
                     codecId: "pg/date-string@1",

@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'32afffc79ab1f5a2cbcff49a639339001ac6637e4dce2a0e95c963edfe7cbe8a'>;
+  StorageHashBase<'aefdbcab70e45e91ae1d9b290ed065201ddabd4a2b6252a5645c9929d486f5da'>;
 export type ExecutionHash =
   ExecutionHashBase<'8eff32203c89a6f8d54b9154e751f536941106d987dfc9909fa3211c34db596d'>;
 export type ProfileHash =
@@ -285,6 +285,7 @@ export type FieldOutputTypes = {
     };
     readonly Enfant: {
       readonly id: Char<36>;
+      readonly prenom: CodecTypes['pg/text@1']['output'];
       readonly dateArrive: CodecTypes['pg/date-string@1']['output'] | null;
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['output'];
     };
@@ -405,6 +406,7 @@ export type FieldInputTypes = {
     };
     readonly Enfant: {
       readonly id: CodecTypes['sql/char@1']['input'];
+      readonly prenom: CodecTypes['pg/text@1']['input'];
       readonly dateArrive: CodecTypes['pg/date-string@1']['input'] | null;
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['input'];
     };
@@ -527,6 +529,7 @@ export type StorageColumnTypes = {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['output'];
       readonly date_arrive: CodecTypes['pg/date-string@1']['output'] | null;
       readonly id: Char<36>;
+      readonly prenom: CodecTypes['pg/text@1']['output'];
     };
     readonly histoire_enfant: {
       readonly annee: CodecTypes['pg/int4@1']['output'] | null;
@@ -647,6 +650,7 @@ export type StorageColumnInputTypes = {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['input'];
       readonly date_arrive: CodecTypes['pg/date-string@1']['input'] | null;
       readonly id: CodecTypes['sql/char@1']['input'];
+      readonly prenom: CodecTypes['pg/text@1']['input'];
     };
     readonly histoire_enfant: {
       readonly annee: CodecTypes['pg/int4@1']['input'] | null;
@@ -733,6 +737,7 @@ export namespace Models {
   };
   export type public_Enfant = {
     id: Char<36>;
+    prenom: CodecTypes['pg/text@1']['output'];
     dateArrive: CodecTypes['pg/date-string@1']['output'] | null;
     createdAt: CodecTypes['pg/timestamp-string@1']['output'];
     readonly [RelationKeys]?: never;
@@ -1107,6 +1112,11 @@ type ContractBase = Omit<
                   readonly codecId: 'sql/char@1';
                   readonly nullable: false;
                   readonly typeParams: { readonly length: 36 };
+                };
+                readonly prenom: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
                 };
                 readonly date_arrive: {
                   readonly nativeType: 'date';
@@ -1828,6 +1838,10 @@ type ContractBase = Omit<
                   readonly typeParams: { readonly length: 36 };
                 };
               };
+              readonly prenom: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
               readonly dateArrive: {
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
@@ -1846,6 +1860,7 @@ type ContractBase = Omit<
               readonly namespaceId: 'public';
               readonly fields: {
                 readonly id: { readonly column: 'id' };
+                readonly prenom: { readonly column: 'prenom' };
                 readonly dateArrive: { readonly column: 'date_arrive' };
                 readonly createdAt: { readonly column: 'created_at' };
               };

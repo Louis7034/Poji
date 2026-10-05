@@ -350,6 +350,45 @@ export const contract = defineContract({}, ({ field, model }) => {
         table: "temperature",
     });
 
+    const Sieste = model("Sieste", {
+        fields: {
+            id: field.id.uuidv4String(),
+
+            enfantId: field
+                .uuidString()
+                .column("enfant_id"),
+
+            heureDebut: field
+                .column({
+                    codecId: "pg/time-string@1",
+                    nativeType: "time",
+                } as const)
+                .column("heure_debut"),
+
+            heureFin: field
+                .column({
+                    codecId: "pg/time-string@1",
+                    nativeType: "time",
+                } as const)
+                .column("heure_fin"),
+
+            duree: field.int(),
+
+            observation: field
+                .text()
+                .optional(),
+
+            createdAt: field
+                .column({
+                    codecId: "pg/timestamp-string@1",
+                    nativeType: "timestamp",
+                } as const)
+                .column("created_at"),
+        },
+    }).sql({
+        table: "sieste",
+    });
+
 
     const Achievement = model("Achievement", {
         fields: {
@@ -469,6 +508,7 @@ export const contract = defineContract({}, ({ field, model }) => {
             RappelParent,
             ProblemeSante,
             Temperature,
+            Sieste,
             Achievement,
             AchievementObservateur,
             AchievementObservation,

@@ -8,6 +8,7 @@ import { TransmissionMatin } from '../../models/transmission_matin';
 import { TransmissionSoir } from '../../models/transmission_soir';
 import { PresenceEtat } from '../../enum/presence_etat';
 import { ProblemeSante } from '../../models/probleme_sante';
+import { Sieste } from '../../models/sieste';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,20 @@ export class PresenceService {
     return this.http.get<ProblemeSante>(
       `${environment.API_URL}/api/probleme-sante/enfant/${enfantId}/aujourd-hui`,
     );
+  }
+
+  getSiestes(enfantId: string) {
+    return this.http.get<Sieste[]>(
+      `${environment.API_URL}/api/sieste/enfant/${enfantId}`,
+    );
+  }
+
+  createSieste(data: Pick<Sieste, 'enfantId' | 'heureDebut' | 'heureFin' | 'observation'>) {
+    return this.http.post<Sieste>(`${environment.API_URL}/api/sieste`, data);
+  }
+
+  deleteSieste(id: string) {
+    return this.http.delete<void>(`${environment.API_URL}/api/sieste/${id}`);
   }
 
   updateSante(id: string, data: Pick<ProblemeSante, 'symptome' | 'traitement' | 'observation'>) {

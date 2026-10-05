@@ -29,6 +29,13 @@
         [attr.aria-selected]="onglet() === 'sante'">
         Santé
       </button>
+      <button type="button" (click)="onglet.set('sieste')"
+        [class]="onglet() === 'sieste'
+          ? 'border-b-2 border-orange-500 px-1 pb-3 font-semibold text-orange-600'
+          : 'border-b-2 border-transparent px-1 pb-3 text-slate-500'"
+        [attr.aria-selected]="onglet() === 'sieste'">
+        Sieste
+      </button>
     </nav>
   </header>
 
@@ -37,8 +44,10 @@
       <app-transmissions-matin [enfantId]="enfantId()" />
     } @else if (onglet() === 'soir') {
       <app-transmissions-soir [enfantId]="enfantId()" />
-    } @else {
+    } @else if (onglet() === 'sante') {
       <app-transmissions-sante [enfantId]="enfantId()" />
+    } @else {
+      <app-transmission-sieste [enfantId]="enfantId()" />
     }
   </div>
 </section>

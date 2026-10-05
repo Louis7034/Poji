@@ -4,17 +4,18 @@ import { EnfantsService } from '../../../../services/enfants/enfants.service';
 import { TransmissionsMatin } from '../transmissions-matin/transmissions-matin';
 import { TransmissionsSoir } from '../transmissions-soir/transmissions-soir';
 import { TransmissionsSante } from '../transmissions-sante/transmissions-sante';
+import { TransmissionSieste } from '../transmission-sieste/transmission-sieste';
 
 @Component({
   selector: 'app-transmissions-panel',
-  imports: [TransmissionsMatin, TransmissionsSoir, TransmissionsSante],
+  imports: [TransmissionsMatin, TransmissionsSoir, TransmissionsSante, TransmissionSieste],
   templateUrl: './transmissions-panel.html',
   styleUrl: './transmissions-panel.css',
 })
 export class TransmissionsPanel implements OnInit {
   readonly enfantId = signal('');
   readonly enfantPrenom = signal('');
-  readonly onglet = signal<'matin' | 'soir' | 'sante'>('matin');
+  readonly onglet = signal<'matin' | 'soir' | 'sante' | 'sieste'>('matin');
 
   constructor(
     private readonly route: ActivatedRoute,

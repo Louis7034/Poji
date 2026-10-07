@@ -59,10 +59,11 @@
     }
   </div>
 
-  <div class="px-4 pb-8 pt-4">
-    <app-creation-enfant (enfantCree)="ajouterEnfant($event)" />
-  </div>
-
+  @if (permDirecteur){
+    <div class="px-4 pb-8 pt-4">
+      <app-creation-enfant (enfantCree)="ajouterEnfant($event)" />
+    </div>
+  }
   @if (enfantHistoireSelectionne(); as enfant) {
     <app-modal-petite-histoire [enfant]="enfant" (fermer)="fermerHistoire()" />
   }

@@ -13,19 +13,18 @@ import { CreationEnfant } from '../creation-enfant/creation-enfant';
   styleUrl: './enfants-total.css',
 })
 export class EnfantsTotal implements OnInit {
-  constructor(
-    private readonly enfantsService: EnfantsService,
-  ) {}
+  constructor(private readonly enfantsService: EnfantsService) {}
 
   readonly enfantsSignal = signal<Enfant[]>([]);
   readonly enfantHistoireSelectionne = signal<Enfant | null>(null);
   readonly enfantAchievementSelectionne = signal<Enfant | null>(null);
-
+  permDirecteur:boolean = false;
   ngOnInit(): void {
     this.enfantsService.getEnfants().subscribe({
       next: (enfants) => this.enfantsSignal.set(enfants),
       error: (error) => console.error('Erreur lors de la récupération des enfants', error),
     });
+    this.checkPermDirecteur();
   }
 
   afficherHistoire(enfant: Enfant): void {
@@ -50,5 +49,15 @@ export class EnfantsTotal implements OnInit {
         a.prenom.localeCompare(b.prenom),
       ),
     );
+  }
+
+  checkPermDirecteur(): void {
+    const user = localStorage.getItem('poji-authenticated-user');
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      if (parsedUser.role === 'DIRECTEUR') {
+        this.permDirecteur = true;
+      }
+    }
   }
 }

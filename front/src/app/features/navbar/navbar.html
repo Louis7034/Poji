@@ -1,13 +1,14 @@
 <div class="relative">
-<aside class="flex h-full min-h-screen w-[300px] min-w-0 flex-col bg-gradient-to-br from-[#243b70] via-[#203664] to-[#1b2d55] px-5 py-7 text-[#eef3ff] shadow-xl">
-  <div class="mb-6 flex items-center gap-4 px-3 lg:mb-5">
-    <a routerLink="/accueil" routerLinkActive="active" class="flex gap-2">
-      <div class="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#fff5f0] text-4xl shadow-sm">
-        <span aria-hidden="true">◡</span>
-        <span class="absolute bottom-4 left-4 h-1.5 w-1.5 rounded-full bg-[#31578e]"></span>
-        <span class="absolute bottom-4 right-4 h-1.5 w-1.5 rounded-full bg-[#31578e]"></span>
+<aside class="flex h-full min-h-screen w-[248px] min-w-0 flex-col bg-gradient-to-br from-[#243b70] via-[#203664] to-[#1b2d55] px-4 py-5 text-[#eef3ff] shadow-xl">
+  <div class="mb-5 flex items-center gap-3 px-2 lg:mb-4">
+    <a routerLink="/accueil" routerLinkActive="active" class="flex items-center gap-3">
+      <div class="poji-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none">
+          <path d="M18 18v28M18 18h13.5a9 9 0 0 1 0 18H18" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="46.5" cy="19" r="3.5" fill="#FF8A70"/>
+        </svg>
       </div>
-      <span class="text-[2.5rem] font-bold tracking-tight text-white">Poji</span>
+      <span class="text-[2rem] font-bold tracking-[-0.06em] text-white">poji<span class="text-[#ffad98]">.</span></span>
     </a>
   </div>
 
@@ -48,8 +49,8 @@
 
   </nav>
 
-  <button type="button" (click)="logout()" class="mt-6 flex h-16 w-full items-center gap-5 rounded-2xl bg-[#8f304d]/80 px-5 text-left text-[1.5rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
-    <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
+  <button type="button" (click)="logout()" class="mt-5 flex h-14 w-full items-center gap-4 rounded-xl bg-[#8f304d]/80 px-4 text-left text-[1.15rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
+    <svg class="h-7 w-7 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
       <path d="M10 17l5-5-5-5"/>
       <path d="M15 12H3"/>
       <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>

@@ -1,0 +1,18 @@
+.reminder-page {
+  max-width: 90rem;
+}
+
+@media (max-width: 767px) {
+  .reminder-page h1 {
+    font-size: 1.45rem;
+  }
+
+  .reminder-form select {
+    width: 100%;
+  }
+
+  .reminder-form > div:first-child {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

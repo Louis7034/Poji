@@ -1,0 +1,25 @@
+.achievement-modal {
+  max-height: min(85vh, 42rem);
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .achievement-modal {
+    max-height: calc(100vh - 2rem);
+    padding: 1.15rem;
+    border-radius: 1.25rem;
+  }
+
+  .achievement-modal h2 {
+    font-size: 1.35rem;
+  }
+
+  .achievement-modal .mt-6 {
+    margin-top: 1.15rem;
+  }
+
+  .achievement-modal button.w-full {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+}

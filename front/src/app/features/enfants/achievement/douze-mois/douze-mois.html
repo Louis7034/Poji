@@ -1,4 +1,4 @@
-<main class="min-h-screen bg-[#f7f9ff] px-6 py-8 text-[#243b70]">
+<main class="achievement-page min-h-screen bg-[#f7f9ff] px-4 py-5 text-[#243b70] sm:px-6 sm:py-8">
   <h1 class="text-3xl font-bold">Observation à 12 mois</h1>
   @if (erreur()) {
     <p class="mt-6 rounded-xl bg-red-50 p-4 text-red-700">Impossible de récupérer les achievements.</p>
@@ -6,8 +6,8 @@
     <p class="mt-6 rounded-xl bg-white p-4 text-slate-500">Aucun achievement pour cette catégorie.</p>
   } @else {
     <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-[1100px] border-collapse text-left">
+      <div class="achievement-table-wrap overflow-x-auto">
+        <table class="achievement-table w-full min-w-[760px] border-collapse text-left">
           <thead class="bg-[#243b70] text-sm text-white">
             <tr>
               <th scope="col" class="w-[25%] px-5 py-4 font-semibold">Observation</th>
@@ -37,7 +37,7 @@
         </table>
       </div>
     </div>
-    <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div class="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:mt-6 sm:p-5">
       <label for="observation-generale" class="block text-sm font-semibold text-[#243b70]">Observation générale</label>
       <textarea id="observation-generale" rows="4" class="mt-2 w-full rounded-xl border border-slate-300 p-3 text-sm text-slate-700 focus:border-[#526fca] focus:outline-none focus:ring-2 focus:ring-[#526fca]/30" [value]="observationGeneraleEnCours()" (input)="sauvegarderObservationGenerale($any($event.target).value)"></textarea>
     </div>

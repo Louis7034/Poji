@@ -1,0 +1,9 @@
+@media (max-width: 767px) {
+  .calendar-presence-card {
+    padding: 1rem;
+  }
+
+  .calendar-presence-card label {
+    min-height: 3.25rem;
+  }
+}

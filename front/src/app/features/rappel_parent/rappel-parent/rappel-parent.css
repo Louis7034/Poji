@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+  :host {
+    display: block;
+  }
+
+  :host h2 {
+    font-size: 1.35rem;
+  }
+
+  :host article {
+    padding: 1rem;
+  }
+}

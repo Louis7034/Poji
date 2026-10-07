@@ -1,17 +1,17 @@
-<div class="flex min-h-screen">
-  <div class="flex flex-col  pt-10 pb-15 gap-15">
-  <div class="flex-col p-8">
+<div class="home-page min-h-screen">
+  <div class="home-main flex flex-col gap-10 p-5 pt-8 sm:p-8 lg:gap-14 lg:pt-10">
+  <div class="home-heading">
       <h1 id="compteur-title" class="text-3xl font-bold text-[#243b70]">
         Bonjour {{ personnelData()?.prenom }}
       </h1>
       <p class="text-xl text-slate-600">Voici un aperçu de la journée d'aujourd'hui</p>
     </div>
     <app-compteur></app-compteur>
-    <a routerLink="/enfants-present" routerLinkActive="active">
+    <a class="home-presence-link" routerLink="/enfants-present" routerLinkActive="active">
       <app-present-aujourdhui></app-present-aujourdhui>
     </a>
   </div>
-  <a class="mt-65" routerLink="/rappel-parent" routerLinkActive="active">
+  <a class="home-reminders-link" routerLink="/rappel-parent" routerLinkActive="active">
     <app-rappel-parent-recap></app-rappel-parent-recap>
   </a>
 </div>

@@ -1,0 +1,41 @@
+.children-heading {
+  max-width: 90rem;
+}
+
+.child-row {
+  grid-template-columns: 16rem minmax(0, 1fr);
+}
+
+@media (max-width: 1023px) {
+  .child-row {
+    grid-template-columns: 13rem minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .children-list {
+    max-height: none;
+    padding-bottom: 1.25rem;
+  }
+
+  .child-row {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-block: 0.65rem;
+  }
+
+  .child-row > .flex {
+    gap: 0.7rem;
+  }
+
+  .child-actions a,
+  .child-actions button {
+    min-width: 0;
+    height: 2.75rem;
+  }
+
+  .child-actions svg {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+}

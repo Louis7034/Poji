@@ -1,0 +1,50 @@
+.home-page {
+  background: linear-gradient(135deg, #fff 0%, #f7f9ff 60%, #eff4ff 100%);
+}
+
+.home-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(270px, 350px);
+  align-items: start;
+}
+
+.home-heading {
+  grid-column: 1 / -1;
+}
+
+.home-presence-link {
+  display: block;
+}
+
+.home-reminders-link {
+  display: block;
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+
+@media (max-width: 1023px) {
+  .home-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-reminders-link {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-main {
+    gap: 1.25rem;
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .home-heading h1 {
+    font-size: 1.7rem;
+  }
+
+  .home-heading p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}

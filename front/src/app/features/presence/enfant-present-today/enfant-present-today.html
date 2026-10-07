@@ -1,10 +1,10 @@
-  <h2 id="present-title" class="px-8 py-6 text-2xl font-bold text-[#243b70]">
+  <h2 id="present-title" class="presence-title px-5 py-5 text-xl font-bold text-[#243b70] sm:px-8 sm:py-6 sm:text-2xl">
     Enfant présent aujourd'hui
   </h2>
 
     @for (enfant of enfantPresentTodaySignal(); track enfant.enfant_id) {
       <div
-        [class]="getEtatBackgroundClass(enfant.etat_presence) + ' mx-4 my-2 flex cursor-pointer items-center gap-5 rounded-xl px-8 py-4'"
+        [class]="getEtatBackgroundClass(enfant.etat_presence) + ' presence-row mx-3 my-2 grid cursor-pointer items-center gap-3 rounded-xl px-4 py-4 sm:mx-4 sm:flex sm:gap-5 sm:px-8'"
         role="button"
         tabindex="0"
         (click)="ouvrirTransmissions(enfant, $event)"
@@ -18,34 +18,34 @@
           </svg>
         </span>
 
-        <p class="min-w-0 max-w-48 truncate text-lg font-semibold text-[#243b70]">
+        <p class="min-w-0 truncate text-lg font-semibold text-[#243b70]">
           {{ enfant.prenom }}
         </p>
-        <div class="pl-10">
+        <div class="presence-action">
         <app-bouton-arrive
           [arrive]="!!enfant.heure_arrivee"
           (arriveChange)="marquerCommeArrive(enfant)"/>
         </div>
-        <div class="pl-10">
+        <div class="presence-action">
           <app-bouton-quitte
             [quitte]="!!enfant.heure_depart"
             (quitteChange)="marquerCommeQuitte(enfant)"
           />
         </div>
-          <div class="pl-10">
+          <div class="presence-action">
             <app-select-etat-presence
               [etat]="getEtatPresence(enfant.etat_presence)"
               [selectId]="'etat-presence-' + enfant.enfant_id"
               (etatChange)="modifierEtat(enfant, $event)"
             />
           </div>
-          <div class="flex items-center gap-2 pl-10">
+          <div class="presence-time flex items-center gap-2">
             <span class="text-sm font-medium text-slate-500">Heure d'arrivée : </span>
             <span class="text-lg font-semibold text-slate-400">
               {{ enfant.heure_arrivee?.substring(0, 5) ?? '--' }}
             </span>
           </div>
-          <div class="flex items-center gap-2 pl-10">
+          <div class="presence-time flex items-center gap-2">
             <span class="text-sm font-medium text-slate-500">Heure de départ : </span>
             <span class="text-lg font-semibold text-slate-400">
               {{ enfant.heure_depart?.substring(0, 5) ?? '--' }}

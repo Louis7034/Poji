@@ -1,0 +1,31 @@
+.transmissions-page {
+  max-width: 90rem;
+}
+
+.transmission-tabs button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .transmissions-page h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .transmissions-page h2 span {
+    display: block;
+    font-size: 1.35rem;
+  }
+
+  .transmission-tabs {
+    gap: 1.15rem;
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .transmission-tabs button {
+    padding-bottom: 0.8rem;
+    font-size: 0.82rem;
+  }
+}

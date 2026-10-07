@@ -1,0 +1,13 @@
+.calendar-layout {
+  max-width: 90rem;
+}
+
+@media (max-width: 767px) {
+  .calendar-page {
+    padding: 1.25rem 1rem;
+  }
+
+  .calendar-page h1 {
+    font-size: 1.45rem;
+  }
+}

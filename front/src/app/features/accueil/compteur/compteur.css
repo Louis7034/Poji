@@ -1,0 +1,30 @@
+.home-stats {
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .home-stats > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .stat-card {
+    min-height: 8.5rem;
+    aspect-ratio: auto;
+    padding: 1rem;
+  }
+
+  .stat-card svg {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .stat-card p.text-4xl {
+    font-size: 1.8rem;
+  }
+
+  .stat-card p.mt-4 {
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+  }
+}

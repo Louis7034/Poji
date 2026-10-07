@@ -1,0 +1,15 @@
+@media (max-width: 767px) {
+  .achievement-page h1 {
+    font-size: 1.55rem;
+  }
+
+  .achievement-table-wrap {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .achievement-table th,
+  .achievement-table td {
+    padding: 0.8rem;
+  }
+}

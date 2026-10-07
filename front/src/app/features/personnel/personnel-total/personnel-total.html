@@ -1,5 +1,5 @@
-<section class="mx-4 my-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm" aria-labelledby="personnel-title">
-  <header class="border-b border-slate-200 px-6 py-6">
+<section class="personnel-card mx-3 my-4 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:mx-4 sm:my-6" aria-labelledby="personnel-title">
+  <header class="border-b border-slate-200 px-4 py-5 sm:px-6 sm:py-6">
     <div class="mt-1 flex items-center justify-between gap-4">
       <h1 id="personnel-title" class="text-2xl font-bold text-slate-800">Personnel</h1>
       <span class="rounded-full bg-orange-100 px-3 py-1 text-sm font-bold text-orange-700">
@@ -10,11 +10,11 @@
 
   <div class="divide-y divide-slate-100">
     @for (personnel of personnels(); track personnel.id) {
-      <article class="flex flex-wrap items-center gap-4 px-6 py-5">
+      <article class="personnel-row flex flex-wrap items-center gap-4 px-4 py-5 sm:px-6">
         <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-lg font-bold text-[#526fca]">
           {{ personnel.prenom.charAt(0).toUpperCase() }}
         </span>
-        <div class="min-w-48 flex-1">
+        <div class="min-w-0 flex-1">
           <h2 class="text-lg font-semibold text-[#243b70]">{{ personnel.prenom }}</h2>
           <p class="text-sm text-slate-500">{{ personnel.email }}</p>
         </div>

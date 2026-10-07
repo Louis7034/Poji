@@ -7,3 +7,28 @@
 .calendar-day:not(:disabled):active {
   transform: scale(0.97);
 }
+
+@media (max-width: 767px) {
+  .calendar-card {
+    padding: 0.85rem;
+  }
+
+  .calendar-grid {
+    gap: 0.25rem;
+  }
+
+  .calendar-day {
+    min-height: 4.7rem;
+    padding: 0.3rem;
+    font-size: 0.72rem;
+  }
+
+  .calendar-day .space-y-1 span {
+    font-size: 0.58rem;
+  }
+
+  .calendar-day .h-7 {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+}

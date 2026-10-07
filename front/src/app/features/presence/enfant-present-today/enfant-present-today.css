@@ -1,0 +1,35 @@
+.presence-row {
+  grid-template-columns: minmax(0, 1fr) repeat(2, auto);
+}
+
+.presence-action {
+  padding-left: 1rem;
+}
+
+@media (max-width: 767px) {
+  :host {
+    display: block;
+  }
+
+  .presence-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .presence-row > span:first-child {
+    grid-row: span 2;
+  }
+
+  .presence-action {
+    padding-left: 0;
+  }
+
+  .presence-time {
+    justify-content: space-between;
+    grid-column: 1 / -1;
+    font-size: 0.8rem;
+  }
+
+  .presence-time span:last-child {
+    font-size: 1rem;
+  }
+}

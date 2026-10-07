@@ -1,0 +1,15 @@
+@media (max-width: 767px) {
+  :host {
+    display: block;
+  }
+
+  :host article {
+    padding: 1rem;
+  }
+
+  :host input,
+  :host textarea {
+    min-height: 2.8rem;
+    font-size: 1rem;
+  }
+}

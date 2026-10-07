@@ -1,13 +1,13 @@
-<div class="space-y-6 p-6 lg:p-8">
+<div class="reminder-page space-y-6 p-5 sm:p-6 lg:p-8">
   <app-rappel-parent [refresh]="refresh()" />
 
-    <div class="mb-6 mt-6">
+    <div class="mb-5 mt-6">
       <p class="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-orange-500">Nouveau message</p>
       <h1 class="text-2xl font-bold text-slate-800">Créer un rappel parent</h1>
     </div>
 
     <form (ngSubmit)="creerRappel()">
-      <article class="rounded-2xl border border-orange-100 bg-amber-50 p-5">
+      <article class="reminder-form rounded-2xl border border-orange-100 bg-amber-50 p-4 sm:p-5">
         <div class="mb-3 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-500">
           <div class="flex min-w-0 flex-1 items-center gap-2">
             <label for="enfant" class="sr-only">Prénom de l’enfant</label>
@@ -33,7 +33,7 @@
       }
 
       <button type="submit" [disabled]="envoiEnCours"
-        class="mt-4 rounded-xl bg-orange-500 px-6 py-3 font-bold text-white disabled:cursor-not-allowed disabled:opacity-60">
+        class="mt-4 w-full rounded-xl bg-orange-500 px-6 py-3 font-bold text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
         {{ envoiEnCours ? 'Création en cours...' : 'Ajouter le rappel' }}
       </button>
     </form>

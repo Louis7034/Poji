@@ -1,7 +1,7 @@
 <div class="relative">
 <aside class="flex h-full min-h-screen w-[248px] min-w-0 flex-col bg-gradient-to-br from-[#243b70] via-[#203664] to-[#1b2d55] px-4 py-5 text-[#eef3ff] shadow-xl">
   <div class="mb-5 flex items-center gap-3 px-2 lg:mb-4">
-    <a routerLink="/accueil" routerLinkActive="active" class="flex items-center gap-3">
+    <a routerLink="/accueil" routerLinkActive="active" class="flex items-center gap-3" aria-label="Accueil">
       <div class="poji-mark" aria-hidden="true">
         <svg viewBox="0 0 64 64" fill="none">
           <path d="M18 18v28M18 18h13.5a9 9 0 0 1 0 18H18" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -13,49 +13,49 @@
   </div>
 
   <nav aria-label="Navigation principale" class="flex flex-1 flex-col gap-2">
-    <a routerLink="/accueil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/accueil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Accueil" class="nav-item flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m3 10 9-8 9 8v10a2 2 0 0 1-2 2h-5v-6H10v6H5a2 2 0 0 1-2-2V10Z"/></svg>
-      <span>Accueil</span>
+      <span class="nav-label">Accueil</span>
     </a>
 
-    <a routerLink="/enfants" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/enfants" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Enfants" class="nav-item flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="16" cy="8" r="3.5"/><circle cx="4" cy="15.5" r="3"/><circle cx="20" cy="15.5" r="3"/><path d="M2 21c.3-3.3 2-5 5-5s4.7 1.7 5 5H2Zm10 0c.3-3.7 2.3-5.5 6-5.5s5.7 1.8 6 5.5h-12Z"/></svg>
-      <span>Enfants</span>
+      <span class="nav-label">Enfants</span>
     </a>
 
-    <a routerLink="/enfants-present" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/enfants-present" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Présence" class="nav-item flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16.5 9"/></svg>
-      <span>Présence</span>
+      <span class="nav-label">Présence</span>
     </a>
 
-    <a routerLink="/calendrier" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/calendrier" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Calendrier" class="nav-item flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-12 w-12 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M2 21c.4-4.2 3-6.5 8-6.5s7.6 2.3 8 6.5H2Z"/><circle cx="17.5" cy="17.5" r="4.5" fill="#243b70" stroke="currentColor" stroke-width="2"/><path d="m15.5 17.5 1.4 1.4 2.7-2.8" fill="none" stroke="#243b70" stroke-linecap="round" stroke-width="1.8"/></svg>
-      <span>Calendrier</span>
+      <span class="nav-label">Calendrier</span>
     </a>
 
-    <a routerLink="/rappel-parent" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/rappel-parent" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Rappel parent" class="nav-item flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-12 w-12 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
         <path d="M10 20a2 2 0 0 0 4 0"/>
         <path d="M12 3v2"/>
       </svg>
-      <span>Rappel parent</span>
+      <span class="nav-label">Rappel parent</span>
     </a>
 
-    <a routerLink="/personnel" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
+    <a routerLink="/personnel" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Personnel" class="nav-item flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-12 w-12 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="6.5" r="4"/><path d="M4 21c.3-4.8 3-7.2 8-7.2s7.7 2.4 8 7.2H4Z"/><path d="M12 14v3" stroke="#243b70" stroke-width="1.5"/></svg>
-      <span>Personnel</span>
+      <span class="nav-label">Personnel</span>
     </a>
 
   </nav>
 
-  <button type="button" (click)="logout()" class="mt-5 flex h-14 w-full items-center gap-4 rounded-xl bg-[#8f304d]/80 px-4 text-left text-[1.15rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
+  <button type="button" (click)="logout()" aria-label="Déconnexion" class="logout-button mt-5 flex h-14 w-full items-center gap-4 rounded-xl bg-[#8f304d]/80 px-4 text-left text-[1.15rem] font-semibold text-[#ffd9e2] transition-colors hover:bg-[#a43a5a]/90 hover:text-white">
     <svg class="h-7 w-7 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
       <path d="M10 17l5-5-5-5"/>
       <path d="M15 12H3"/>
       <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
     </svg>
-    <span>Déconnexion</span>
+    <span class="nav-label">Déconnexion</span>
   </button>
 </aside>
 

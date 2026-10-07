@@ -1,0 +1,20 @@
+@media (max-width: 767px) {
+  .personnel-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.7rem 0.8rem;
+  }
+
+  .personnel-row > span:first-child {
+    grid-row: span 2;
+  }
+
+  .personnel-row > span:nth-last-child(2),
+  .personnel-row > time {
+    grid-column: 2;
+  }
+
+  .personnel-row > time {
+    font-size: 0.75rem;
+  }
+}

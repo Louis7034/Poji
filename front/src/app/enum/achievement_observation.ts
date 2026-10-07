@@ -1,26 +1,3 @@
-export interface AchievementObservation {
-  id: string;
-  enfantId: string;
-  achievementId: string;
-  observateurId: string;
-  reponse: number | string;
-  professionnelResponse?: number | string | null;
-  dateObservation: string;
-}
-
-export interface AchievementObservateur {
-  id: string;
-  type: string;
-}
-
-export interface AchievementObservationGenerale {
-  id: string;
-  enfantId: string;
-  categorie: string;
-  observation: string;
-  dateObservation: string;
-}
-
 export const REPONSES_PAR_CATEGORIE: Record<string, readonly (readonly string[])[]> = {
   '6 mois': [
     ['Oui', 'Parfois', 'Pas encore'],

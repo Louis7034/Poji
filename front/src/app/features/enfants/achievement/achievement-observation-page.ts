@@ -3,14 +3,14 @@ import { Directive, inject, OnInit, signal } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Achievement } from '../../../models/achievement';
+import { Achievement } from '../../../models/achievement/achievement';
 import {
-  AchievementObservation,
-  AchievementObservateur,
-  AchievementObservationGenerale,
   REPONSES_PAR_CATEGORIE,
-} from '../../../models/achievement-observation';
+} from '../../../enum/achievement_observation';
 import { AchievementService } from '../../../services/achievement/achievement.service';
+import { AchievementObservation } from '../../../models/achievement/achievmeent_observation';
+import { AchievementObservateur } from '../../../models/achievement/achievement_observateur';
+import { AchievementObservationGenerale } from '../../../models/achievement/achievement_observation_generale';
 
 @Directive()
 export abstract class AchievementObservationPage implements OnInit {

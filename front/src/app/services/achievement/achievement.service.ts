@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../environment/environment';
-import { Achievement } from '../../models/achievement';
-import {
-  AchievementObservation,
-  AchievementObservateur,
-  AchievementObservationGenerale,
-} from '../../models/achievement-observation';
+import { Achievement } from '../../models/achievement/achievement';
+import { AchievementObservation } from '../../models/achievement/achievmeent_observation';
+import { AchievementObservateur } from '../../models/achievement/achievement_observateur';
+import { AchievementObservationGenerale } from '../../models/achievement/achievement_observation_generale';
 
 @Injectable({
   providedIn: 'root',

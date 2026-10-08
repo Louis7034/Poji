@@ -167,7 +167,15 @@ export const contract = defineContract({}, ({ field, model }) => {
         fields: {
             id: field.id.uuidv4String(),
 
-            contenu: field.text().optional(),
+            heureCouche: field.text().optional().column("heure_couche"),
+
+            heureReveille: field.text().optional().column("heure_reveille"),
+
+            observation: field.text().optional(),
+
+            repas: field.text().optional(),
+
+            comportement: field.text().optional(),
 
             createdAt: field
                 .column({
@@ -194,7 +202,15 @@ export const contract = defineContract({}, ({ field, model }) => {
         fields: {
             id: field.id.uuidv4String(),
 
-            contenu: field.text().optional(),
+            depart: field.text().optional(),
+
+            arrivee: field.text().optional(),
+
+            observation: field.text().optional(),
+
+            evenement: field.text().optional(),
+
+            besoin: field.text().optional(),
 
             createdAt: field
                 .column({

@@ -5,6 +5,11 @@ import JournalService from "./journal.service.js";
 const selectFields = `
     id,
     contenu,
+    heure_couche AS "heureCouche",
+    heure_reveille AS "heureReveille",
+    observation,
+    repas,
+    comportement,
     created_at AS "createdAt",
     auteur_id AS "auteurId",
     enfant_id AS "enfantId"
@@ -13,18 +18,22 @@ const selectFields = `
 const fields = ["heureCouche", "heureReveille", "observation", "repas", "comportement"];
 
 function parseTransmission(row) {
-    let contenu = {};
-    if (row.contenu) {
+    const legacyContent = row.contenu;
+    delete row.contenu;
+    if (legacyContent) {
         try {
-            const parsed = JSON.parse(row.contenu);
+            const parsed = JSON.parse(legacyContent);
             if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-                contenu = parsed;
+                const populatedFields = Object.fromEntries(
+                    Object.entries(row).filter(([key, value]) => key !== "contenu" && value !== null && value !== undefined),
+                );
+                return { ...parsed, ...populatedFields };
             }
         } catch {
-            contenu = { observation: row.contenu };
+            if (row.observation == null) row.observation = legacyContent;
         }
     }
-    return { ...row, ...contenu };
+    return row;
 }
 
 const TransmissionMatinService = {
@@ -54,29 +63,25 @@ const TransmissionMatinService = {
     },
 
     async update(id, data) {
-        const current = await pool.query(
-            `SELECT contenu FROM transmission_matin WHERE id = $1`,
-            [id],
-        );
-        if (current.rowCount === 0) throw new Error("Transmission du matin introuvable");
-
-        let contenu = {};
-        try {
-            const parsed = JSON.parse(current.rows[0].contenu ?? "{}");
-            if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) contenu = parsed;
-        } catch {
-            contenu = { observation: current.rows[0].contenu };
-        }
-        for (const field of fields) {
-            if (data[field] !== undefined) contenu[field] = data[field];
-        }
+        const values = fields.filter((field) => data[field] !== undefined);
+        if (values.length === 0) throw new Error("Aucun champ de transmission du matin à mettre à jour");
+        const columns = {
+            heureCouche: "heure_couche",
+            heureReveille: "heure_reveille",
+            observation: "observation",
+            repas: "repas",
+            comportement: "comportement",
+        };
+        const assignments = values.map((field, index) => `"${columns[field]}" = $${index + 1}`);
+        const parameters = values.map((field) => data[field]);
+        parameters.push(id);
 
         const result = await pool.query(`
             UPDATE transmission_matin
-            SET contenu = $1
-            WHERE id = $2
+            SET ${assignments.join(", ")}
+            WHERE id = $${parameters.length}
             RETURNING ${selectFields}
-        `, [JSON.stringify(contenu), id]);
+        `, parameters);
         if (result.rowCount === 0) throw new Error("Transmission du matin introuvable");
         return parseTransmission(result.rows[0]);
     },

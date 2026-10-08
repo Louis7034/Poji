@@ -88,7 +88,11 @@ const JournalService = {
             LEFT JOIN LATERAL (
                 SELECT json_agg(json_build_object(
                     'id', transmission_matin.id,
-                    'contenu', transmission_matin.contenu,
+                    'heureCouche', transmission_matin.heure_couche,
+                    'heureReveille', transmission_matin.heure_reveille,
+                    'observation', transmission_matin.observation,
+                    'repas', transmission_matin.repas,
+                    'comportement', transmission_matin.comportement,
                     'createdAt', transmission_matin.created_at,
                     'auteurId', transmission_matin.auteur_id,
                     'enfantId', transmission_matin.enfant_id
@@ -101,7 +105,11 @@ const JournalService = {
             LEFT JOIN LATERAL (
                 SELECT json_agg(json_build_object(
                     'id', transmission_soir.id,
-                    'contenu', transmission_soir.contenu,
+                    'depart', transmission_soir.depart,
+                    'arrivee', transmission_soir.arrivee,
+                    'observation', transmission_soir.observation,
+                    'evenement', transmission_soir.evenement,
+                    'besoin', transmission_soir.besoin,
                     'createdAt', transmission_soir.created_at,
                     'auteurId', transmission_soir.auteur_id,
                     'enfantId', transmission_soir.enfant_id

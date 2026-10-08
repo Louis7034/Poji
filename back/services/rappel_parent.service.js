@@ -43,7 +43,16 @@ const RappelParentService = {
     },
 
     async delete(id) {
-        return await db.orm.public.RappelParent.where({ id }).delete();
+        const result = await pool.query(
+            "DELETE FROM rappel_parent WHERE id = $1 RETURNING id",
+            [id],
+        );
+
+        if (result.rowCount === 0) {
+            throw new Error("Rappel parent introuvable");
+        }
+
+        return result.rows[0];
     },
 };
 

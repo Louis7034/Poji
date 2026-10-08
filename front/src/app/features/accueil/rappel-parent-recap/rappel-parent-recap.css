@@ -1,0 +1,15 @@
+ :host {
+  display: block;
+}
+
+.reminders-card {
+  max-height: 26rem;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .reminders-card {
+    max-height: 24rem;
+  }
+}

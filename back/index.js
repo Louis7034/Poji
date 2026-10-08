@@ -22,7 +22,7 @@ import achievementObservationGeneraleRoutes from "./routes/achievement_observati
 const app = express();
 
 app.use(cors({
-    origin: "http://192.168.1.23:4200",
+    origin: "http://localhost:4200",
 }));
 app.use(express.json());
 

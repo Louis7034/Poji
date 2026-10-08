@@ -13,6 +13,7 @@ export class RappelParent implements OnInit, OnChanges {
   @Input() refresh = 0;
 
   readonly rappels = signal<RappelParentModel[]>([]);
+  readonly rappelEnCours = signal<string | null>(null);
 
   constructor(private readonly rappelParentService: RappelParentService) {}
 
@@ -30,6 +31,20 @@ export class RappelParent implements OnInit, OnChanges {
     this.rappelParentService.getAll().subscribe({
       next: (rappels) => this.rappels.set(rappels),
       error: (error) => console.error('Erreur lors de la récupération des rappels parents', error),
+    });
+  }
+
+  validerRappel(rappel: RappelParentModel): void {
+    this.rappelEnCours.set(rappel.id);
+    this.rappelParentService.delete(rappel.id).subscribe({
+      next: () => {
+        this.rappels.update((rappels) => rappels.filter(({ id }) => id !== rappel.id));
+        this.rappelEnCours.set(null);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la validation du rappel parent', error);
+        this.rappelEnCours.set(null);
+      },
     });
   }
 }

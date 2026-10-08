@@ -3,40 +3,97 @@
 }
 
 .home-main {
+  box-sizing: border-box;
+  width: min(100%, 1480px);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(270px, 350px);
-  align-items: start;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+  grid-template-areas:
+    "heading heading"
+    "stats presence"
+    "reminders presence";
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 3rem);
 }
 
 .home-heading {
-  grid-column: 1 / -1;
+  grid-area: heading;
+  padding: 0.5rem 0.25rem 0.75rem;
 }
 
-.home-presence-link {
-  display: block;
+.home-heading h1 {
+  margin: 0;
+  letter-spacing: -0.04em;
 }
 
-.home-reminders-link {
+.home-heading p {
+  margin: 0.4rem 0 0;
+}
+
+.home-stats-tile,
+.home-presence-tile,
+.home-reminders-tile {
+  min-width: 0;
   display: block;
-  grid-column: 2;
-  grid-row: 2 / span 2;
+  border: 1px solid rgba(211, 220, 242, 0.8);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 14px 36px rgba(52, 74, 126, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-stats-tile {
+  grid-area: stats;
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.home-presence-tile {
+  grid-area: presence;
+  overflow: hidden;
+}
+
+.home-reminders-tile {
+  grid-area: reminders;
+  overflow: hidden;
+}
+
+.home-presence-tile:hover,
+.home-reminders-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(52, 74, 126, 0.14);
+}
+
+.home-presence-tile:focus-visible,
+.home-reminders-tile:focus-visible {
+  outline: 3px solid rgba(82, 111, 202, 0.4);
+  outline-offset: 3px;
 }
 
 @media (max-width: 1023px) {
   .home-main {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-reminders-link {
-    grid-column: 1;
-    grid-row: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "heading heading"
+      "stats stats"
+      "presence reminders";
+    padding-bottom: 6.5rem;
   }
 }
 
 @media (max-width: 767px) {
   .home-main {
-    gap: 1.25rem;
-    padding: 1.25rem 1rem 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "heading"
+      "stats"
+      "presence"
+      "reminders";
+    gap: 1rem;
+    padding: 1.25rem 1rem 6.5rem;
+  }
+
+  .home-heading {
+    padding: 0.25rem 0 0.5rem;
   }
 
   .home-heading h1 {
@@ -46,5 +103,15 @@
   .home-heading p {
     font-size: 0.95rem;
     line-height: 1.4;
+  }
+
+  .home-stats-tile,
+  .home-presence-tile,
+  .home-reminders-tile {
+    border-radius: 1.25rem;
+  }
+
+  .home-stats-tile {
+    padding: 0.8rem;
   }
 }

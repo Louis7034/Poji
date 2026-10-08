@@ -1,4 +1,17 @@
 <div class="relative">
+<button
+  type="button"
+  class="responsive-nav-toggle"
+  [class.is-open]="labelsVisible()"
+  (click)="toggleLabels()"
+  [attr.aria-expanded]="labelsVisible()"
+  aria-controls="responsive-navigation"
+  aria-label="Afficher les libellés de navigation"
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
+    <path d="m6 9 6 6 6-6"/>
+  </svg>
+</button>
 <aside class="flex h-full min-h-screen w-[248px] min-w-0 flex-col bg-gradient-to-br from-[#243b70] via-[#203664] to-[#1b2d55] px-4 py-5 text-[#eef3ff] shadow-xl">
   <div class="mb-5 flex items-center gap-3 px-2 lg:mb-4">
     <a routerLink="/accueil" routerLinkActive="active" class="flex items-center gap-3" aria-label="Accueil">
@@ -12,7 +25,7 @@
     </a>
   </div>
 
-  <nav aria-label="Navigation principale" class="flex flex-1 flex-col gap-2">
+  <nav id="responsive-navigation" [class.labels-visible]="labelsVisible()" aria-label="Navigation principale" class="flex flex-1 flex-col gap-2">
     <a routerLink="/accueil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Accueil" class="nav-item flex h-16 items-center gap-5 rounded-2xl px-5 text-[1.5rem] font-semibold transition-colors hover:bg-white/10">
       <svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m3 10 9-8 9 8v10a2 2 0 0 1-2 2h-5v-6H10v6H5a2 2 0 0 1-2-2V10Z"/></svg>
       <span class="nav-label">Accueil</span>
@@ -34,11 +47,18 @@
     </a>
 
     <a routerLink="/rappel-parent" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" aria-label="Rappel parent" class="nav-item flex h-[104px] items-center gap-10 rounded-[22px] px-10 text-[2.25rem] font-semibold transition-colors hover:bg-white/10">
-      <svg class="h-12 w-12 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
-        <path d="M10 20a2 2 0 0 0 4 0"/>
-        <path d="M12 3v2"/>
-      </svg>
+      <span class="nav-icon-with-badge">
+        <svg class="h-12 w-12 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
+          <path d="M10 20a2 2 0 0 0 4 0"/>
+          <path d="M12 3v2"/>
+        </svg>
+        @if (rappelsCount > 0) {
+          <span class="nav-reminder-badge" [attr.aria-label]="rappelsCount + ' rappel(s) à faire'">
+            {{ rappelsCount > 99 ? '99+' : rappelsCount }}
+          </span>
+        }
+      </span>
       <span class="nav-label">Rappel parent</span>
     </a>
 

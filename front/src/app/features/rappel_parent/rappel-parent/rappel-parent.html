@@ -20,7 +20,22 @@
               {{ rappel.dateCreation | date: 'dd/MM/yyyy à HH:mm' }}
             </time>
           </div>
-          <p class="text-base leading-7 text-slate-700">{{ rappel.message || 'Aucun message' }}</p>
+          <div class="flex items-end justify-between gap-4">
+            <p class="text-base leading-7 text-slate-700">{{ rappel.message || 'Aucun message' }}</p>
+            <label
+              class="validate-reminder shrink-0"
+              [class.is-loading]="rappelEnCours() === rappel.id"
+              [attr.aria-label]="'Valider le rappel de ' + (rappel.prenomEnfant || 'l’enfant')"
+            >
+              <input
+                type="checkbox"
+                [checked]="rappelEnCours() === rappel.id"
+                [disabled]="rappelEnCours() === rappel.id"
+                (change)="validerRappel(rappel)"
+              />
+              <span class="sr-only">Valider</span>
+            </label>
+          </div>
         </article>
       }
     </div>

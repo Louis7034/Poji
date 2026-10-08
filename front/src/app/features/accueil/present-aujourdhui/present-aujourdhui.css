@@ -1,0 +1,16 @@
+ :host {
+  display: block;
+  height: 100%;
+}
+
+.present-card {
+  height: 100%;
+  box-shadow: none;
+  background: transparent;
+}
+
+@media (max-width: 767px) {
+  .present-card {
+    max-height: 28rem;
+  }
+}

@@ -22,7 +22,7 @@ import achievementObservationGeneraleRoutes from "./routes/achievement_observati
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:4200",
+    origin: "http://192.168.1.23:4200",
 }));
 app.use(express.json());
 
@@ -48,7 +48,7 @@ app.use("/api", achievementObservationGeneraleRoutes);
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`Poji API démarrée sur http://localhost:${PORT}`);
+    console.log(`Poji API démarrée sur http://192.168.1.23:${PORT}`);
 });
 
 export default app;

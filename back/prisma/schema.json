@@ -846,6 +846,30 @@
                   }
                 }
               },
+              "dateDebut": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/date-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "dateFin": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/date-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "enfantId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/char@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 36
+                  }
+                }
+              },
               "id": {
                 "nullable": false,
                 "type": {
@@ -904,6 +928,15 @@
                 "auteurId": {
                   "column": "auteur_id"
                 },
+                "dateDebut": {
+                  "column": "date_debut"
+                },
+                "dateFin": {
+                  "column": "date_fin"
+                },
+                "enfantId": {
+                  "column": "enfant_id"
+                },
                 "id": {
                   "column": "id"
                 },
@@ -911,7 +944,7 @@
                   "column": "observation"
                 },
                 "symptome": {
-                  "column": "symptome"
+                  "column": "description"
                 },
                 "traitement": {
                   "column": "traitement"
@@ -1895,6 +1928,29 @@
                     "length": 36
                   }
                 },
+                "date_debut": {
+                  "codecId": "pg/date-string@1",
+                  "nativeType": "date",
+                  "nullable": true
+                },
+                "date_fin": {
+                  "codecId": "pg/date-string@1",
+                  "nativeType": "date",
+                  "nullable": true
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "enfant_id": {
+                  "codecId": "sql/char@1",
+                  "nativeType": "character",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 36
+                  }
+                },
                 "id": {
                   "codecId": "sql/char@1",
                   "nativeType": "character",
@@ -1904,11 +1960,6 @@
                   }
                 },
                 "observation": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
-                },
-                "symptome": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": true
@@ -2235,7 +2286,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "a26438fc182209112ba31b3bf2aa435eb595cbc48a10d498b45e02d2c4dbf52a"
+    "storageHash": "dc7fc957e5c577e8f2b3f981d410a806761efce0476657d4ff3d1efe92ce2a9c"
   },
   "execution": {
     "executionHash": "c794c9b44daf6e41f58c4135a698bc5fdb38a4bd3f85a6969f4fe36b15109f60",

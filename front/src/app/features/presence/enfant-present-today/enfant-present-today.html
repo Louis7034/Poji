@@ -28,12 +28,12 @@
           <div class="presence-action">
             <app-bouton-arrive
               [arrive]="!!enfant.heure_arrivee"
-              (arriveChange)="marquerCommeArrive(enfant)"/>
+              (arriveChange)="marquerCommeArrive(enfant, $event)"/>
           </div>
           <div class="presence-action">
             <app-bouton-quitte
               [quitte]="!!enfant.heure_depart"
-              (quitteChange)="marquerCommeQuitte(enfant)"
+              (quitteChange)="marquerCommeQuitte(enfant, $event)"
             />
           </div>
           <div class="presence-action">

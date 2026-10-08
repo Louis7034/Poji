@@ -1,0 +1,30 @@
+<form class="mt-8 border-t border-slate-200 pt-6" (ngSubmit)="creer()">
+  <h3 class="text-lg font-semibold text-slate-700">Ajouter un problème de santé</h3>
+  <div class="mt-4 grid gap-4">
+    <label class="block text-sm font-medium text-slate-600">
+      Symptômes
+      <textarea name="symptome" [(ngModel)]="symptome" rows="3"
+        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700"></textarea>
+    </label>
+    <label class="block text-sm font-medium text-slate-600">
+      Traitement
+      <textarea name="traitement" [(ngModel)]="traitement" rows="3"
+        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700"></textarea>
+    </label>
+    <label class="block text-sm font-medium text-slate-600">
+      Observations de santé
+      <textarea name="observation" [(ngModel)]="observation" rows="4"
+        class="mt-1 w-full resize-y rounded-lg border border-slate-200 px-3 py-2 text-slate-700"></textarea>
+    </label>
+  </div>
+  <div class="mt-4 flex items-center gap-3">
+    <button type="submit" class="rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600">
+      Ajouter
+    </button>
+    @if (sauvegarde) {
+      <span class="text-xs text-slate-400" role="status">
+        {{ sauvegarde === 'en cours' ? 'Enregistrement...' : sauvegarde === 'enregistre' ? 'Enregistré' : 'Erreur lors de l’enregistrement' }}
+      </span>
+    }
+  </div>
+</form>

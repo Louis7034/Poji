@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'a26438fc182209112ba31b3bf2aa435eb595cbc48a10d498b45e02d2c4dbf52a'>;
+  StorageHashBase<'dc7fc957e5c577e8f2b3f981d410a806761efce0476657d4ff3d1efe92ce2a9c'>;
 export type ExecutionHash =
   ExecutionHashBase<'c794c9b44daf6e41f58c4135a698bc5fdb38a4bd3f85a6969f4fe36b15109f60'>;
 export type ProfileHash =
@@ -326,6 +326,9 @@ export type FieldOutputTypes = {
       readonly symptome: CodecTypes['pg/text@1']['output'] | null;
       readonly traitement: CodecTypes['pg/text@1']['output'] | null;
       readonly observation: CodecTypes['pg/text@1']['output'] | null;
+      readonly dateDebut: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly dateFin: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly enfantId: Char<36>;
       readonly transmissionMatinId: Char<36> | null;
       readonly transmissionSoirId: Char<36> | null;
       readonly auteurId: Char<36> | null;
@@ -464,6 +467,9 @@ export type FieldInputTypes = {
       readonly symptome: CodecTypes['pg/text@1']['input'] | null;
       readonly traitement: CodecTypes['pg/text@1']['input'] | null;
       readonly observation: CodecTypes['pg/text@1']['input'] | null;
+      readonly dateDebut: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly dateFin: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly enfantId: CodecTypes['sql/char@1']['input'];
       readonly transmissionMatinId: CodecTypes['sql/char@1']['input'] | null;
       readonly transmissionSoirId: CodecTypes['sql/char@1']['input'] | null;
       readonly auteurId: CodecTypes['sql/char@1']['input'] | null;
@@ -599,9 +605,12 @@ export type StorageColumnTypes = {
     };
     readonly probleme_sante: {
       readonly auteur_id: Char<36> | null;
+      readonly date_debut: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly date_fin: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly description: CodecTypes['pg/text@1']['output'] | null;
+      readonly enfant_id: Char<36>;
       readonly id: Char<36>;
       readonly observation: CodecTypes['pg/text@1']['output'] | null;
-      readonly symptome: CodecTypes['pg/text@1']['output'] | null;
       readonly traitement: CodecTypes['pg/text@1']['output'] | null;
       readonly transmission_matin_id: Char<36> | null;
       readonly transmission_soir_id: Char<36> | null;
@@ -737,9 +746,12 @@ export type StorageColumnInputTypes = {
     };
     readonly probleme_sante: {
       readonly auteur_id: CodecTypes['sql/char@1']['input'] | null;
+      readonly date_debut: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly date_fin: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly description: CodecTypes['pg/text@1']['input'] | null;
+      readonly enfant_id: CodecTypes['sql/char@1']['input'];
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly observation: CodecTypes['pg/text@1']['input'] | null;
-      readonly symptome: CodecTypes['pg/text@1']['input'] | null;
       readonly traitement: CodecTypes['pg/text@1']['input'] | null;
       readonly transmission_matin_id: CodecTypes['sql/char@1']['input'] | null;
       readonly transmission_soir_id: CodecTypes['sql/char@1']['input'] | null;
@@ -883,6 +895,9 @@ export namespace Models {
     symptome: CodecTypes['pg/text@1']['output'] | null;
     traitement: CodecTypes['pg/text@1']['output'] | null;
     observation: CodecTypes['pg/text@1']['output'] | null;
+    dateDebut: CodecTypes['pg/date-string@1']['output'] | null;
+    dateFin: CodecTypes['pg/date-string@1']['output'] | null;
+    enfantId: Char<36>;
     transmissionMatinId: Char<36> | null;
     transmissionSoirId: Char<36> | null;
     auteurId: Char<36> | null;
@@ -1390,7 +1405,7 @@ type ContractBase = Omit<
                   readonly nullable: false;
                   readonly typeParams: { readonly length: 36 };
                 };
-                readonly symptome: {
+                readonly description: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
@@ -1404,6 +1419,22 @@ type ContractBase = Omit<
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
+                };
+                readonly date_debut: {
+                  readonly nativeType: 'date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: true;
+                };
+                readonly date_fin: {
+                  readonly nativeType: 'date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: true;
+                };
+                readonly enfant_id: {
+                  readonly nativeType: 'character';
+                  readonly codecId: 'sql/char@1';
+                  readonly nullable: false;
+                  readonly typeParams: { readonly length: 36 };
                 };
                 readonly transmission_matin_id: {
                   readonly nativeType: 'character';
@@ -2273,6 +2304,22 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
+              readonly dateDebut: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly dateFin: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly enfantId: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'sql/char@1';
+                  readonly typeParams: { readonly length: 36 };
+                };
+              };
               readonly transmissionMatinId: {
                 readonly nullable: true;
                 readonly type: {
@@ -2304,9 +2351,12 @@ type ContractBase = Omit<
               readonly namespaceId: 'public';
               readonly fields: {
                 readonly id: { readonly column: 'id' };
-                readonly symptome: { readonly column: 'symptome' };
+                readonly symptome: { readonly column: 'description' };
                 readonly traitement: { readonly column: 'traitement' };
                 readonly observation: { readonly column: 'observation' };
+                readonly dateDebut: { readonly column: 'date_debut' };
+                readonly dateFin: { readonly column: 'date_fin' };
+                readonly enfantId: { readonly column: 'enfant_id' };
                 readonly transmissionMatinId: { readonly column: 'transmission_matin_id' };
                 readonly transmissionSoirId: { readonly column: 'transmission_soir_id' };
                 readonly auteurId: { readonly column: 'auteur_id' };

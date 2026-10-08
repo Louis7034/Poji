@@ -21,3 +21,7 @@
 } @else {
   <p class="rounded-xl bg-slate-50 px-4 py-8 text-center text-slate-500">Aucune donnée de santé.</p>
 }
+
+<app-transmission-sante-creation
+  [enfantId]="enfantId"
+  (created)="ajouter($event)" />

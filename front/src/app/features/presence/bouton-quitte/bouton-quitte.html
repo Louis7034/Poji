@@ -3,7 +3,6 @@
     type="checkbox"
     class="h-4 w-4 accent-[#526fca]"
     [checked]="quitte"
-    [disabled]="quitte"
     (change)="quitteChange.emit($any($event.target).checked)"
   />
   <span>Quitté</span>

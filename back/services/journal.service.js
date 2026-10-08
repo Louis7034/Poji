@@ -3,18 +3,7 @@ import pool from "../db/database.js";
 import { randomUUID } from "node:crypto";
 
 function parseTransmission(transmission) {
-    let contenu = {};
-    if (transmission.contenu) {
-        try {
-            const parsed = JSON.parse(transmission.contenu);
-            if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-                contenu = parsed;
-            }
-        } catch {
-            contenu = { observation: transmission.contenu };
-        }
-    }
-    return { ...transmission, ...contenu };
+    return transmission;
 }
 
 const JournalService = {

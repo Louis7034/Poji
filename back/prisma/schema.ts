@@ -302,7 +302,8 @@ export const contract = defineContract({}, ({ field, model }) => {
 
             symptome: field
                 .text()
-                .optional(),
+                .optional()
+                .column("description"),
 
             traitement: field
                 .text()
@@ -311,6 +312,26 @@ export const contract = defineContract({}, ({ field, model }) => {
             observation: field
                 .text()
                 .optional(),
+
+            dateDebut: field
+                .column({
+                    codecId: "pg/date-string@1",
+                    nativeType: "date",
+                } as const)
+                .optional()
+                .column("date_debut"),
+
+            dateFin: field
+                .column({
+                    codecId: "pg/date-string@1",
+                    nativeType: "date",
+                } as const)
+                .optional()
+                .column("date_fin"),
+
+            enfantId: field
+                .uuidString()
+                .column("enfant_id"),
 
             transmissionMatinId: field
                 .uuidString()

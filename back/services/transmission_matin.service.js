@@ -4,7 +4,6 @@ import JournalService from "./journal.service.js";
 
 const selectFields = `
     id,
-    contenu,
     heure_couche AS "heureCouche",
     heure_reveille AS "heureReveille",
     observation,
@@ -18,21 +17,6 @@ const selectFields = `
 const fields = ["heureCouche", "heureReveille", "observation", "repas", "comportement"];
 
 function parseTransmission(row) {
-    const legacyContent = row.contenu;
-    delete row.contenu;
-    if (legacyContent) {
-        try {
-            const parsed = JSON.parse(legacyContent);
-            if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-                const populatedFields = Object.fromEntries(
-                    Object.entries(row).filter(([key, value]) => key !== "contenu" && value !== null && value !== undefined),
-                );
-                return { ...parsed, ...populatedFields };
-            }
-        } catch {
-            if (row.observation == null) row.observation = legacyContent;
-        }
-    }
     return row;
 }
 

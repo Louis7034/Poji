@@ -1,11 +1,14 @@
 import { db } from "../prisma/db.ts";
 import pool from "../db/database.js";
+import { randomUUID } from "node:crypto";
 
 const today = "(CURRENT_TIMESTAMP AT TIME ZONE 'Europe/Paris')::date";
 
 const selectFields = `
     id,
     description AS symptome,
+    traitement,
+    observation,
     date_debut AS "dateDebut",
     date_fin AS "dateFin",
     created_at AS "createdAt",
@@ -48,13 +51,36 @@ const ProblemeSanteService = {
     },
 
     async create(data) {
-        return await db.orm.public.ProblemeSante.create(data);
+        const result = await pool.query(`
+            INSERT INTO probleme_sante (
+                id, description, traitement, observation, date_debut, enfant_id
+            )
+            VALUES ($1, $2, $3, $4, ${today}, $5)
+            RETURNING ${selectFields}
+        `, [
+            randomUUID(),
+            data.symptome ?? data.description ?? null,
+            data.traitement ?? null,
+            data.observation ?? null,
+            data.enfantId,
+        ]);
+        return result.rows[0];
     },
 
     async update(id, data) {
-        return await db.orm.public.ProblemeSante
-            .where({ id })
-            .update(data);
+        const result = await pool.query(`
+            UPDATE probleme_sante
+            SET description = $1, traitement = $2, observation = $3
+            WHERE id = $4
+            RETURNING ${selectFields}
+        `, [
+            data.symptome ?? data.description ?? null,
+            data.traitement ?? null,
+            data.observation ?? null,
+            id,
+        ]);
+        if (result.rowCount === 0) throw new Error("Problème de santé introuvable");
+        return result.rows[0];
     },
 
     async delete(id) {

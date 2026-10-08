@@ -10,6 +10,7 @@ import { EnfantPresent } from '../../../models/enfant_present';
 import { SelectEtatPresence } from '../select-etat-presence/select-etat-presence';
 import { BoutonArrive } from '../bouton-arrive/bouton-arrive';
 import { BoutonQuitte } from '../bouton-quitte/bouton-quitte';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-enfant-present-today',
@@ -113,54 +114,87 @@ export class EnfantPresentToday {
       });
   }
 
-  marquerCommeQuitte(enfant: EnfantPresent): void {
+  marquerCommeQuitte(enfant: EnfantPresent, coche: boolean): void {
     if (!enfant.presence_id) {
       return;
     }
 
-    const heureDepart = new Date().toTimeString().slice(0, 8);
+    const heureDepart = coche ? new Date().toTimeString().slice(0, 8) : null;
 
     this.presenceService
-      .updatePresence(enfant.presence_id, PresenceEtat.QUITTE, undefined, heureDepart)
+      .updatePresence(
+        enfant.presence_id,
+        coche ? PresenceEtat.QUITTE : PresenceEtat.PRESENT,
+        undefined,
+        heureDepart,
+      )
+      .pipe(
+        switchMap(() =>
+          this.presenceService.updateHeureTransmissionSoir(
+            enfant.enfant_id,
+            'depart',
+            heureDepart,
+          ),
+        ),
+      )
       .subscribe({
-        next: () => {
-          this.enfantPresentTodaySignal.update((enfants) =>
-            enfants.map((item) =>
-              item.enfant_id === enfant.enfant_id
-                ? { ...item, etat_presence: PresenceEtat.QUITTE, heure_depart: heureDepart }
-                : item,
-            ),
-          );
-        },
+        next: () => this.mettreAJourHeures(enfant, undefined, heureDepart),
         error: (error) => {
           console.error("Erreur lors de l'enregistrement du départ", error);
         },
       });
   }
 
-  marquerCommeArrive(enfant: EnfantPresent): void {
+  marquerCommeArrive(enfant: EnfantPresent, coche: boolean): void {
     if (!enfant.presence_id) {
       return;
     }
 
-    const heureArrivee = new Date().toTimeString().slice(0, 8);
+    const heureArrivee = coche ? new Date().toTimeString().slice(0, 8) : null;
 
     this.presenceService
-      .updatePresence(enfant.presence_id, PresenceEtat.PRESENT, heureArrivee)
-      .subscribe({
-      next: () => {
-        this.enfantPresentTodaySignal.update((enfants) =>
-          enfants.map((item) =>
-            item.enfant_id === enfant.enfant_id
-              ? { ...item, etat_presence: PresenceEtat.PRESENT, heure_arrivee: heureArrivee }
-              : item,
+      .updatePresence(enfant.presence_id, coche ? PresenceEtat.PRESENT : PresenceEtat.PAS_ENCORE_ARRIVE, heureArrivee)
+      .pipe(
+        switchMap(() =>
+          this.presenceService.updateHeureTransmissionSoir(
+            enfant.enfant_id,
+            'arrivee',
+            heureArrivee,
           ),
-        );
-      },
-      error: (error) => {
-        console.error("Erreur lors de l'enregistrement de l'arrivée", error);
-      },
+        ),
+      )
+      .subscribe({
+        next: () => this.mettreAJourHeures(enfant, heureArrivee, undefined),
+        error: (error) => {
+          console.error("Erreur lors de l'enregistrement de l'arrivée", error);
+        },
       });
+  }
+
+  private mettreAJourHeures(
+    enfant: EnfantPresent,
+    heureArrivee: string | null | undefined,
+    heureDepart: string | null | undefined,
+  ): void {
+    this.enfantPresentTodaySignal.update((enfants) =>
+      enfants.map((item) =>
+        item.enfant_id === enfant.enfant_id
+          ? {
+              ...item,
+              heure_arrivee:
+                heureArrivee === undefined ? item.heure_arrivee : heureArrivee,
+              heure_depart:
+                heureDepart === undefined ? item.heure_depart : heureDepart,
+              etat_presence:
+                (heureDepart === undefined ? item.heure_depart : heureDepart)
+                  ? PresenceEtat.QUITTE
+                  : (heureArrivee === undefined ? item.heure_arrivee : heureArrivee)
+                    ? PresenceEtat.PRESENT
+                    : PresenceEtat.PAS_ENCORE_ARRIVE,
+            }
+          : item,
+      ),
+    );
   }
 
   ouvrirTransmissions(enfant: EnfantPresent, event: Event): void {

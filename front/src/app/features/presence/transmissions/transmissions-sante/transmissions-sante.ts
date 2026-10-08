@@ -2,10 +2,11 @@ import { Component, Input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProblemeSante } from '../../../../models/probleme_sante';
 import { PresenceService } from '../../../../services/presence/presence.service';
+import { TransmissionSanteCreation } from '../transmission-sante-creation/transmission-sante-creation';
 
 @Component({
   selector: 'app-transmissions-sante',
-  imports: [FormsModule],
+  imports: [FormsModule, TransmissionSanteCreation],
   templateUrl: './transmissions-sante.html',
 })
 export class TransmissionsSante implements OnInit {
@@ -41,5 +42,9 @@ export class TransmissionsSante implements OnInit {
         this.sauvegarde.set('erreur');
       },
     });
+  }
+
+  ajouter(sante: ProblemeSante): void {
+    this.sante.set(sante);
   }
 }

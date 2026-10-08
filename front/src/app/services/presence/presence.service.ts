@@ -9,6 +9,7 @@ import { TransmissionSoir } from '../../models/transmission_soir';
 import { PresenceEtat } from '../../enum/presence_etat';
 import { ProblemeSante } from '../../models/probleme_sante';
 import { Sieste } from '../../models/sieste';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,16 @@ export class PresenceService {
     );
   }
 
+  createSante(
+    enfantId: string,
+    data: Pick<ProblemeSante, 'symptome' | 'traitement' | 'observation'>,
+  ) {
+    return this.http.post<ProblemeSante>(
+      `${environment.API_URL}/api/probleme-sante`,
+      { enfantId, ...data },
+    );
+  }
+
   updateTransmissionMatin(
     id: string,
     data: Partial<Pick<TransmissionMatin, 'heureCouche' | 'heureReveille' | 'observation' | 'repas' | 'comportement'>>,
@@ -86,6 +97,22 @@ export class PresenceService {
     return this.http.put<TransmissionSoir>(
       `${environment.API_URL}/api/transmission-soir/${id}`,
       data,
+    );
+  }
+
+  updateHeureTransmissionSoir(
+    enfantId: string,
+    champ: 'arrivee' | 'depart',
+    valeur: string | null,
+  ) {
+    return this.getTransmissionsSoir(enfantId).pipe(
+      switchMap((transmissions) => {
+        const transmission = transmissions[0];
+        if (!transmission) {
+          throw new Error('Aucune transmission du soir trouvée');
+        }
+        return this.updateTransmissionSoir(transmission.id, { [champ]: valeur });
+      }),
     );
   }
 

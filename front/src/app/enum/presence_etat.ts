@@ -3,6 +3,7 @@ export enum PresenceEtat {
   ABSENT = 'absent',
   RETARD = 'retard',
   PAS_ENCORE_ARRIVE = 'pas_encore_arrive',
+  MALADE = 'malade',
   QUITTE = 'quitte'
 }
 
@@ -20,6 +21,8 @@ export function getPresenceEtatClass(etat: PresenceEtat | string | null): string
     case PresenceEtat.PAS_ENCORE_ARRIVE:
     case 'pas_encore_arrivee':
       return `${baseClass} bg-orange-100 text-orange-700`;
+    case PresenceEtat.MALADE:
+      return `${baseClass} bg-black-100 text-black-700`;
     case PresenceEtat.QUITTE:
       return `${baseClass} bg-violet-100 text-violet-700`;
     default:
@@ -41,6 +44,8 @@ export function getPresenceEtatBackgroundClass(etat: PresenceEtat | string | nul
     case PresenceEtat.PAS_ENCORE_ARRIVE:
     case 'pas_encore_arrivee':
       return 'bg-orange-50';
+    case PresenceEtat.MALADE:
+      return 'bg-black-50';
     case PresenceEtat.QUITTE:
       return 'bg-violet-50';
     default:

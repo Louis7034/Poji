@@ -16,14 +16,11 @@ const PresenceRepository = {
                   AND etat_presence = 'ABSENT'
             `),
             pool.query(`
-                SELECT COUNT(DISTINCT probleme_sante.enfant_id)
+                SELECT COUNT(DISTINCT enfant_id)
                     AS nombre_enfants_malades
-                FROM probleme_sante
-                WHERE probleme_sante.date_debut <= CURRENT_DATE
-                  AND (
-                      probleme_sante.date_fin IS NULL
-                      OR probleme_sante.date_fin >= CURRENT_DATE
-                  )
+                FROM presence
+                WHERE date_presence = CURRENT_DATE
+                  AND etat_presence = 'MALADE'
             `),
         ]);
 

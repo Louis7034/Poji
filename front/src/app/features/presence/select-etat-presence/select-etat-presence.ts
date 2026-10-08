@@ -33,6 +33,7 @@ export class SelectEtatPresence {
     { value: PresenceEtat.ABSENT, label: 'Absent' },
     { value: PresenceEtat.RETARD, label: 'En retard' },
     { value: PresenceEtat.PAS_ENCORE_ARRIVE, label: 'Pas encore arrivé' },
+    { value: PresenceEtat.MALADE, label: 'Malade' },
     { value: PresenceEtat.QUITTE, label: 'Quitté' },
   ];
 
@@ -41,5 +42,4 @@ export class SelectEtatPresence {
       this.etatChange.emit(value as PresenceEtat);
     }
   }
-
 }

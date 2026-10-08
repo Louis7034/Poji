@@ -1,0 +1,17 @@
+.journal-page h2,
+.journal-page h3,
+.journal-page dt,
+.journal-page dd {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 639px) {
+  .journal-page section {
+    padding: 1rem;
+  }
+
+  .journal-page .min-h-20 {
+    min-height: 4rem;
+    padding: 0.35rem;
+  }
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Enfant } from '../../../models/enfant';
 import { EnfantsService } from '../../../services/enfants/enfants.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histoire';
 import { AchievementList } from '../achievement/achievement-list/achievement-list';
 import { CreationEnfant } from '../creation-enfant/creation-enfant';
@@ -13,7 +13,10 @@ import { CreationEnfant } from '../creation-enfant/creation-enfant';
   styleUrl: './enfants-total.css',
 })
 export class EnfantsTotal implements OnInit {
-  constructor(private readonly enfantsService: EnfantsService) {}
+  constructor(
+    private readonly enfantsService: EnfantsService,
+    private readonly router: Router,
+  ) {}
 
   readonly enfantsSignal = signal<Enfant[]>([]);
   readonly enfantHistoireSelectionne = signal<Enfant | null>(null);
@@ -37,6 +40,10 @@ export class EnfantsTotal implements OnInit {
 
   afficherAchievements(enfant: Enfant): void {
     this.enfantAchievementSelectionne.set(enfant);
+  }
+
+  ouvrirJournal(enfant: Enfant): void {
+    this.router.navigate(['/journal', enfant.id]);
   }
 
   fermerAchievements(): void {

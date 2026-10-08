@@ -16,8 +16,8 @@
             <span class="font-semibold text-slate-800">
               {{ rappel.prenomEnfant || 'Enfant non renseigné' }}
             </span>
-            <time [attr.datetime]="rappel.dateCreation">
-              {{ rappel.dateCreation | date: 'dd/MM/yyyy à HH:mm' }}
+            <time [attr.datetime]="rappel.date_creation">
+              {{ rappel.date_creation | date: 'dd/MM/yyyy à HH:mm' }}
             </time>
           </div>
           <div class="flex items-end justify-between gap-4">

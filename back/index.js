@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import 'dotenv/config';
+import pg, {Pool} from 'pg';
 import enfantRoutes from "./routes/enfant.routes.js";
 import dejectionRoutes from "./routes/dejection.routes.js";
 import histoireEnfantRoutes from "./routes/histoire_enfant.routes.js";
@@ -21,9 +23,17 @@ import achievementObservationGeneraleRoutes from "./routes/achievement_observati
 
 const app = express();
 
+
+const pool = new Pool({
+    PORT: Number(process.env.DB_PORT),
+    IP_SERVER: process.env.IP_SERVER,
+});
+
+
 app.use(cors({
-    origin: "http://localhost:4200",
+    origin: `http://${process.env.IP_SERVER}:4200`,
 }));
+
 app.use(express.json());
 
 app.use("/api", enfantRoutes);
@@ -45,10 +55,8 @@ app.use("/api", achievementObservationRoutes);
 app.use("/api", achievementObservationQuestionRoutes);
 app.use("/api", achievementObservationGeneraleRoutes);
 
-const PORT = 3000;
-
-app.listen(PORT, () => {
-    console.log(`Poji API démarrée sur http://192.168.1.23:${PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Poji API démarrée sur le port ${process.env.PORT}`);
 });
 
 export default app;

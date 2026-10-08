@@ -5,10 +5,11 @@ import { TransmissionsMatin } from '../transmissions-matin/transmissions-matin';
 import { TransmissionsSoir } from '../transmission-du-soir/transmissions-soir/transmissions-soir';
 import { TransmissionsSante } from '../transmissions-sante/transmissions-sante';
 import { TransmissionSieste } from '../transmission-sieste/transmission-sieste';
+import { BackButton } from '../../../navigation/back-button/back-button';
 
 @Component({
   selector: 'app-transmissions-panel',
-  imports: [TransmissionsMatin, TransmissionsSoir, TransmissionsSante, TransmissionSieste],
+  imports: [TransmissionsMatin, TransmissionsSoir, TransmissionsSante, TransmissionSieste, BackButton],
   templateUrl: './transmissions-panel.html',
   styleUrl: './transmissions-panel.css',
 })

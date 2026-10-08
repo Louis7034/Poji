@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Journal } from '../../../../models/journal';
 import { JournalService } from '../../../../services/journal/journal.service';
+import { BackButton } from '../../../navigation/back-button/back-button';
 
 @Component({
   selector: 'app-journal-panel',
-  imports: [DatePipe],
+  imports: [DatePipe, BackButton],
   templateUrl: './journal-panel.html',
   styleUrl: './journal-panel.css',
 })

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AchievementObservationPage } from '../achievement-observation-page';
+import { BackButton } from '../../../navigation/back-button/back-button';
 
 @Component({
   selector: 'app-six-mois',
-  imports: [],
+  imports: [BackButton],
   templateUrl: './six-mois.html',
   styleUrl: './six-mois.css',
 })

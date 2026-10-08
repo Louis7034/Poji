@@ -2,6 +2,14 @@
   grid-template-columns: minmax(0, 1fr) repeat(2, auto);
 }
 
+.presence-header {
+  min-width: 0;
+}
+
+.presence-controls {
+  min-width: 0;
+}
+
 .presence-action {
   padding-left: 1rem;
 }
@@ -12,20 +20,47 @@
   }
 
   .presence-row {
-    grid-template-columns: minmax(0, 1fr) auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
   }
 
-  .presence-row > span:first-child {
-    grid-row: span 2;
+  .presence-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .presence-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
   }
 
   .presence-action {
     padding-left: 0;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .presence-action label {
+    gap: 0.35rem;
+    font-size: 0.75rem;
+  }
+
+  .presence-action select {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 0.5rem;
   }
 
   .presence-time {
     justify-content: space-between;
-    grid-column: 1 / -1;
+    width: 100%;
     font-size: 0.8rem;
   }
 

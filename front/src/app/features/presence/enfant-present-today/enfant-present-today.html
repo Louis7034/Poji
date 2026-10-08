@@ -11,27 +11,31 @@
         (keydown.enter)="ouvrirTransmissions(enfant, $event)"
         (keydown.space)="ouvrirTransmissions(enfant, $event)"
       >
-        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-[#526fca]" aria-hidden="true">
-          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="8" r="3.5"></circle>
-            <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
-          </svg>
-        </span>
+        <div class="presence-header flex min-w-0 items-center gap-3">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef3ff] text-[#526fca]" aria-hidden="true">
+            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="8" r="3.5"></circle>
+              <path d="M5 21c.3-3.8 2.6-6 7-6s6.7 2.2 7 6"></path>
+            </svg>
+          </span>
 
-        <p class="min-w-0 truncate text-lg font-semibold text-[#243b70]">
-          {{ enfant.prenom }}
-        </p>
-        <div class="presence-action">
-        <app-bouton-arrive
-          [arrive]="!!enfant.heure_arrivee"
-          (arriveChange)="marquerCommeArrive(enfant)"/>
+          <p class="min-w-0 truncate text-lg font-semibold text-[#243b70]">
+            {{ enfant.prenom }}
+          </p>
         </div>
-        <div class="presence-action">
-          <app-bouton-quitte
-            [quitte]="!!enfant.heure_depart"
-            (quitteChange)="marquerCommeQuitte(enfant)"
-          />
-        </div>
+
+        <div class="presence-controls flex flex-wrap items-center gap-3 sm:gap-4">
+          <div class="presence-action">
+            <app-bouton-arrive
+              [arrive]="!!enfant.heure_arrivee"
+              (arriveChange)="marquerCommeArrive(enfant)"/>
+          </div>
+          <div class="presence-action">
+            <app-bouton-quitte
+              [quitte]="!!enfant.heure_depart"
+              (quitteChange)="marquerCommeQuitte(enfant)"
+            />
+          </div>
           <div class="presence-action">
             <app-select-etat-presence
               [etat]="getEtatPresence(enfant.etat_presence)"
@@ -39,19 +43,21 @@
               (etatChange)="modifierEtat(enfant, $event)"
             />
           </div>
-          <div class="presence-time flex items-center gap-2">
-            <span class="text-sm font-medium text-slate-500">Heure d'arrivée : </span>
-            <span class="text-lg font-semibold text-slate-400">
-              {{ enfant.heure_arrivee?.substring(0, 5) ?? '--' }}
-            </span>
-          </div>
-          <div class="presence-time flex items-center gap-2">
-            <span class="text-sm font-medium text-slate-500">Heure de départ : </span>
-            <span class="text-lg font-semibold text-slate-400">
-              {{ enfant.heure_depart?.substring(0, 5) ?? '--' }}
-            </span>
-          </div>
         </div>
+
+        <div class="presence-time flex items-center gap-2">
+          <span class="text-sm font-medium text-slate-500">Heure d'arrivée : </span>
+          <span class="text-lg font-semibold text-slate-400">
+            {{ enfant.heure_arrivee?.substring(0, 5) ?? '--' }}
+          </span>
+        </div>
+        <div class="presence-time flex items-center gap-2">
+          <span class="text-sm font-medium text-slate-500">Heure de départ : </span>
+          <span class="text-lg font-semibold text-slate-400">
+            {{ enfant.heure_depart?.substring(0, 5) ?? '--' }}
+          </span>
+        </div>
+      </div>
     } @empty {
       <p class="px-8 py-6 text-slate-500">Aucune enfant n'est enregistrée aujourd'hui.</p>
     }

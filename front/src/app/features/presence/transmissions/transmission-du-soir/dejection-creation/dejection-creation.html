@@ -1,0 +1,37 @@
+<section class="mt-6 border-t border-slate-200 pt-6" aria-labelledby="dejection-creation-title">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-orange-500">Nouvelle saisie</p>
+  <h3 id="dejection-creation-title" class="mt-1 text-lg font-bold text-slate-800">Ajouter une déjection</h3>
+
+  <form class="mt-4 rounded-xl border border-slate-200 bg-white p-4" (ngSubmit)="creerDejection()">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <label class="text-sm font-medium text-slate-600">
+        Type
+        <select name="type" [(ngModel)]="type" required
+          class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20">
+          <option value="" disabled>Choisir un type</option>
+          @for (typeDejection of typesDejection; track typeDejection) {
+            <option [value]="typeDejection">{{ typeDejection }}</option>
+          }
+        </select>
+      </label>
+      <label class="text-sm font-medium text-slate-600">
+        Heure
+        <input type="time" name="heure" [(ngModel)]="heure" required
+          class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20">
+      </label>
+    </div>
+    <label class="mt-4 block text-sm font-medium text-slate-600">
+      Commentaire
+      <textarea name="commentaire" [(ngModel)]="commentaire" rows="3" placeholder="Ajouter une précision..."
+        class="mt-1 w-full resize-y rounded-lg border border-slate-200 px-3 py-2 text-slate-700 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"></textarea>
+    </label>
+
+    @if (erreur) {
+      <p class="mt-3 text-sm text-red-600" role="alert">{{ erreur }}</p>
+    }
+    <button type="submit" [disabled]="envoiEnCours"
+      class="mt-4 rounded-lg bg-orange-500 px-5 py-2.5 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60">
+      {{ envoiEnCours ? 'Création en cours...' : 'Ajouter la déjection' }}
+    </button>
+  </form>
+</section>

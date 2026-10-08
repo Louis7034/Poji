@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TransmissionSoir } from '../../../../models/transmission_soir';
-import { PresenceService } from '../../../../services/presence/presence.service';
+import { TransmissionSoir } from '../../../../../models/transmission_soir';
+import { PresenceService } from '../../../../../services/presence/presence.service';
+import { Dejection } from '../dejection/dejection';
+import { DejectionCreation } from '../dejection-creation/dejection-creation';
 
 @Component({
   selector: 'app-transmissions-soir',
-  imports: [FormsModule],
+  imports: [FormsModule, Dejection, DejectionCreation],
   templateUrl: './transmissions-soir.html',
   styleUrl: './transmissions-soir.css',
 })
@@ -13,6 +15,7 @@ export class TransmissionsSoir implements OnInit {
   @Input({ required: true }) enfantId!: string;
   readonly transmissions = signal<TransmissionSoir[]>([]);
   readonly sauvegarde = signal<{ id: string; etat: 'en cours' | 'enregistre' | 'erreur' } | null>(null);
+  readonly dejectionsRefresh = signal(0);
 
   constructor(private readonly presenceService: PresenceService) {}
 
@@ -32,5 +35,9 @@ export class TransmissionsSoir implements OnInit {
         this.sauvegarde.set({ id, etat: 'erreur' });
       },
     });
+  }
+
+  actualiserDejections(): void {
+    this.dejectionsRefresh.update((value) => value + 1);
   }
 }

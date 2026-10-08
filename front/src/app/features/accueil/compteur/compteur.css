@@ -26,13 +26,28 @@
 }
 
 @media (max-width: 767px) {
+  .home-stats,
+  .home-stats > div {
+    height: auto;
+  }
+
   .home-stats > div {
     gap: 0.55rem;
   }
 
   .stat-card {
-    min-height: 7.5rem;
-    padding: 0.85rem;
+    min-height: 6.5rem;
+    padding: 0.75rem;
+  }
+
+  .stat-card > div:first-child {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .stat-card > div:first-child svg {
+    flex: 0 0 auto;
   }
 
   .stat-card p.text-4xl {

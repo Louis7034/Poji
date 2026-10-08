@@ -35,3 +35,10 @@
 } @else {
   <p class="rounded-xl bg-slate-50 px-4 py-8 text-center text-slate-500">Aucune transmission du soir.</p>
 }
+
+@if (transmissions().length > 0) {
+  <app-dejection [enfantId]="enfantId" [refresh]="dejectionsRefresh()" />
+  <app-dejection-creation
+    [enfantId]="enfantId"
+    (created)="actualiserDejections()" />
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EnfantsService } from '../../../../services/enfants/enfants.service';
 import { TransmissionsMatin } from '../transmissions-matin/transmissions-matin';
-import { TransmissionsSoir } from '../transmissions-soir/transmissions-soir';
+import { TransmissionsSoir } from '../transmission-du-soir/transmissions-soir/transmissions-soir';
 import { TransmissionsSante } from '../transmissions-sante/transmissions-sante';
 import { TransmissionSieste } from '../transmission-sieste/transmission-sieste';
 

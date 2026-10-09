@@ -34,9 +34,9 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'dc7fc957e5c577e8f2b3f981d410a806761efce0476657d4ff3d1efe92ce2a9c'>;
+  StorageHashBase<'a05715ee008f2c8fa581fc5cc8e9d6acb6de8659b71e27e1fe620f3e0e14b2cc'>;
 export type ExecutionHash =
-  ExecutionHashBase<'c794c9b44daf6e41f58c4135a698bc5fdb38a4bd3f85a6969f4fe36b15109f60'>;
+  ExecutionHashBase<'35f30e67a46b4dc2391fff5929b05fda50e6b373c954a14eff09f15803b2aff7'>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
@@ -304,6 +304,61 @@ export type FieldOutputTypes = {
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['output'];
       readonly enfantId: Char<36>;
     };
+    readonly MaPetiteHistoire: {
+      readonly id: Char<36>;
+      readonly enfantId: Char<36>;
+      readonly personneAccompagnementMatin: CodecTypes['pg/text@1']['output'] | null;
+      readonly heureArriveeMatin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly personneRecuperationSoir: CodecTypes['pg/text@1']['output'] | null;
+      readonly heureDepartSoir: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly modeAlimentation: CodecTypes['pg/text@1']['output'] | null;
+      readonly habitudesAlimentaires: CodecTypes['pg/text@1']['output'] | null;
+      readonly alimentsAEviterAllergies: CodecTypes['pg/text@1']['output'] | null;
+      readonly alimentsPreferes: CodecTypes['pg/text@1']['output'] | null;
+      readonly alimentsNonAimes: CodecTypes['pg/text@1']['output'] | null;
+      readonly positionRepas: CodecTypes['pg/text@1']['output'] | null;
+      readonly autonomieBiberon: CodecTypes['pg/text@1']['output'] | null;
+      readonly autonomieRepas: CodecTypes['pg/text@1']['output'] | null;
+      readonly eauCristalineConvient: CodecTypes['pg/bool@1']['output'] | null;
+      readonly eauApporteeParFamille: CodecTypes['pg/text@1']['output'] | null;
+      readonly repasFournisParCreche: CodecTypes['pg/text@1']['output'] | null;
+      readonly utiliseTetine: CodecTypes['pg/bool@1']['output'] | null;
+      readonly descriptionTetine: CodecTypes['pg/text@1']['output'] | null;
+      readonly utiliseDoudou: CodecTypes['pg/bool@1']['output'] | null;
+      readonly descriptionDoudou: CodecTypes['pg/text@1']['output'] | null;
+      readonly autreObjetApaisement: CodecTypes['pg/text@1']['output'] | null;
+      readonly signesFatigue: CodecTypes['pg/text@1']['output'] | null;
+      readonly heureSiesteMatin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heureSiesteApresMidi: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heureCoucherNuit: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heureReveilMatin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly besoinsSommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly modeEndormissement: CodecTypes['pg/text@1']['output'] | null;
+      readonly chambreSommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly typeLit: CodecTypes['pg/text@1']['output'] | null;
+      readonly positionSommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly marcheDepuis: CodecTypes['pg/text@1']['output'] | null;
+      readonly modeDeplacement: CodecTypes['pg/text@1']['output'] | null;
+      readonly competencesAutonomie: CodecTypes['pg/text@1']['output'] | null;
+      readonly jouetsPreferes: CodecTypes['pg/text@1']['output'] | null;
+      readonly habitudesJeu: CodecTypes['pg/text@1']['output'] | null;
+      readonly motsPhrasesUtilises: CodecTypes['pg/text@1']['output'] | null;
+      readonly porteCouches: CodecTypes['pg/bool@1']['output'] | null;
+      readonly tailleCouche: CodecTypes['pg/text@1']['output'] | null;
+      readonly apprentissagePropreteCommence: CodecTypes['pg/bool@1']['output'] | null;
+      readonly couchePendantSieste: CodecTypes['pg/bool@1']['output'] | null;
+      readonly propreDepuis: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly traitementsCutanes: CodecTypes['pg/text@1']['output'] | null;
+      readonly traitementsOraux: CodecTypes['pg/text@1']['output'] | null;
+      readonly manifestationsFievre: CodecTypes['pg/text@1']['output'] | null;
+      readonly modalitesSurveillanceTemperature: CodecTypes['pg/text@1']['output'] | null;
+      readonly ordonnanceDolipranePresente: CodecTypes['pg/bool@1']['output'] | null;
+      readonly ordonnanceDolipraneReference: CodecTypes['pg/text@1']['output'] | null;
+      readonly poidsReferenceKg: CodecTypes['pg/numeric@1']['output'] | null;
+      readonly dateOrdonnanceDoliprane: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly dateCreation: CodecTypes['pg/timestamp-string@1']['output'];
+      readonly dateModification: CodecTypes['pg/timestamp-string@1']['output'];
+    };
     readonly Personnel: {
       readonly id: Char<36>;
       readonly role: CodecTypes['pg/text@1']['output'];
@@ -444,6 +499,61 @@ export type FieldInputTypes = {
       readonly nom: CodecTypes['pg/text@1']['input'];
       readonly createdAt: CodecTypes['pg/timestamp-string@1']['input'];
       readonly enfantId: CodecTypes['sql/char@1']['input'];
+    };
+    readonly MaPetiteHistoire: {
+      readonly id: CodecTypes['sql/char@1']['input'];
+      readonly enfantId: CodecTypes['sql/char@1']['input'];
+      readonly personneAccompagnementMatin: CodecTypes['pg/text@1']['input'] | null;
+      readonly heureArriveeMatin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly personneRecuperationSoir: CodecTypes['pg/text@1']['input'] | null;
+      readonly heureDepartSoir: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly modeAlimentation: CodecTypes['pg/text@1']['input'] | null;
+      readonly habitudesAlimentaires: CodecTypes['pg/text@1']['input'] | null;
+      readonly alimentsAEviterAllergies: CodecTypes['pg/text@1']['input'] | null;
+      readonly alimentsPreferes: CodecTypes['pg/text@1']['input'] | null;
+      readonly alimentsNonAimes: CodecTypes['pg/text@1']['input'] | null;
+      readonly positionRepas: CodecTypes['pg/text@1']['input'] | null;
+      readonly autonomieBiberon: CodecTypes['pg/text@1']['input'] | null;
+      readonly autonomieRepas: CodecTypes['pg/text@1']['input'] | null;
+      readonly eauCristalineConvient: CodecTypes['pg/bool@1']['input'] | null;
+      readonly eauApporteeParFamille: CodecTypes['pg/text@1']['input'] | null;
+      readonly repasFournisParCreche: CodecTypes['pg/text@1']['input'] | null;
+      readonly utiliseTetine: CodecTypes['pg/bool@1']['input'] | null;
+      readonly descriptionTetine: CodecTypes['pg/text@1']['input'] | null;
+      readonly utiliseDoudou: CodecTypes['pg/bool@1']['input'] | null;
+      readonly descriptionDoudou: CodecTypes['pg/text@1']['input'] | null;
+      readonly autreObjetApaisement: CodecTypes['pg/text@1']['input'] | null;
+      readonly signesFatigue: CodecTypes['pg/text@1']['input'] | null;
+      readonly heureSiesteMatin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heureSiesteApresMidi: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heureCoucherNuit: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heureReveilMatin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly besoinsSommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly modeEndormissement: CodecTypes['pg/text@1']['input'] | null;
+      readonly chambreSommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly typeLit: CodecTypes['pg/text@1']['input'] | null;
+      readonly positionSommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly marcheDepuis: CodecTypes['pg/text@1']['input'] | null;
+      readonly modeDeplacement: CodecTypes['pg/text@1']['input'] | null;
+      readonly competencesAutonomie: CodecTypes['pg/text@1']['input'] | null;
+      readonly jouetsPreferes: CodecTypes['pg/text@1']['input'] | null;
+      readonly habitudesJeu: CodecTypes['pg/text@1']['input'] | null;
+      readonly motsPhrasesUtilises: CodecTypes['pg/text@1']['input'] | null;
+      readonly porteCouches: CodecTypes['pg/bool@1']['input'] | null;
+      readonly tailleCouche: CodecTypes['pg/text@1']['input'] | null;
+      readonly apprentissagePropreteCommence: CodecTypes['pg/bool@1']['input'] | null;
+      readonly couchePendantSieste: CodecTypes['pg/bool@1']['input'] | null;
+      readonly propreDepuis: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly traitementsCutanes: CodecTypes['pg/text@1']['input'] | null;
+      readonly traitementsOraux: CodecTypes['pg/text@1']['input'] | null;
+      readonly manifestationsFievre: CodecTypes['pg/text@1']['input'] | null;
+      readonly modalitesSurveillanceTemperature: CodecTypes['pg/text@1']['input'] | null;
+      readonly ordonnanceDolipranePresente: CodecTypes['pg/bool@1']['input'] | null;
+      readonly ordonnanceDolipraneReference: CodecTypes['pg/text@1']['input'] | null;
+      readonly poidsReferenceKg: CodecTypes['pg/numeric@1']['input'] | null;
+      readonly dateOrdonnanceDoliprane: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly dateCreation: CodecTypes['pg/timestamp-string@1']['input'];
+      readonly dateModification: CodecTypes['pg/timestamp-string@1']['input'];
     };
     readonly Personnel: {
       readonly id: CodecTypes['sql/char@1']['input'];
@@ -586,6 +696,61 @@ export type StorageColumnTypes = {
       readonly id: Char<36>;
       readonly nom: CodecTypes['pg/text@1']['output'];
     };
+    readonly ma_petite_histoire: {
+      readonly aliments_a_eviter_allergies: CodecTypes['pg/text@1']['output'] | null;
+      readonly aliments_non_aimes: CodecTypes['pg/text@1']['output'] | null;
+      readonly aliments_preferes: CodecTypes['pg/text@1']['output'] | null;
+      readonly apprentissage_proprete_commence: CodecTypes['pg/bool@1']['output'] | null;
+      readonly autonomie_biberon: CodecTypes['pg/text@1']['output'] | null;
+      readonly autonomie_repas: CodecTypes['pg/text@1']['output'] | null;
+      readonly autre_objet_apaisement: CodecTypes['pg/text@1']['output'] | null;
+      readonly besoins_sommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly chambre_sommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly competences_autonomie: CodecTypes['pg/text@1']['output'] | null;
+      readonly couche_pendant_sieste: CodecTypes['pg/bool@1']['output'] | null;
+      readonly date_creation: CodecTypes['pg/timestamp-string@1']['output'];
+      readonly date_modification: CodecTypes['pg/timestamp-string@1']['output'];
+      readonly date_ordonnance_doliprane: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly description_doudou: CodecTypes['pg/text@1']['output'] | null;
+      readonly description_tetine: CodecTypes['pg/text@1']['output'] | null;
+      readonly eau_apportee_par_famille: CodecTypes['pg/text@1']['output'] | null;
+      readonly eau_cristaline_convient: CodecTypes['pg/bool@1']['output'] | null;
+      readonly enfant_id: Char<36>;
+      readonly habitudes_alimentaires: CodecTypes['pg/text@1']['output'] | null;
+      readonly habitudes_jeu: CodecTypes['pg/text@1']['output'] | null;
+      readonly heure_arrivee_matin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heure_coucher_nuit: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heure_depart_soir: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heure_reveil_matin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heure_sieste_apres_midi: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly heure_sieste_matin: CodecTypes['pg/time-string@1']['output'] | null;
+      readonly id: Char<36>;
+      readonly jouets_preferes: CodecTypes['pg/text@1']['output'] | null;
+      readonly manifestations_fievre: CodecTypes['pg/text@1']['output'] | null;
+      readonly marche_depuis: CodecTypes['pg/text@1']['output'] | null;
+      readonly modalites_surveillance_temperature: CodecTypes['pg/text@1']['output'] | null;
+      readonly mode_alimentation: CodecTypes['pg/text@1']['output'] | null;
+      readonly mode_deplacement: CodecTypes['pg/text@1']['output'] | null;
+      readonly mode_endormissement: CodecTypes['pg/text@1']['output'] | null;
+      readonly mots_phrases_utilises: CodecTypes['pg/text@1']['output'] | null;
+      readonly ordonnance_doliprane_presente: CodecTypes['pg/bool@1']['output'] | null;
+      readonly ordonnance_doliprane_reference: CodecTypes['pg/text@1']['output'] | null;
+      readonly personne_accompagnement_matin: CodecTypes['pg/text@1']['output'] | null;
+      readonly personne_recuperation_soir: CodecTypes['pg/text@1']['output'] | null;
+      readonly poids_reference_kg: CodecTypes['pg/numeric@1']['output'] | null;
+      readonly porte_couches: CodecTypes['pg/bool@1']['output'] | null;
+      readonly position_repas: CodecTypes['pg/text@1']['output'] | null;
+      readonly position_sommeil: CodecTypes['pg/text@1']['output'] | null;
+      readonly propre_depuis: CodecTypes['pg/date-string@1']['output'] | null;
+      readonly repas_fournis_par_creche: CodecTypes['pg/text@1']['output'] | null;
+      readonly signes_fatigue: CodecTypes['pg/text@1']['output'] | null;
+      readonly taille_couche: CodecTypes['pg/text@1']['output'] | null;
+      readonly traitements_cutanes: CodecTypes['pg/text@1']['output'] | null;
+      readonly traitements_oraux: CodecTypes['pg/text@1']['output'] | null;
+      readonly type_lit: CodecTypes['pg/text@1']['output'] | null;
+      readonly utilise_doudou: CodecTypes['pg/bool@1']['output'] | null;
+      readonly utilise_tetine: CodecTypes['pg/bool@1']['output'] | null;
+    };
     readonly personnel: {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['output'];
       readonly email: CodecTypes['pg/text@1']['output'];
@@ -726,6 +891,61 @@ export type StorageColumnInputTypes = {
       readonly enfant_id: CodecTypes['sql/char@1']['input'];
       readonly id: CodecTypes['sql/char@1']['input'];
       readonly nom: CodecTypes['pg/text@1']['input'];
+    };
+    readonly ma_petite_histoire: {
+      readonly aliments_a_eviter_allergies: CodecTypes['pg/text@1']['input'] | null;
+      readonly aliments_non_aimes: CodecTypes['pg/text@1']['input'] | null;
+      readonly aliments_preferes: CodecTypes['pg/text@1']['input'] | null;
+      readonly apprentissage_proprete_commence: CodecTypes['pg/bool@1']['input'] | null;
+      readonly autonomie_biberon: CodecTypes['pg/text@1']['input'] | null;
+      readonly autonomie_repas: CodecTypes['pg/text@1']['input'] | null;
+      readonly autre_objet_apaisement: CodecTypes['pg/text@1']['input'] | null;
+      readonly besoins_sommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly chambre_sommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly competences_autonomie: CodecTypes['pg/text@1']['input'] | null;
+      readonly couche_pendant_sieste: CodecTypes['pg/bool@1']['input'] | null;
+      readonly date_creation: CodecTypes['pg/timestamp-string@1']['input'];
+      readonly date_modification: CodecTypes['pg/timestamp-string@1']['input'];
+      readonly date_ordonnance_doliprane: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly description_doudou: CodecTypes['pg/text@1']['input'] | null;
+      readonly description_tetine: CodecTypes['pg/text@1']['input'] | null;
+      readonly eau_apportee_par_famille: CodecTypes['pg/text@1']['input'] | null;
+      readonly eau_cristaline_convient: CodecTypes['pg/bool@1']['input'] | null;
+      readonly enfant_id: CodecTypes['sql/char@1']['input'];
+      readonly habitudes_alimentaires: CodecTypes['pg/text@1']['input'] | null;
+      readonly habitudes_jeu: CodecTypes['pg/text@1']['input'] | null;
+      readonly heure_arrivee_matin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heure_coucher_nuit: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heure_depart_soir: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heure_reveil_matin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heure_sieste_apres_midi: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly heure_sieste_matin: CodecTypes['pg/time-string@1']['input'] | null;
+      readonly id: CodecTypes['sql/char@1']['input'];
+      readonly jouets_preferes: CodecTypes['pg/text@1']['input'] | null;
+      readonly manifestations_fievre: CodecTypes['pg/text@1']['input'] | null;
+      readonly marche_depuis: CodecTypes['pg/text@1']['input'] | null;
+      readonly modalites_surveillance_temperature: CodecTypes['pg/text@1']['input'] | null;
+      readonly mode_alimentation: CodecTypes['pg/text@1']['input'] | null;
+      readonly mode_deplacement: CodecTypes['pg/text@1']['input'] | null;
+      readonly mode_endormissement: CodecTypes['pg/text@1']['input'] | null;
+      readonly mots_phrases_utilises: CodecTypes['pg/text@1']['input'] | null;
+      readonly ordonnance_doliprane_presente: CodecTypes['pg/bool@1']['input'] | null;
+      readonly ordonnance_doliprane_reference: CodecTypes['pg/text@1']['input'] | null;
+      readonly personne_accompagnement_matin: CodecTypes['pg/text@1']['input'] | null;
+      readonly personne_recuperation_soir: CodecTypes['pg/text@1']['input'] | null;
+      readonly poids_reference_kg: CodecTypes['pg/numeric@1']['input'] | null;
+      readonly porte_couches: CodecTypes['pg/bool@1']['input'] | null;
+      readonly position_repas: CodecTypes['pg/text@1']['input'] | null;
+      readonly position_sommeil: CodecTypes['pg/text@1']['input'] | null;
+      readonly propre_depuis: CodecTypes['pg/date-string@1']['input'] | null;
+      readonly repas_fournis_par_creche: CodecTypes['pg/text@1']['input'] | null;
+      readonly signes_fatigue: CodecTypes['pg/text@1']['input'] | null;
+      readonly taille_couche: CodecTypes['pg/text@1']['input'] | null;
+      readonly traitements_cutanes: CodecTypes['pg/text@1']['input'] | null;
+      readonly traitements_oraux: CodecTypes['pg/text@1']['input'] | null;
+      readonly type_lit: CodecTypes['pg/text@1']['input'] | null;
+      readonly utilise_doudou: CodecTypes['pg/bool@1']['input'] | null;
+      readonly utilise_tetine: CodecTypes['pg/bool@1']['input'] | null;
     };
     readonly personnel: {
       readonly created_at: CodecTypes['pg/timestamp-string@1']['input'];
@@ -960,6 +1180,62 @@ export namespace Models {
     dateObservation: CodecTypes['pg/timestamp-string@1']['output'];
     readonly [RelationKeys]?: never;
   };
+  export type public_MaPetiteHistoire = {
+    id: Char<36>;
+    enfantId: Char<36>;
+    personneAccompagnementMatin: CodecTypes['pg/text@1']['output'] | null;
+    heureArriveeMatin: CodecTypes['pg/time-string@1']['output'] | null;
+    personneRecuperationSoir: CodecTypes['pg/text@1']['output'] | null;
+    heureDepartSoir: CodecTypes['pg/time-string@1']['output'] | null;
+    modeAlimentation: CodecTypes['pg/text@1']['output'] | null;
+    habitudesAlimentaires: CodecTypes['pg/text@1']['output'] | null;
+    alimentsAEviterAllergies: CodecTypes['pg/text@1']['output'] | null;
+    alimentsPreferes: CodecTypes['pg/text@1']['output'] | null;
+    alimentsNonAimes: CodecTypes['pg/text@1']['output'] | null;
+    positionRepas: CodecTypes['pg/text@1']['output'] | null;
+    autonomieBiberon: CodecTypes['pg/text@1']['output'] | null;
+    autonomieRepas: CodecTypes['pg/text@1']['output'] | null;
+    eauCristalineConvient: CodecTypes['pg/bool@1']['output'] | null;
+    eauApporteeParFamille: CodecTypes['pg/text@1']['output'] | null;
+    repasFournisParCreche: CodecTypes['pg/text@1']['output'] | null;
+    utiliseTetine: CodecTypes['pg/bool@1']['output'] | null;
+    descriptionTetine: CodecTypes['pg/text@1']['output'] | null;
+    utiliseDoudou: CodecTypes['pg/bool@1']['output'] | null;
+    descriptionDoudou: CodecTypes['pg/text@1']['output'] | null;
+    autreObjetApaisement: CodecTypes['pg/text@1']['output'] | null;
+    signesFatigue: CodecTypes['pg/text@1']['output'] | null;
+    heureSiesteMatin: CodecTypes['pg/time-string@1']['output'] | null;
+    heureSiesteApresMidi: CodecTypes['pg/time-string@1']['output'] | null;
+    heureCoucherNuit: CodecTypes['pg/time-string@1']['output'] | null;
+    heureReveilMatin: CodecTypes['pg/time-string@1']['output'] | null;
+    besoinsSommeil: CodecTypes['pg/text@1']['output'] | null;
+    modeEndormissement: CodecTypes['pg/text@1']['output'] | null;
+    chambreSommeil: CodecTypes['pg/text@1']['output'] | null;
+    typeLit: CodecTypes['pg/text@1']['output'] | null;
+    positionSommeil: CodecTypes['pg/text@1']['output'] | null;
+    marcheDepuis: CodecTypes['pg/text@1']['output'] | null;
+    modeDeplacement: CodecTypes['pg/text@1']['output'] | null;
+    competencesAutonomie: CodecTypes['pg/text@1']['output'] | null;
+    jouetsPreferes: CodecTypes['pg/text@1']['output'] | null;
+    habitudesJeu: CodecTypes['pg/text@1']['output'] | null;
+    motsPhrasesUtilises: CodecTypes['pg/text@1']['output'] | null;
+    porteCouches: CodecTypes['pg/bool@1']['output'] | null;
+    tailleCouche: CodecTypes['pg/text@1']['output'] | null;
+    apprentissagePropreteCommence: CodecTypes['pg/bool@1']['output'] | null;
+    couchePendantSieste: CodecTypes['pg/bool@1']['output'] | null;
+    propreDepuis: CodecTypes['pg/date-string@1']['output'] | null;
+    traitementsCutanes: CodecTypes['pg/text@1']['output'] | null;
+    traitementsOraux: CodecTypes['pg/text@1']['output'] | null;
+    manifestationsFievre: CodecTypes['pg/text@1']['output'] | null;
+    modalitesSurveillanceTemperature: CodecTypes['pg/text@1']['output'] | null;
+    ordonnanceDolipranePresente: CodecTypes['pg/bool@1']['output'] | null;
+    ordonnanceDolipraneReference: CodecTypes['pg/text@1']['output'] | null;
+    poidsReferenceKg: CodecTypes['pg/numeric@1']['output'] | null;
+    dateOrdonnanceDoliprane: CodecTypes['pg/date-string@1']['output'] | null;
+    dateCreation: CodecTypes['pg/timestamp-string@1']['output'];
+    dateModification: CodecTypes['pg/timestamp-string@1']['output'];
+    readonly [RelationKeys]?: never;
+  };
 }
 
 export declare const models: {
@@ -981,6 +1257,7 @@ export declare const models: {
     AchievementObservation: Models.public_AchievementObservation;
     AchievementObservationQuestion: Models.public_AchievementObservationQuestion;
     AchievementObservationGenerale: Models.public_AchievementObservationGenerale;
+    MaPetiteHistoire: Models.public_MaPetiteHistoire;
   };
 };
 
@@ -1309,6 +1586,281 @@ type ContractBase = Omit<
               };
               primaryKey: { readonly columns: readonly ['id'] };
               uniques: readonly [];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
+            readonly ma_petite_histoire: {
+              columns: {
+                readonly id: {
+                  readonly nativeType: 'character';
+                  readonly codecId: 'sql/char@1';
+                  readonly nullable: false;
+                  readonly typeParams: { readonly length: 36 };
+                };
+                readonly enfant_id: {
+                  readonly nativeType: 'character';
+                  readonly codecId: 'sql/char@1';
+                  readonly nullable: false;
+                  readonly typeParams: { readonly length: 36 };
+                };
+                readonly personne_accompagnement_matin: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly heure_arrivee_matin: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly personne_recuperation_soir: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly heure_depart_soir: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly mode_alimentation: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly habitudes_alimentaires: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly aliments_a_eviter_allergies: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly aliments_preferes: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly aliments_non_aimes: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly position_repas: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly autonomie_biberon: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly autonomie_repas: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly eau_cristaline_convient: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly eau_apportee_par_famille: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly repas_fournis_par_creche: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly utilise_tetine: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly description_tetine: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly utilise_doudou: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly description_doudou: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly autre_objet_apaisement: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly signes_fatigue: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly heure_sieste_matin: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly heure_sieste_apres_midi: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly heure_coucher_nuit: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly heure_reveil_matin: {
+                  readonly nativeType: 'time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: true;
+                };
+                readonly besoins_sommeil: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly mode_endormissement: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly chambre_sommeil: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly type_lit: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly position_sommeil: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly marche_depuis: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly mode_deplacement: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly competences_autonomie: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly jouets_preferes: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly habitudes_jeu: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly mots_phrases_utilises: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly porte_couches: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly taille_couche: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly apprentissage_proprete_commence: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly couche_pendant_sieste: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly propre_depuis: {
+                  readonly nativeType: 'date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: true;
+                };
+                readonly traitements_cutanes: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly traitements_oraux: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly manifestations_fievre: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly modalites_surveillance_temperature: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly ordonnance_doliprane_presente: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: true;
+                };
+                readonly ordonnance_doliprane_reference: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly poids_reference_kg: {
+                  readonly nativeType: 'numeric';
+                  readonly codecId: 'pg/numeric@1';
+                  readonly nullable: true;
+                };
+                readonly date_ordonnance_doliprane: {
+                  readonly nativeType: 'date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: true;
+                };
+                readonly date_creation: {
+                  readonly nativeType: 'timestamp';
+                  readonly codecId: 'pg/timestamp-string@1';
+                  readonly nullable: false;
+                };
+                readonly date_modification: {
+                  readonly nativeType: 'timestamp';
+                  readonly codecId: 'pg/timestamp-string@1';
+                  readonly nullable: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [{ readonly columns: readonly ['enfant_id'] }];
               indexes: readonly [];
               foreignKeys: readonly [];
             };
@@ -1756,6 +2308,10 @@ type ContractBase = Omit<
       readonly namespace: 'public' & NamespaceId;
       readonly model: 'AchievementObservationGenerale';
     };
+    readonly ma_petite_histoire: {
+      readonly namespace: 'public' & NamespaceId;
+      readonly model: 'MaPetiteHistoire';
+    };
   };
   readonly domain: {
     readonly namespaces: {
@@ -2173,6 +2729,310 @@ type ContractBase = Omit<
                 readonly nom: { readonly column: 'nom' };
                 readonly createdAt: { readonly column: 'created_at' };
                 readonly enfantId: { readonly column: 'enfant_id' };
+              };
+            };
+          };
+          readonly MaPetiteHistoire: {
+            readonly fields: {
+              readonly id: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'sql/char@1';
+                  readonly typeParams: { readonly length: 36 };
+                };
+              };
+              readonly enfantId: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'sql/char@1';
+                  readonly typeParams: { readonly length: 36 };
+                };
+              };
+              readonly personneAccompagnementMatin: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly heureArriveeMatin: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly personneRecuperationSoir: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly heureDepartSoir: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly modeAlimentation: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly habitudesAlimentaires: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly alimentsAEviterAllergies: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly alimentsPreferes: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly alimentsNonAimes: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly positionRepas: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly autonomieBiberon: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly autonomieRepas: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly eauCristalineConvient: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly eauApporteeParFamille: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly repasFournisParCreche: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly utiliseTetine: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly descriptionTetine: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly utiliseDoudou: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly descriptionDoudou: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly autreObjetApaisement: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly signesFatigue: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly heureSiesteMatin: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly heureSiesteApresMidi: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly heureCoucherNuit: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly heureReveilMatin: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly besoinsSommeil: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly modeEndormissement: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly chambreSommeil: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly typeLit: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly positionSommeil: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly marcheDepuis: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly modeDeplacement: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly competencesAutonomie: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly jouetsPreferes: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly habitudesJeu: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly motsPhrasesUtilises: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly porteCouches: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly tailleCouche: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly apprentissagePropreteCommence: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly couchePendantSieste: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly propreDepuis: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly traitementsCutanes: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly traitementsOraux: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly manifestationsFievre: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly modalitesSurveillanceTemperature: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly ordonnanceDolipranePresente: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly ordonnanceDolipraneReference: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly poidsReferenceKg: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/numeric@1' };
+              };
+              readonly dateOrdonnanceDoliprane: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly dateCreation: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamp-string@1';
+                };
+              };
+              readonly dateModification: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamp-string@1';
+                };
+              };
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'ma_petite_histoire';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly id: { readonly column: 'id' };
+                readonly enfantId: { readonly column: 'enfant_id' };
+                readonly personneAccompagnementMatin: {
+                  readonly column: 'personne_accompagnement_matin';
+                };
+                readonly heureArriveeMatin: { readonly column: 'heure_arrivee_matin' };
+                readonly personneRecuperationSoir: {
+                  readonly column: 'personne_recuperation_soir';
+                };
+                readonly heureDepartSoir: { readonly column: 'heure_depart_soir' };
+                readonly modeAlimentation: { readonly column: 'mode_alimentation' };
+                readonly habitudesAlimentaires: { readonly column: 'habitudes_alimentaires' };
+                readonly alimentsAEviterAllergies: {
+                  readonly column: 'aliments_a_eviter_allergies';
+                };
+                readonly alimentsPreferes: { readonly column: 'aliments_preferes' };
+                readonly alimentsNonAimes: { readonly column: 'aliments_non_aimes' };
+                readonly positionRepas: { readonly column: 'position_repas' };
+                readonly autonomieBiberon: { readonly column: 'autonomie_biberon' };
+                readonly autonomieRepas: { readonly column: 'autonomie_repas' };
+                readonly eauCristalineConvient: { readonly column: 'eau_cristaline_convient' };
+                readonly eauApporteeParFamille: { readonly column: 'eau_apportee_par_famille' };
+                readonly repasFournisParCreche: { readonly column: 'repas_fournis_par_creche' };
+                readonly utiliseTetine: { readonly column: 'utilise_tetine' };
+                readonly descriptionTetine: { readonly column: 'description_tetine' };
+                readonly utiliseDoudou: { readonly column: 'utilise_doudou' };
+                readonly descriptionDoudou: { readonly column: 'description_doudou' };
+                readonly autreObjetApaisement: { readonly column: 'autre_objet_apaisement' };
+                readonly signesFatigue: { readonly column: 'signes_fatigue' };
+                readonly heureSiesteMatin: { readonly column: 'heure_sieste_matin' };
+                readonly heureSiesteApresMidi: { readonly column: 'heure_sieste_apres_midi' };
+                readonly heureCoucherNuit: { readonly column: 'heure_coucher_nuit' };
+                readonly heureReveilMatin: { readonly column: 'heure_reveil_matin' };
+                readonly besoinsSommeil: { readonly column: 'besoins_sommeil' };
+                readonly modeEndormissement: { readonly column: 'mode_endormissement' };
+                readonly chambreSommeil: { readonly column: 'chambre_sommeil' };
+                readonly typeLit: { readonly column: 'type_lit' };
+                readonly positionSommeil: { readonly column: 'position_sommeil' };
+                readonly marcheDepuis: { readonly column: 'marche_depuis' };
+                readonly modeDeplacement: { readonly column: 'mode_deplacement' };
+                readonly competencesAutonomie: { readonly column: 'competences_autonomie' };
+                readonly jouetsPreferes: { readonly column: 'jouets_preferes' };
+                readonly habitudesJeu: { readonly column: 'habitudes_jeu' };
+                readonly motsPhrasesUtilises: { readonly column: 'mots_phrases_utilises' };
+                readonly porteCouches: { readonly column: 'porte_couches' };
+                readonly tailleCouche: { readonly column: 'taille_couche' };
+                readonly apprentissagePropreteCommence: {
+                  readonly column: 'apprentissage_proprete_commence';
+                };
+                readonly couchePendantSieste: { readonly column: 'couche_pendant_sieste' };
+                readonly propreDepuis: { readonly column: 'propre_depuis' };
+                readonly traitementsCutanes: { readonly column: 'traitements_cutanes' };
+                readonly traitementsOraux: { readonly column: 'traitements_oraux' };
+                readonly manifestationsFievre: { readonly column: 'manifestations_fievre' };
+                readonly modalitesSurveillanceTemperature: {
+                  readonly column: 'modalites_surveillance_temperature';
+                };
+                readonly ordonnanceDolipranePresente: {
+                  readonly column: 'ordonnance_doliprane_presente';
+                };
+                readonly ordonnanceDolipraneReference: {
+                  readonly column: 'ordonnance_doliprane_reference';
+                };
+                readonly poidsReferenceKg: { readonly column: 'poids_reference_kg' };
+                readonly dateOrdonnanceDoliprane: { readonly column: 'date_ordonnance_doliprane' };
+                readonly dateCreation: { readonly column: 'date_creation' };
+                readonly dateModification: { readonly column: 'date_modification' };
               };
             };
           };
@@ -2765,6 +3625,14 @@ type ContractBase = Omit<
           readonly ref: {
             readonly namespace: 'public';
             readonly table: 'journal';
+            readonly column: 'id';
+          };
+          readonly onCreate: { readonly kind: 'generator'; readonly id: 'uuidv4' };
+        },
+        {
+          readonly ref: {
+            readonly namespace: 'public';
+            readonly table: 'ma_petite_histoire';
             readonly column: 'id';
           };
           readonly onCreate: { readonly kind: 'generator'; readonly id: 'uuidv4' };

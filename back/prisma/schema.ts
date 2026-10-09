@@ -531,6 +531,73 @@ export const contract = defineContract({}, ({ field, model }) => {
         table: "achievement_observation_generale",
     });
 
+    const MaPetiteHistoire = model("MaPetiteHistoire", {
+        fields: {
+            id: field.id.uuidv4String(),
+            enfantId: field.uuidString().unique().column("enfant_id"),
+
+            personneAccompagnementMatin: field.text().optional().column("personne_accompagnement_matin"),
+            heureArriveeMatin: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_arrivee_matin"),
+            personneRecuperationSoir: field.text().optional().column("personne_recuperation_soir"),
+            heureDepartSoir: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_depart_soir"),
+
+            modeAlimentation: field.text().optional().column("mode_alimentation"),
+            habitudesAlimentaires: field.text().optional().column("habitudes_alimentaires"),
+            alimentsAEviterAllergies: field.text().optional().column("aliments_a_eviter_allergies"),
+            alimentsPreferes: field.text().optional().column("aliments_preferes"),
+            alimentsNonAimes: field.text().optional().column("aliments_non_aimes"),
+            positionRepas: field.text().optional().column("position_repas"),
+            autonomieBiberon: field.text().optional().column("autonomie_biberon"),
+            autonomieRepas: field.text().optional().column("autonomie_repas"),
+            eauCristalineConvient: field.boolean().optional().column("eau_cristaline_convient"),
+            eauApporteeParFamille: field.text().optional().column("eau_apportee_par_famille"),
+            repasFournisParCreche: field.text().optional().column("repas_fournis_par_creche"),
+
+            utiliseTetine: field.boolean().optional().column("utilise_tetine"),
+            descriptionTetine: field.text().optional().column("description_tetine"),
+            utiliseDoudou: field.boolean().optional().column("utilise_doudou"),
+            descriptionDoudou: field.text().optional().column("description_doudou"),
+            autreObjetApaisement: field.text().optional().column("autre_objet_apaisement"),
+            signesFatigue: field.text().optional().column("signes_fatigue"),
+            heureSiesteMatin: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_sieste_matin"),
+            heureSiesteApresMidi: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_sieste_apres_midi"),
+            heureCoucherNuit: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_coucher_nuit"),
+            heureReveilMatin: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_reveil_matin"),
+            besoinsSommeil: field.text().optional().column("besoins_sommeil"),
+            modeEndormissement: field.text().optional().column("mode_endormissement"),
+            chambreSommeil: field.text().optional().column("chambre_sommeil"),
+            typeLit: field.text().optional().column("type_lit"),
+            positionSommeil: field.text().optional().column("position_sommeil"),
+
+            marcheDepuis: field.text().optional().column("marche_depuis"),
+            modeDeplacement: field.text().optional().column("mode_deplacement"),
+            competencesAutonomie: field.text().optional().column("competences_autonomie"),
+            jouetsPreferes: field.text().optional().column("jouets_preferes"),
+            habitudesJeu: field.text().optional().column("habitudes_jeu"),
+            motsPhrasesUtilises: field.text().optional().column("mots_phrases_utilises"),
+
+            porteCouches: field.boolean().optional().column("porte_couches"),
+            tailleCouche: field.text().optional().column("taille_couche"),
+            apprentissagePropreteCommence: field.boolean().optional().column("apprentissage_proprete_commence"),
+            couchePendantSieste: field.boolean().optional().column("couche_pendant_sieste"),
+            propreDepuis: field.column({ codecId: "pg/date-string@1", nativeType: "date" } as const).optional().column("propre_depuis"),
+
+            traitementsCutanes: field.text().optional().column("traitements_cutanes"),
+            traitementsOraux: field.text().optional().column("traitements_oraux"),
+            manifestationsFievre: field.text().optional().column("manifestations_fievre"),
+            modalitesSurveillanceTemperature: field.text().optional().column("modalites_surveillance_temperature"),
+            ordonnanceDolipranePresente: field.boolean().optional().column("ordonnance_doliprane_presente"),
+            ordonnanceDolipraneReference: field.text().optional().column("ordonnance_doliprane_reference"),
+            poidsReferenceKg: field.decimal().optional().column("poids_reference_kg"),
+            dateOrdonnanceDoliprane: field.column({ codecId: "pg/date-string@1", nativeType: "date" } as const).optional().column("date_ordonnance_doliprane"),
+
+            dateCreation: field.column({ codecId: "pg/timestamp-string@1", nativeType: "timestamp" } as const).column("date_creation"),
+            dateModification: field.column({ codecId: "pg/timestamp-string@1", nativeType: "timestamp" } as const).column("date_modification"),
+        },
+    }).sql({
+        table: "ma_petite_histoire",
+    });
+
 
     return {
         models: {
@@ -551,6 +618,7 @@ export const contract = defineContract({}, ({ field, model }) => {
             AchievementObservation,
             AchievementObservationQuestion,
             AchievementObservationGenerale,
+            MaPetiteHistoire,
         },
     };
 });

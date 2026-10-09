@@ -2,6 +2,7 @@ import { Component, Input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TransmissionSoir } from '../../../../../models/transmission_soir';
 import { PresenceService } from '../../../../../services/presence/presence.service';
+import { Evenement } from '../../../../../enum/evenement';
 import { Dejection } from '../dejection/dejection';
 import { DejectionCreation } from '../dejection-creation/dejection-creation';
 
@@ -16,6 +17,7 @@ export class TransmissionsSoir implements OnInit {
   readonly transmissions = signal<TransmissionSoir[]>([]);
   readonly sauvegarde = signal<{ id: string; etat: 'en cours' | 'enregistre' | 'erreur' } | null>(null);
   readonly dejectionsRefresh = signal(0);
+  readonly evenements = Object.values(Evenement);
 
   constructor(private readonly presenceService: PresenceService) {}
 
@@ -35,6 +37,26 @@ export class TransmissionsSoir implements OnInit {
         this.sauvegarde.set({ id, etat: 'erreur' });
       },
     });
+  }
+
+  evenementSelectionne(evenement: string | null): Evenement | typeof Evenement.Autre {
+    return evenement && this.evenements.includes(evenement as Evenement)
+      ? (evenement as Evenement)
+      : Evenement.Autre;
+  }
+
+  estAutreEvenement(evenement: string | null): boolean {
+    return this.evenementSelectionne(evenement) === Evenement.Autre;
+  }
+
+  modifierEvenement(transmission: TransmissionSoir, valeur: string): void {
+    transmission.evenement = valeur;
+    this.sauvegarder(transmission.id, 'evenement', valeur || null);
+  }
+
+  selectionnerEvenement(transmission: TransmissionSoir, valeur: string): void {
+    transmission.evenement = valeur === Evenement.Autre ? null : valeur;
+    this.sauvegarder(transmission.id, 'evenement', transmission.evenement);
   }
 
   actualiserDejections(): void {

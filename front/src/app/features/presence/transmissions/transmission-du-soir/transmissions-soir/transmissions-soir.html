@@ -10,7 +10,24 @@
             <input type="time" [(ngModel)]="transmission.depart" (ngModelChange)="sauvegarder(transmission.id, 'depart', $event)" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700">
           </label>
           <label class="text-sm font-medium text-slate-600">Événement
-            <input type="text" [(ngModel)]="transmission.evenement" (ngModelChange)="sauvegarder(transmission.id, 'evenement', $event)" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700">
+            <select
+              [ngModel]="evenementSelectionne(transmission.evenement)"
+              (ngModelChange)="selectionnerEvenement(transmission, $event)"
+              class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700"
+            >
+              @for (evenement of evenements; track evenement) {
+                <option [value]="evenement">{{ evenement }}</option>
+              }
+            </select>
+            @if (estAutreEvenement(transmission.evenement)) {
+              <input
+                type="text"
+                [ngModel]="transmission.evenement"
+                (ngModelChange)="modifierEvenement(transmission, $event)"
+                placeholder="Préciser l'événement"
+                class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700"
+              >
+            }
           </label>
           <label class="text-sm font-medium text-slate-600">Besoin
             <input type="text" [(ngModel)]="transmission.besoin" (ngModelChange)="sauvegarder(transmission.id, 'besoin', $event)" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-700">

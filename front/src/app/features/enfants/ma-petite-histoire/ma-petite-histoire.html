@@ -1,0 +1,236 @@
+<main class="mx-auto max-w-5xl px-4 py-6 text-[#243b70] sm:px-8">
+  <app-back-button />
+  <header class="rounded-2xl bg-[#eef3ff] p-6">
+    <p class="text-sm font-semibold uppercase tracking-wide text-[#526fca]">Ma petite histoire</p>
+    <h1 class="mt-1 text-3xl font-bold">Mon arrivée à la crèche</h1>
+  </header>
+
+  @if (chargement()) {
+    <p class="mt-6 rounded-xl bg-slate-50 p-6 text-slate-500">Chargement...</p>
+  } @else if (histoire(); as fiche) {
+    <form #histoireForm="ngForm" (ngSubmit)="sauvegarder(histoireForm)" class="mt-6 space-y-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
+      <section>
+        <h2 class="story-title">L’accueil du matin et celui du soir</h2>
+        <div class="form-grid">
+          <label>Le matin c’est <input name="personneAccompagnementMatin" [(ngModel)]="fiche.personneAccompagnementMatin"> qui m'emmène à la micro crèche</label>
+          <label>Vers
+            <select name="heureArriveeMatin" [(ngModel)]="fiche.heureArriveeMatin">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>
+            heures
+          </label>
+          <label>Le soir c’est <input name="personneRecuperationSoir" [(ngModel)]="fiche.personneRecuperationSoir"> qui viendra me chercher à la micro crèche</label>
+          <label>Vers
+            <select name="heureDepartSoir" [(ngModel)]="fiche.heureDepartSoir">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>
+            heures
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="story-title">Alimentation</h2>
+        <div class="form-grid">
+          <label>Je me nourris
+            <select name="modeAlimentation" [(ngModel)]="fiche.modeAlimentation">
+              <option [ngValue]="null">--</option>
+              <option value="Au biberon">Au biberon</option>
+              <option value="Allaitement maternel exclusif">Allaitement maternel exclusif</option>
+              <option value="Début de la diversification alimentaire">Début de la diversification alimentaire</option>
+            </select>
+          </label>
+          <label>Ma maman me donne à manger <textarea name="habitudesAlimentaires" [(ngModel)]="fiche.habitudesAlimentaires"></textarea></label>
+          <label>Aliments à éviter / allergies <textarea name="alimentsAEviterAllergies" [(ngModel)]="fiche.alimentsAEviterAllergies"></textarea></label>
+          <label>Moi j’adore manger <textarea name="alimentsPreferes" [(ngModel)]="fiche.alimentsPreferes"></textarea></label>
+          <label>Je n’aime pas manger <textarea name="alimentsNonAimes" [(ngModel)]="fiche.alimentsNonAimes"></textarea></label>
+
+          <label>Je prends mes repas
+            <select name="positionRepas" [(ngModel)]="fiche.positionRepas">
+              <option [ngValue]="null">--</option>
+              <option value="Dans les bras">Dans les bras</option>
+              <option value="Dans un transat">Dans un transat</option>
+              <option value="À table">À table</option>
+            </select>
+          </label>
+          <label>Je bois mon biberon
+            <select name="autonomieBiberon" [(ngModel)]="fiche.autonomieBiberon">
+              <option [ngValue]="null">--</option>
+              <option value="Seul">Seul</option>
+              <option value="Accompagné des bras">Accompagné des bras</option>
+            </select>
+          </label>
+          <label>Mes repas sont
+            <select name="autonomieRepas" [(ngModel)]="fiche.autonomieRepas">
+              <option [ngValue]="null">--</option>
+              <option value="Avec l’aide d’un adulte">Avec l’aide d’un adulte</option>
+              <option value="Tout seul">Tout seul</option>
+            </select>
+          </label>
+          <label>Eau Cristaline adaptée <input name="eauCristalineConvient" [(ngModel)]="fiche.eauCristalineConvient"></label>
+          <label>Eau apportée par la famille <input name="eauApporteeParFamille" [(ngModel)]="fiche.eauApporteeParFamille"></label>
+          <label>Repas fournis par la cuisine de l’EHPAD (jusqu’à décembre 2026)
+            <br>-	Eau Cristaline fournie par la crèche pour la confection des biberons uniquement
+                    <br>(-> si celle si ne convient pas le parent apporte à sa charge)</label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="story-title">Sommeil</h2>
+        <div class="form-grid">
+          <label>J’utilise une tétine <input name="utiliseTetine" [(ngModel)]="fiche.utiliseTetine"></label>
+          <label>J’utilise un doudou <input name="utiliseDoudou" [(ngModel)]="fiche.utiliseDoudou"></label>
+          <label>Autre objet apaisant <input name="autreObjetApaisement" [(ngModel)]="fiche.autreObjetApaisement"></label>
+          <label><strong>La tétine et le doudou restent à la crèche   -    SANS  ATTACHE TETINE</strong></label>
+          <label>Quand je suis fatigué(e), je le maniferse <textarea name="signesFatigue" [(ngModel)]="fiche.signesFatigue"></textarea></label>
+          <label>Sieste fais la sieste le matin vers
+            <select name="heureSiesteMatin" [(ngModel)]="fiche.heureSiesteMatin">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>,
+            et l’après-midi vers
+            <select name="heureSiesteApresMidi" [(ngModel)]="fiche.heureSiesteApresMidi">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>
+          </label>
+          <label>Je commence ma nuit vers
+            <select name="heureCoucherNuit" [(ngModel)]="fiche.heureCoucherNuit">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>
+            jusqu'à
+            <select name="heureReveilMatin" [(ngModel)]="fiche.heureReveilMatin">
+              <option [ngValue]="null">Choisir une heure</option>
+              @for (heure of heures; track heure) {
+                <option [value]="heure">{{ heure }}</option>
+              }
+            </select>
+            le lendemain
+          </label>
+          <label>Pour que j'ai un sommeil serein, j’ai besoin de (lumière, geste, objet transitionnel, position)<textarea name="besoinsSommeil" [(ngModel)]="fiche.besoinsSommeil"></textarea></label>
+          <label>Je m’endors mieux quand
+            <select name="modeEndormissement" [(ngModel)]="fiche.modeEndormissement">
+              <option [ngValue]="null">--</option>
+              <option value="Seul">Je suis seul</option>
+              <option value="Accompagné par un adulte">Accompagné par la présence d’un adulte</option>
+            </select>
+          </label>
+          <label>Je dors dans
+            <select name="chambreSommeil" [(ngModel)]="fiche.chambreSommeil">
+              <option [ngValue]="null">--</option>
+              <option value="Ma chambre seul">Ma chambre seul</option>
+              <option value="La chambre de mes parents">La chambre de mes parents</option>
+              <option value="La chambre de mon frère ou de ma sœur">La chambre de mon frère ou de ma sœur</option>
+            </select>
+          </label>
+          <label>Type de lit
+            <select name="typeLit" [(ngModel)]="fiche.typeLit">
+              <option [ngValue]="null">--</option>
+              <option value="Lit au sol">Lit au sol</option>
+              <option value="Lit à barreaux">Lit à barreaux</option>
+              <option value="Lit simple 1 place">Lit simple 1 place</option>
+            </select>
+          </label>
+          <label>Position de sommeil <input name="positionSommeil" [(ngModel)]="fiche.positionSommeil"></label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="story-title">Développement verbal et psychomoteur</h2>
+        <div class="form-grid">
+          <label>Je marche depuis <input type="date" name="marcheDepuis" [(ngModel)]="fiche.marcheDepuis"></label>
+          <label>Je me déplace <textarea name="modeDeplacement" [(ngModel)]="fiche.modeDeplacement"></textarea></label>
+          <label>Ce que je suis capable de faire (habillage, escaliers, préhension manuelle)<textarea name="competencesAutonomie" [(ngModel)]="fiche.competencesAutonomie"></textarea></label>
+          <label>Mes jouets préférés <textarea name="jouetsPreferes" [(ngModel)]="fiche.jouetsPreferes"></textarea></label>
+          <label>J’ai l’habitude de jouer
+            <select name="habitudesJeu" [(ngModel)]="fiche.habitudesJeu">
+              <option [ngValue]="null">--</option>
+              <option value="Seul">Seul</option>
+              <option value="Avec mes copains">Avec mes copains</option>
+              <option value="Avec la présence d’un adulte">Avec la présence d’un adulte</option>
+            </select>
+          </label>
+          <label>Les mots ou phrases que j’emploie pour m’exprimer <textarea name="motsPhrasesUtilises" [(ngModel)]="fiche.motsPhrasesUtilises"></textarea></label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="story-title">Change et propreté</h2>
+        <label><strong>COUCHE FOURNI PAR LA CRECHE (marque pommette, si convient pas apporter à la charge de la famille)</strong></label>
+        <div class="form-grid">
+          <label>Je porte des couches <input name="porteCouches" [(ngModel)]="fiche.porteCouches"></label>
+          <label>Taille de couche <input name="tailleCouche" [(ngModel)]="fiche.tailleCouche"></label>
+          <label>J’ai commencé la propreté <input name="apprentissagePropreteCommence" [(ngModel)]="fiche.apprentissagePropreteCommence"></label>
+          <label>Couche pour la sieste <input name="couchePendantSieste" [(ngModel)]="fiche.couchePendantSieste"></label>
+          <label>Je suis propre depuis <input type="date" name="propreDepuis" [(ngModel)]="fiche.propreDepuis"></label>
+          <label>
+            Apporter à l’arrivée de l’enfant à la crèche :
+            <br>       -	Crème de change
+            <br>       -	Serum physiologique
+            <br>        -	Vêtements de rechange dans le sac (nom sur les vêtements si possible)
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="story-title">Santé</h2>
+        <label><strong>Les traitements que ma maman me donne pour que je sois en bonne santé :</strong></label>
+        <div class="form-grid">
+          <label>Traitements cutanés <textarea name="traitementsCutanes" [(ngModel)]="fiche.traitementsCutanes"></textarea></label>
+          <label>Traitements oraux <textarea name="traitementsOraux" [(ngModel)]="fiche.traitementsOraux"></textarea></label>
+          <label>Quand, je fais de la température, voici la façon dont je le manifeste :<textarea name="manifestationsFievre" [(ngModel)]="fiche.manifestationsFievre"></textarea></label>
+          <label>Surveillance de la température <textarea name="modalitesSurveillanceTemperature" [(ngModel)]="fiche.modalitesSurveillanceTemperature"></textarea></label>
+          <label>Ordonnance Doliprane présente
+            <select name="ordonnanceDolipranePresente" [(ngModel)]="fiche.ordonnanceDolipranePresente">
+              <option [ngValue]="null">Choisir une réponse</option>
+              <option [ngValue]="true">Oui</option>
+              <option [ngValue]="false">Non</option>
+            </select>
+          </label>
+          <label>Poids de référence
+            <select name="poidsReferenceKg" [(ngModel)]="fiche.poidsReferenceKg">
+              <option [ngValue]="null">--</option>
+              @for (poids of poidsSelectOptions(fiche.poidsReferenceKg); track poids) {
+                <option [ngValue]="poids">{{ poids }} kg</option>
+              }
+            </select>
+            <select name="poidsReferenceGrammes" [(ngModel)]="grammesSelectionnes">
+              <option [ngValue]="null">-- g</option>
+              @for (grammes of grammesOptions; track grammes) {
+                <option [ngValue]="grammes">{{ grammes }} g</option>
+              }
+            </select>
+          </label>
+          <label>Date de l’ordonnance <input type="date" name="dateOrdonnanceDoliprane" [(ngModel)]="fiche.dateOrdonnanceDoliprane"></label>
+        </div>
+        <p class="story-note">Le Doliprane est administré après l’appel du parent lorsqu’il y a une température supérieure à 38,5 °C.</p>
+      </section>
+
+      @if (histoireForm.dirty) {
+        <div class="flex items-center justify-end gap-4 border-t border-slate-100 pt-5">
+          @if (sauvegardeTerminee()) {
+            <span class="text-sm text-emerald-600">Enregistré</span>
+          }
+          <button type="submit" [disabled]="sauvegardeEnCours()" class="rounded-lg bg-[#526fca] px-5 py-2.5 font-semibold text-white transition hover:bg-[#243b70] disabled:cursor-wait disabled:opacity-60">
+            {{ sauvegardeEnCours() ? 'Enregistrement...' : 'Sauvegarder' }}
+          </button>
+        </div>
+      }
+    </form>
+  } @else {
+    <p class="mt-6 rounded-xl bg-red-50 p-6 text-red-700">Impossible de charger le formulaire.</p>
+  }
+</main>

@@ -774,20 +774,6 @@
                   "kind": "scalar"
                 }
               },
-              "descriptionDoudou": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "descriptionTetine": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
               "eauApporteeParFamille": {
                 "nullable": true,
                 "type": {
@@ -938,13 +924,6 @@
                 "nullable": true,
                 "type": {
                   "codecId": "pg/bool@1",
-                  "kind": "scalar"
-                }
-              },
-              "ordonnanceDolipraneReference": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
                   "kind": "scalar"
                 }
               },
@@ -1099,12 +1078,6 @@
                 "dateOrdonnanceDoliprane": {
                   "column": "date_ordonnance_doliprane"
                 },
-                "descriptionDoudou": {
-                  "column": "description_doudou"
-                },
-                "descriptionTetine": {
-                  "column": "description_tetine"
-                },
                 "eauApporteeParFamille": {
                   "column": "eau_apportee_par_famille"
                 },
@@ -1167,9 +1140,6 @@
                 },
                 "ordonnanceDolipranePresente": {
                   "column": "ordonnance_doliprane_presente"
-                },
-                "ordonnanceDolipraneReference": {
-                  "column": "ordonnance_doliprane_reference"
                 },
                 "personneAccompagnementMatin": {
                   "column": "personne_accompagnement_matin"
@@ -2434,16 +2404,6 @@
                   "nativeType": "date",
                   "nullable": true
                 },
-                "description_doudou": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
-                },
-                "description_tetine": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
-                },
                 "eau_apportee_par_famille": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
@@ -2553,11 +2513,6 @@
                 "ordonnance_doliprane_presente": {
                   "codecId": "pg/bool@1",
                   "nativeType": "bool",
-                  "nullable": true
-                },
-                "ordonnance_doliprane_reference": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
                   "nullable": true
                 },
                 "personne_accompagnement_matin": {
@@ -3126,7 +3081,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "a05715ee008f2c8fa581fc5cc8e9d6acb6de8659b71e27e1fe620f3e0e14b2cc"
+    "storageHash": "4ca63d0cd55af694a1cc38064ebd48e7e5a3468a14a33107c172f52395968129"
   },
   "execution": {
     "executionHash": "35f30e67a46b4dc2391fff5929b05fda50e6b373c954a14eff09f15803b2aff7",

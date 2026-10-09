@@ -1,7 +1,0 @@
-@media (max-width: 767px) {
-  .history-modal {
-    max-height: calc(100vh - 2rem);
-    padding: 1.15rem;
-    border-radius: 1.25rem;
-  }
-}

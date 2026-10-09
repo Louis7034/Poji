@@ -1,0 +1,89 @@
+.story-title {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #dbe5ff;
+  padding-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #243b70;
+}
+
+.form-grid {
+  display: block;
+}
+
+.form-grid label {
+  display: block;
+  margin-top: 0.85rem;
+  color: #475569;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.form-grid input {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 12ch;
+  max-width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.15rem 0.35rem;
+  color: #334155;
+  outline: none;
+  vertical-align: baseline;
+}
+
+.form-grid select {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.15rem 0.35rem;
+  color: #334155;
+  outline: none;
+  vertical-align: baseline;
+  field-sizing: content;
+}
+
+.form-grid input[type='date'] {
+  width: 9rem;
+}
+
+.form-grid textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.4rem 0.5rem;
+  resize: vertical;
+  color: #334155;
+  outline: none;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+  border-color: #526fca;
+  box-shadow: 0 0 0 2px rgb(82 111 202 / 0.15);
+}
+
+section p {
+  margin-top: 0.7rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+section strong {
+  color: #243b70;
+}
+
+.story-note {
+  border-radius: 0.75rem;
+  background: #fff7ed;
+  padding: 0.75rem 1rem;
+  color: #9a3412;
+}

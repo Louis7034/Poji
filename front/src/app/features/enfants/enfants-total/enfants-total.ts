@@ -2,13 +2,12 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Enfant } from '../../../models/enfant';
 import { EnfantsService } from '../../../services/enfants/enfants.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { ModalPetiteHistoire } from '../modal-petite-histoire/modal-petite-histoire';
 import { AchievementList } from '../achievement/achievement-list/achievement-list';
 import { CreationEnfant } from '../creation-enfant/creation-enfant';
 
 @Component({
   selector: 'app-enfants-total',
-  imports: [RouterLink, RouterLinkActive, ModalPetiteHistoire, AchievementList, CreationEnfant],
+  imports: [RouterLink, RouterLinkActive, AchievementList, CreationEnfant],
   templateUrl: './enfants-total.html',
   styleUrl: './enfants-total.css',
 })
@@ -19,7 +18,6 @@ export class EnfantsTotal implements OnInit {
   ) {}
 
   readonly enfantsSignal = signal<Enfant[]>([]);
-  readonly enfantHistoireSelectionne = signal<Enfant | null>(null);
   readonly enfantAchievementSelectionne = signal<Enfant | null>(null);
   permDirecteur:boolean = false;
   ngOnInit(): void {
@@ -28,14 +26,6 @@ export class EnfantsTotal implements OnInit {
       error: (error) => console.error('Erreur lors de la récupération des enfants', error),
     });
     this.checkPermDirecteur();
-  }
-
-  afficherHistoire(enfant: Enfant): void {
-    this.enfantHistoireSelectionne.set(enfant);
-  }
-
-  fermerHistoire(): void {
-    this.enfantHistoireSelectionne.set(null);
   }
 
   afficherAchievements(enfant: Enfant): void {
@@ -52,7 +42,7 @@ export class EnfantsTotal implements OnInit {
 
   ajouterEnfant(enfant: Enfant): void {
     this.enfantsSignal.update((enfants) =>
-      [...enfants, { ...enfant, histoire_enfant: enfant.histoire_enfant ?? [] }].sort((a, b) =>
+      [...enfants, { ...enfant ?? [] }].sort((a, b) =>
         a.prenom.localeCompare(b.prenom),
       ),
     );

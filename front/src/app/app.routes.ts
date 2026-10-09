@@ -13,6 +13,7 @@ import { DouzeMois } from './features/enfants/achievement/douze-mois/douze-mois'
 import { DixHuitMois } from './features/enfants/achievement/dix-huit-mois/dix-huit-mois';
 import { VingtQuatreMois } from './features/enfants/achievement/vingt-quatre-mois/vingt-quatre-mois';
 import { TrenteSixMois } from './features/enfants/achievement/trente-six-mois/trente-six-mois';
+import { MaPetiteHistoire } from './features/enfants/ma-petite-histoire/ma-petite-histoire';
 
 export const routes: Routes = [
   {
@@ -63,6 +64,10 @@ export const routes: Routes = [
   {
     path: 'journal/:enfantId',
     component: JournalPanel,
+  },
+  {
+    path: 'ma-petite-histoire/:enfantId',
+    component: MaPetiteHistoire,
   },
   {
     path: 'calendrier',

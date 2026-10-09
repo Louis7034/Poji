@@ -554,9 +554,7 @@ export const contract = defineContract({}, ({ field, model }) => {
             repasFournisParCreche: field.text().optional().column("repas_fournis_par_creche"),
 
             utiliseTetine: field.boolean().optional().column("utilise_tetine"),
-            descriptionTetine: field.text().optional().column("description_tetine"),
             utiliseDoudou: field.boolean().optional().column("utilise_doudou"),
-            descriptionDoudou: field.text().optional().column("description_doudou"),
             autreObjetApaisement: field.text().optional().column("autre_objet_apaisement"),
             signesFatigue: field.text().optional().column("signes_fatigue"),
             heureSiesteMatin: field.column({ codecId: "pg/time-string@1", nativeType: "time" } as const).optional().column("heure_sieste_matin"),
@@ -587,7 +585,6 @@ export const contract = defineContract({}, ({ field, model }) => {
             manifestationsFievre: field.text().optional().column("manifestations_fievre"),
             modalitesSurveillanceTemperature: field.text().optional().column("modalites_surveillance_temperature"),
             ordonnanceDolipranePresente: field.boolean().optional().column("ordonnance_doliprane_presente"),
-            ordonnanceDolipraneReference: field.text().optional().column("ordonnance_doliprane_reference"),
             poidsReferenceKg: field.decimal().optional().column("poids_reference_kg"),
             dateOrdonnanceDoliprane: field.column({ codecId: "pg/date-string@1", nativeType: "date" } as const).optional().column("date_ordonnance_doliprane"),
 

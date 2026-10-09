@@ -1,5 +1,3 @@
-import { Enfant } from "./enfant";
-
 export interface MaPetiteHistoire {
   id: string;
   enfantId: string;
@@ -41,15 +39,12 @@ export interface MaPetiteHistoire {
   tailleCouche: string | null;
   apprentissagePropreteCommence: boolean | null;
   couchePendantSieste: boolean | null;
-  propreDepuis: Date | null;
+  propreDepuis: string | null;
   traitementsCutanes: string | null;
   traitementsOraux: string | null;
   manifestationsFievre: string | null;
   modalitesSurveillanceTemperature: string | null;
   ordonnanceDolipranePresente: boolean | null;
   poidsReferenceKg: number | null;
-  dateOrdonnanceDoliprane: Date | null;
-  dateCreation: Date;
-  dateModification: Date;
-  enfant: Enfant;
+  dateOrdonnanceDoliprane: string | null;
 }

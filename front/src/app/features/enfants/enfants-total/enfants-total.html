@@ -43,7 +43,7 @@
               </svg>
               <span class="hidden sm:inline">Calendrier</span>
           </a>
-          <button type="button" (click)="afficherHistoire(enfant)"
+          <a [routerLink]="['/ma-petite-histoire', enfant.id]"
             class="flex h-10 items-center justify-center gap-1 rounded-lg bg-white px-2 text-xs font-semibold text-[#526fca] transition-colors hover:bg-[#dbe5ff]"
             [attr.aria-label]="'Voir la petite histoire de ' + enfant.prenom">
             <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -51,7 +51,7 @@
               <path d="M4 5.5V21M8 7h8M8 11h8"></path>
             </svg>
             <span class="hidden sm:inline">Histoire</span>
-          </button>
+          </a>
           <button type="button" (click)="afficherAchievements(enfant)"
             class="flex h-10 items-center justify-center gap-1 rounded-lg bg-white px-2 text-xs font-semibold text-[#526fca] transition-colors hover:bg-[#dbe5ff]"
             [attr.aria-label]="'Voir les achievements de ' + enfant.prenom">
@@ -73,10 +73,6 @@
       <app-creation-enfant (enfantCree)="ajouterEnfant($event)" />
     </div>
   }
-  @if (enfantHistoireSelectionne(); as enfant) {
-    <app-modal-petite-histoire [enfant]="enfant" (fermer)="fermerHistoire()" />
-  }
-
   @if (enfantAchievementSelectionne(); as enfant) {
     <app-achievement-list [enfant]="enfant" (fermer)="fermerAchievements()" />
   }
